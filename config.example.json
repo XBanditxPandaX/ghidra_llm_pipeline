@@ -1,0 +1,21 @@
+{
+    "ghidra_path": "C:/Users/themi/OneDrive - Institut Catholique de Lille/Bureau/CoursM1/M2/ghidra_12.0.1_PUBLIC",
+    "lm_studio": {
+        "base_url": "http://localhost:1234/v1",
+        "model": "deepseek-coder-6.7b-instruct",
+        "options": {
+            "temperature": 0.3,
+            "max_tokens": 1024
+        }
+    },
+    "analysis": {
+        "min_function_size": 10,
+        "confidence_threshold": 0.5,
+        "skip_external_functions": true,
+        "skip_thunks": true
+    },
+    "output": {
+        "results_dir": "./results",
+        "save_intermediate": true
+    }
+}

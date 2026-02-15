@@ -1,0 +1,310 @@
+{
+  "description": "Ground Truth - Resultats attendus pour l'evaluation du pipeline LLM",
+  "version": "1.0",
+  "binaries": [
+    {
+      "binary": "test1_buffer.exe",
+      "functions": [
+        {
+          "original_name": "func_001",
+          "expected_name": "allocate_and_copy_buffer",
+          "acceptable_names": ["copy_buffer", "duplicate_buffer", "clone_memory", "alloc_copy"],
+          "expected_return_type": "void*",
+          "expected_param_types": [
+            {"name": "src", "type": "void*"},
+            {"name": "size", "type": "size_t"}
+          ],
+          "expected_apis": ["malloc", "memcpy"],
+          "expected_comment_keywords": ["allocate", "copy", "buffer", "memory"]
+        },
+        {
+          "original_name": "func_002",
+          "expected_name": "free_buffer_safely",
+          "acceptable_names": ["safe_free", "free_and_null", "secure_free", "release_buffer"],
+          "expected_return_type": "void",
+          "expected_param_types": [
+            {"name": "ptr", "type": "void**"}
+          ],
+          "expected_apis": ["free"],
+          "expected_comment_keywords": ["free", "safe", "null", "pointer"]
+        },
+        {
+          "original_name": "func_003",
+          "expected_name": "resize_buffer",
+          "acceptable_names": ["realloc_buffer", "grow_buffer", "reallocate_memory"],
+          "expected_return_type": "void*",
+          "expected_apis": ["malloc", "memcpy", "free"],
+          "expected_comment_keywords": ["resize", "realloc", "grow", "expand"]
+        },
+        {
+          "original_name": "func_004",
+          "expected_name": "compare_buffers",
+          "acceptable_names": ["buffer_compare", "memory_compare", "memcmp_custom"],
+          "expected_return_type": "int",
+          "expected_comment_keywords": ["compare", "buffer", "memory", "equal"]
+        },
+        {
+          "original_name": "func_005",
+          "expected_name": "fill_buffer_with_pattern",
+          "acceptable_names": ["memset_custom", "fill_memory", "set_buffer"],
+          "expected_return_type": "void",
+          "expected_comment_keywords": ["fill", "pattern", "set", "memory"]
+        }
+      ]
+    },
+    {
+      "binary": "test2_string.exe",
+      "functions": [
+        {
+          "original_name": "func_101",
+          "expected_name": "calculate_string_length",
+          "acceptable_names": ["strlen_custom", "string_length", "get_length"],
+          "expected_return_type": "unsigned int",
+          "expected_comment_keywords": ["length", "string", "count", "characters"]
+        },
+        {
+          "original_name": "func_102",
+          "expected_name": "copy_string",
+          "acceptable_names": ["strcpy_custom", "string_copy", "duplicate_string"],
+          "expected_return_type": "char*",
+          "expected_comment_keywords": ["copy", "string", "destination"]
+        },
+        {
+          "original_name": "func_103",
+          "expected_name": "concatenate_strings",
+          "acceptable_names": ["strcat_custom", "string_append", "join_strings"],
+          "expected_return_type": "char*",
+          "expected_comment_keywords": ["concatenate", "append", "join", "string"]
+        },
+        {
+          "original_name": "func_104",
+          "expected_name": "find_character_in_string",
+          "acceptable_names": ["strchr_custom", "char_search", "find_char"],
+          "expected_return_type": "char*",
+          "expected_comment_keywords": ["find", "character", "search", "string"]
+        },
+        {
+          "original_name": "func_105",
+          "expected_name": "convert_to_uppercase",
+          "acceptable_names": ["string_to_upper", "toupper_string", "uppercase"],
+          "expected_return_type": "void",
+          "expected_comment_keywords": ["uppercase", "convert", "upper", "case"]
+        },
+        {
+          "original_name": "func_106",
+          "expected_name": "reverse_string",
+          "acceptable_names": ["string_reverse", "strrev_custom", "invert_string"],
+          "expected_return_type": "void",
+          "expected_comment_keywords": ["reverse", "invert", "backward", "string"]
+        },
+        {
+          "original_name": "func_107",
+          "expected_name": "count_character_occurrences",
+          "acceptable_names": ["char_count", "count_char", "character_frequency"],
+          "expected_return_type": "int",
+          "expected_comment_keywords": ["count", "character", "occurrences", "frequency"]
+        },
+        {
+          "original_name": "func_108",
+          "expected_name": "trim_whitespace",
+          "acceptable_names": ["string_trim", "strip_spaces", "remove_whitespace"],
+          "expected_return_type": "char*",
+          "expected_comment_keywords": ["trim", "whitespace", "strip", "space"]
+        }
+      ]
+    },
+    {
+      "binary": "test3_crypto.exe",
+      "functions": [
+        {
+          "original_name": "func_201",
+          "expected_name": "xor_encrypt_decrypt",
+          "acceptable_names": ["xor_cipher", "xor_transform", "single_byte_xor"],
+          "expected_return_type": "void",
+          "expected_apis": [],
+          "expected_patterns": ["XOR cipher", "symmetric encryption"],
+          "expected_comment_keywords": ["xor", "encrypt", "decrypt", "cipher"]
+        },
+        {
+          "original_name": "func_202",
+          "expected_name": "xor_with_key_array",
+          "acceptable_names": ["xor_cipher_multikey", "repeating_key_xor", "vigenere_xor"],
+          "expected_return_type": "void",
+          "expected_patterns": ["XOR with repeating key"],
+          "expected_comment_keywords": ["xor", "key", "array", "repeating"]
+        },
+        {
+          "original_name": "func_203",
+          "expected_name": "rot13_transform",
+          "acceptable_names": ["rot13", "rotate_13", "rot13_cipher"],
+          "expected_return_type": "void",
+          "expected_patterns": ["ROT13"],
+          "expected_comment_keywords": ["rot13", "rotate", "13", "cipher"]
+        },
+        {
+          "original_name": "func_204",
+          "expected_name": "caesar_cipher",
+          "acceptable_names": ["caesar_shift", "shift_cipher", "rotation_cipher"],
+          "expected_return_type": "void",
+          "expected_patterns": ["Caesar cipher", "shift cipher"],
+          "expected_comment_keywords": ["caesar", "shift", "cipher", "alphabet"]
+        },
+        {
+          "original_name": "func_205",
+          "expected_name": "calculate_simple_checksum",
+          "acceptable_names": ["sum_checksum", "additive_checksum", "byte_sum"],
+          "expected_return_type": "unsigned int",
+          "expected_comment_keywords": ["checksum", "sum", "verify", "integrity"]
+        },
+        {
+          "original_name": "func_206",
+          "expected_name": "calculate_xor_checksum",
+          "acceptable_names": ["xor_checksum", "parity_check", "lrc_checksum"],
+          "expected_return_type": "unsigned char",
+          "expected_comment_keywords": ["xor", "checksum", "parity"]
+        },
+        {
+          "original_name": "func_207",
+          "expected_name": "get_base64_char",
+          "acceptable_names": ["base64_encode_char", "b64_lookup", "base64_digit"],
+          "expected_return_type": "char",
+          "expected_patterns": ["Base64 encoding"],
+          "expected_comment_keywords": ["base64", "encode", "character"]
+        },
+        {
+          "original_name": "func_208",
+          "expected_name": "djb2_hash",
+          "acceptable_names": ["simple_hash", "string_hash", "hash_function"],
+          "expected_return_type": "unsigned long",
+          "expected_patterns": ["DJB2 hash", "hash function"],
+          "expected_comment_keywords": ["hash", "djb2", "string"]
+        }
+      ]
+    },
+    {
+      "binary": "test4_linkedlist.exe",
+      "functions": [
+        {
+          "original_name": "func_301",
+          "expected_name": "create_list_node",
+          "acceptable_names": ["allocate_node", "new_node", "make_node"],
+          "expected_return_type": "void*",
+          "expected_apis": ["malloc"],
+          "expected_comment_keywords": ["create", "node", "allocate", "list"]
+        },
+        {
+          "original_name": "func_302",
+          "expected_name": "insert_at_head",
+          "acceptable_names": ["prepend_node", "push_front", "add_first"],
+          "expected_return_type": "void*",
+          "expected_comment_keywords": ["insert", "head", "front", "prepend"]
+        },
+        {
+          "original_name": "func_303",
+          "expected_name": "insert_at_tail",
+          "acceptable_names": ["append_node", "push_back", "add_last"],
+          "expected_return_type": "void*",
+          "expected_comment_keywords": ["insert", "tail", "end", "append"]
+        },
+        {
+          "original_name": "func_304",
+          "expected_name": "find_node_by_value",
+          "acceptable_names": ["search_list", "find_in_list", "lookup_node"],
+          "expected_return_type": "void*",
+          "expected_comment_keywords": ["find", "search", "node", "value"]
+        },
+        {
+          "original_name": "func_305",
+          "expected_name": "delete_node_by_value",
+          "acceptable_names": ["remove_from_list", "delete_node", "remove_node"],
+          "expected_return_type": "void*",
+          "expected_apis": ["free"],
+          "expected_comment_keywords": ["delete", "remove", "node"]
+        },
+        {
+          "original_name": "func_306",
+          "expected_name": "count_list_nodes",
+          "acceptable_names": ["get_list_length", "list_size", "count_nodes"],
+          "expected_return_type": "int",
+          "expected_comment_keywords": ["count", "length", "size", "list"]
+        },
+        {
+          "original_name": "func_307",
+          "expected_name": "reverse_list",
+          "acceptable_names": ["list_reverse", "invert_list"],
+          "expected_return_type": "void*",
+          "expected_comment_keywords": ["reverse", "invert", "list"]
+        },
+        {
+          "original_name": "func_308",
+          "expected_name": "free_list",
+          "acceptable_names": ["destroy_list", "delete_list", "clear_list"],
+          "expected_return_type": "void",
+          "expected_apis": ["free"],
+          "expected_comment_keywords": ["free", "destroy", "delete", "list"]
+        }
+      ]
+    },
+    {
+      "binary": "test5_file.exe",
+      "functions": [
+        {
+          "original_name": "func_401",
+          "expected_name": "read_entire_file",
+          "acceptable_names": ["load_file_contents", "read_file", "file_to_buffer"],
+          "expected_return_type": "char*",
+          "expected_apis": ["fopen", "fseek", "ftell", "fread", "fclose", "malloc"],
+          "expected_comment_keywords": ["read", "file", "load", "contents"]
+        },
+        {
+          "original_name": "func_402",
+          "expected_name": "write_to_file",
+          "acceptable_names": ["save_buffer_to_file", "write_file", "buffer_to_file"],
+          "expected_return_type": "int",
+          "expected_apis": ["fopen", "fwrite", "fclose"],
+          "expected_comment_keywords": ["write", "file", "save"]
+        },
+        {
+          "original_name": "func_403",
+          "expected_name": "append_to_file",
+          "acceptable_names": ["file_append", "add_to_file"],
+          "expected_return_type": "int",
+          "expected_apis": ["fopen", "fwrite", "fclose"],
+          "expected_comment_keywords": ["append", "file", "add"]
+        },
+        {
+          "original_name": "func_404",
+          "expected_name": "file_exists",
+          "acceptable_names": ["check_file_exists", "is_file", "file_accessible"],
+          "expected_return_type": "int",
+          "expected_apis": ["fopen", "fclose"],
+          "expected_comment_keywords": ["exists", "file", "check"]
+        },
+        {
+          "original_name": "func_405",
+          "expected_name": "get_file_size",
+          "acceptable_names": ["file_size", "filesize", "get_size"],
+          "expected_return_type": "long",
+          "expected_apis": ["fopen", "fseek", "ftell", "fclose"],
+          "expected_comment_keywords": ["size", "file", "length"]
+        },
+        {
+          "original_name": "func_406",
+          "expected_name": "copy_file",
+          "acceptable_names": ["file_copy", "duplicate_file", "clone_file"],
+          "expected_return_type": "int",
+          "expected_apis": ["fopen", "fread", "fwrite", "fclose"],
+          "expected_comment_keywords": ["copy", "file", "duplicate"]
+        },
+        {
+          "original_name": "func_408",
+          "expected_name": "count_lines_in_file",
+          "acceptable_names": ["line_count", "count_file_lines", "file_line_count"],
+          "expected_return_type": "int",
+          "expected_apis": ["fopen", "fgetc", "fclose"],
+          "expected_comment_keywords": ["count", "lines", "file"]
+        }
+      ]
+    }
+  ]
+}

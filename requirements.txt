@@ -1,0 +1,2 @@
+# Dépendances Python pour le pipeline Ghidra-LLM
+requests>=2.28.0
