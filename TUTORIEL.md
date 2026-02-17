@@ -47,6 +47,8 @@ curl http://localhost:1234/v1/models
 
 ```bash
 pip install requests
+pip install nltk rouge-score
+python -c "import nltk; nltk.download('punkt')"
 ```
 
 ### 4. Compilateur C (pour les binaires de test)

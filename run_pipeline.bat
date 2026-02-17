@@ -4,16 +4,16 @@ REM Usage: run_pipeline.bat <chemin_binaire> [modele]
 
 setlocal
 
-set GHIDRA_PATH=C:\Users\themi\OneDrive - Institut Catholique de Lille\Bureau\CoursM1\M2\ghidra_12.0.1_PUBLIC
+set GHIDRA_PATH=C:\Users\themi\Bureau\CoursM1\M2\ghidra_12.0.1_PUBLIC
 set SCRIPT_DIR=%~dp0scripts
-set MODEL=deepseek-coder-6.7b-instruct
+set MODEL=Deepseek R1 0528 Qwen3 8B
 
 if "%~1"=="" (
     echo Usage: run_pipeline.bat ^<chemin_binaire^> [modele]
     echo.
     echo Exemple:
     echo   run_pipeline.bat test_binaries\bin\test1_buffer.exe
-    echo   run_pipeline.bat C:\path\to\binary.exe deepseek-coder-6.7b-instruct
+    echo   run_pipeline.bat C:\path\to\binary.exe Deepseek R1 0528 Qwen3 8B
     exit /b 1
 )
 
@@ -41,7 +41,7 @@ curl -s http://localhost:1234/v1/models >nul 2>&1
 if errorlevel 1 (
     echo [!] Erreur: LM Studio n'est pas accessible
     echo     1. Lancez LM Studio
-    echo     2. Chargez deepseek-coder-6.7B-instruct-GGUF
+    echo     2. Chargez Deepseek R1 0528 Qwen3 8B
     echo     3. Demarrez le serveur local
     exit /b 1
 )
