@@ -16,6 +16,27 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 import re
 from collections import defaultdict
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+from rouge_score import rouge_scorer
+
+
+def compute_bleu(reference: str, hypothesis: str) -> float:
+    """Calcule le score BLEU entre une reference et une hypothese"""
+    ref_tokens = reference.lower().split()
+    hyp_tokens = hypothesis.lower().split()
+    if not ref_tokens or not hyp_tokens:
+        return 0.0
+    smoothie = SmoothingFunction().method1
+    return sentence_bleu([ref_tokens], hyp_tokens, smoothing_function=smoothie)
+
+
+def compute_rouge(reference: str, hypothesis: str) -> dict:
+    """Calcule les scores ROUGE entre une reference et une hypothese"""
+    if not reference or not hypothesis:
+        return {'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0}
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+    scores = scorer.score(reference, hypothesis)
+    return {k: v.fmeasure for k, v in scores.items()}
 
 
 @dataclass
@@ -29,6 +50,10 @@ class EvaluationMetrics:
     apis_precision: float = 0.0
     apis_recall: float = 0.0
     comment_keyword_score: float = 0.0
+    comment_bleu: float = 0.0
+    comment_rouge1: float = 0.0
+    comment_rouge2: float = 0.0
+    comment_rougeL: float = 0.0
     is_hallucination: bool = False
     confidence: float = 0.0
 
@@ -46,6 +71,10 @@ class BinaryEvaluation:
     avg_api_precision: float = 0.0
     avg_api_recall: float = 0.0
     avg_comment_score: float = 0.0
+    avg_bleu: float = 0.0
+    avg_rouge1: float = 0.0
+    avg_rouge2: float = 0.0
+    avg_rougeL: float = 0.0
     hallucination_count: int = 0
     hallucination_rate: float = 0.0
     function_metrics: List[EvaluationMetrics] = field(default_factory=list)
@@ -194,6 +223,16 @@ def evaluate_function(suggestion: Dict, ground_truth: Dict) -> EvaluationMetrics
     comment = suggestion.get('comments', '') or suggestion.get('reasoning', '')
     metrics.comment_keyword_score = calculate_keyword_score(comment, expected_keywords)
 
+    # BLEU / ROUGE
+    if expected_keywords and comment:
+        reference = " ".join(expected_keywords)
+        hypothesis = comment
+        metrics.comment_bleu = compute_bleu(reference, hypothesis)
+        rouge_scores = compute_rouge(reference, hypothesis)
+        metrics.comment_rouge1 = rouge_scores['rouge1']
+        metrics.comment_rouge2 = rouge_scores['rouge2']
+        metrics.comment_rougeL = rouge_scores['rougeL']
+
     # Detection d'hallucination
     metrics.is_hallucination = detect_hallucination(suggestion, ground_truth)
 
@@ -219,6 +258,10 @@ def evaluate_binary(suggestions_file: str, ground_truth: Dict) -> BinaryEvaluati
     api_precisions = []
     api_recalls = []
     comment_scores = []
+    bleu_scores = []
+    rouge1_scores = []
+    rouge2_scores = []
+    rougeL_scores = []
     return_type_correct = 0
 
     for suggestion in suggestions:
@@ -248,6 +291,10 @@ def evaluate_binary(suggestions_file: str, ground_truth: Dict) -> BinaryEvaluati
             api_recalls.append(metrics.apis_recall)
 
         comment_scores.append(metrics.comment_keyword_score)
+        bleu_scores.append(metrics.comment_bleu)
+        rouge1_scores.append(metrics.comment_rouge1)
+        rouge2_scores.append(metrics.comment_rouge2)
+        rougeL_scores.append(metrics.comment_rougeL)
 
         if metrics.is_hallucination:
             eval_result.hallucination_count += 1
@@ -260,6 +307,10 @@ def evaluate_binary(suggestions_file: str, ground_truth: Dict) -> BinaryEvaluati
         eval_result.avg_api_precision = sum(api_precisions) / len(api_precisions) if api_precisions else 0
         eval_result.avg_api_recall = sum(api_recalls) / len(api_recalls) if api_recalls else 0
         eval_result.avg_comment_score = sum(comment_scores) / len(comment_scores) if comment_scores else 0
+        eval_result.avg_bleu = sum(bleu_scores) / len(bleu_scores) if bleu_scores else 0
+        eval_result.avg_rouge1 = sum(rouge1_scores) / len(rouge1_scores) if rouge1_scores else 0
+        eval_result.avg_rouge2 = sum(rouge2_scores) / len(rouge2_scores) if rouge2_scores else 0
+        eval_result.avg_rougeL = sum(rougeL_scores) / len(rougeL_scores) if rougeL_scores else 0
         eval_result.hallucination_rate = eval_result.hallucination_count / n
 
     return eval_result
@@ -282,6 +333,10 @@ def generate_report(evaluations: List[BinaryEvaluation], output_file: str):
 
     all_semantic = [m.name_semantic_score for e in evaluations for m in e.function_metrics]
     all_comment = [m.comment_keyword_score for e in evaluations for m in e.function_metrics]
+    all_bleu = [m.comment_bleu for e in evaluations for m in e.function_metrics]
+    all_rouge1 = [m.comment_rouge1 for e in evaluations for m in e.function_metrics]
+    all_rouge2 = [m.comment_rouge2 for e in evaluations for m in e.function_metrics]
+    all_rougeL = [m.comment_rougeL for e in evaluations for m in e.function_metrics]
 
     report["summary"] = {
         "total_binaries": len(evaluations),
@@ -290,6 +345,10 @@ def generate_report(evaluations: List[BinaryEvaluation], output_file: str):
         "acceptable_name_match_rate": total_acceptable / total_functions if total_functions else 0,
         "average_semantic_score": sum(all_semantic) / len(all_semantic) if all_semantic else 0,
         "average_comment_score": sum(all_comment) / len(all_comment) if all_comment else 0,
+        "average_bleu": sum(all_bleu) / len(all_bleu) if all_bleu else 0,
+        "average_rouge1": sum(all_rouge1) / len(all_rouge1) if all_rouge1 else 0,
+        "average_rouge2": sum(all_rouge2) / len(all_rouge2) if all_rouge2 else 0,
+        "average_rougeL": sum(all_rougeL) / len(all_rougeL) if all_rougeL else 0,
         "hallucination_rate": total_hallucinations / total_functions if total_functions else 0,
         "confidence_calibration": "TODO"  # A implementer
     }
@@ -307,6 +366,10 @@ def generate_report(evaluations: List[BinaryEvaluation], output_file: str):
             "api_precision": e.avg_api_precision,
             "api_recall": e.avg_api_recall,
             "comment_score": e.avg_comment_score,
+            "bleu": e.avg_bleu,
+            "rouge1": e.avg_rouge1,
+            "rouge2": e.avg_rouge2,
+            "rougeL": e.avg_rougeL,
             "hallucination_rate": e.hallucination_rate
         })
 
@@ -322,6 +385,10 @@ def generate_report(evaluations: List[BinaryEvaluation], output_file: str):
                 "api_precision": m.apis_precision,
                 "api_recall": m.apis_recall,
                 "comment_score": m.comment_keyword_score,
+                "bleu": m.comment_bleu,
+                "rouge1": m.comment_rouge1,
+                "rouge2": m.comment_rouge2,
+                "rougeL": m.comment_rougeL,
                 "is_hallucination": m.is_hallucination,
                 "confidence": m.confidence
             })
@@ -349,7 +416,11 @@ def print_summary(report: Dict):
     print(f"Score semantique moyen: {s['average_semantic_score']*100:.1f}%")
 
     print("\n--- Qualite des Commentaires ---")
-    print(f"Score moyen: {s['average_comment_score']*100:.1f}%")
+    print(f"Score mots-cles moyen: {s['average_comment_score']*100:.1f}%")
+    print(f"BLEU moyen: {s.get('average_bleu', 0):.4f}")
+    print(f"ROUGE-1 moyen: {s.get('average_rouge1', 0):.4f}")
+    print(f"ROUGE-2 moyen: {s.get('average_rouge2', 0):.4f}")
+    print(f"ROUGE-L moyen: {s.get('average_rougeL', 0):.4f}")
 
     print("\n--- Fiabilite ---")
     print(f"Taux d'hallucination: {s['hallucination_rate']*100:.1f}%")
