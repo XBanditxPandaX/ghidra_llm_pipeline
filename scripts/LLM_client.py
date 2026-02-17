@@ -35,9 +35,12 @@ class LLMSuggestion:
 class LMStudioClient:
     """Client pour communiquer avec LM Studio (API compatible OpenAI)"""
 
-    def __init__(self, base_url: str = "http://localhost:1234/v1", model: str = "deepseek-coder"):
+    def __init__(self, base_url: str = "http://localhost:1234/v1", model: str = "deepseek-coder",
+                 temperature: float = 0.3, max_tokens: int = 1024):
         self.base_url = base_url.rstrip('/')
         self.model = model
+        self.temperature = temperature
+        self.max_tokens = max_tokens
         self.api_endpoint = f"{self.base_url}/chat/completions"
 
     def check_connection(self) -> bool:
@@ -59,7 +62,7 @@ class LMStudioClient:
             pass
         return []
 
-    def _build_prompt(self, task: TaskType, func_info: Dict) -> str:
+    def _build_prompt(self, task: TaskType, func_info: Dict, all_functions_context: str = "") -> str:
         """Construit le prompt selon la tache"""
 
         base_context = f"""Tu es un expert en reverse engineering et analyse de binaires.
@@ -76,6 +79,12 @@ Code decompile:
 ```c
 {func_info.get('decompiled_code', '// No code available')}
 ```
+"""
+
+        if all_functions_context:
+            base_context += f"""
+Contexte global du binaire (autres fonctions presentes):
+{all_functions_context}
 """
 
         if task == TaskType.RENAME_FUNCTION:
@@ -149,8 +158,8 @@ Reponds UNIQUEMENT avec ce JSON:
                         "content": prompt
                     }
                 ],
-                "temperature": 0.3,  # Plus deterministe pour l'analyse de code
-                "max_tokens": 1024,
+                "temperature": self.temperature,
+                "max_tokens": self.max_tokens,
                 "stream": False
             }
 
@@ -185,10 +194,11 @@ Reponds UNIQUEMENT avec ce JSON:
 
         return None
 
-    def analyze_function(self, func_info: Dict, task: TaskType = TaskType.FULL_ANALYSIS) -> Optional[LLMSuggestion]:
+    def analyze_function(self, func_info: Dict, task: TaskType = TaskType.FULL_ANALYSIS,
+                         all_functions_context: str = "") -> Optional[LLMSuggestion]:
         """Analyse une fonction avec le LLM"""
 
-        prompt = self._build_prompt(task, func_info)
+        prompt = self._build_prompt(task, func_info, all_functions_context)
         response = self._query_llm(prompt)
 
         if not response:
@@ -219,6 +229,31 @@ Reponds UNIQUEMENT avec ce JSON:
         for i, func in enumerate(functions):
             print(f"[*] Analyse {i+1}/{len(functions)}: {func.get('name', 'unknown')}")
             suggestion = self.analyze_function(func, task)
+            if suggestion:
+                results.append(suggestion)
+
+        return results
+
+    @staticmethod
+    def build_global_context(functions: List[Dict]) -> str:
+        """Construit le contexte global (signatures de toutes les fonctions du binaire)"""
+        lines = []
+        for func in functions:
+            name = func.get('name', 'unknown')
+            signature = func.get('signature', '')
+            called = [f['name'] for f in func.get('called_functions', [])]
+            called_str = ', '.join(called) if called else 'aucune'
+            lines.append(f"- {name}: {signature} -> appelle {called_str}")
+        return '\n'.join(lines)
+
+    def analyze_batch_with_context(self, functions: List[Dict], task: TaskType = TaskType.FULL_ANALYSIS) -> List[LLMSuggestion]:
+        """Analyse un lot de fonctions en fournissant le contexte global du binaire"""
+        global_context = self.build_global_context(functions)
+        results = []
+
+        for i, func in enumerate(functions):
+            print(f"[*] Analyse {i+1}/{len(functions)}: {func.get('name', 'unknown')}")
+            suggestion = self.analyze_function(func, task, all_functions_context=global_context)
             if suggestion:
                 results.append(suggestion)
 
