@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from LLM_client import LMStudioClient, TaskType, LLMSuggestion
 from evaluate_results import evaluate_function
 from multipass import MultiPassRunner, filter_functions
+from config_loader import get_lm_studio_url
 
 
 def evaluate_suggestions_vs_gt(suggestions_dicts: list, binary_gt: dict) -> dict:
@@ -138,7 +139,7 @@ def run_benchmark(models: list, input_files: list, gt_data: dict,
         print("#"*70)
 
         # Verifier la connexion
-        client = LMStudioClient(model=model_name)
+        client = LMStudioClient(base_url=get_lm_studio_url(), model=model_name)
 
         if not client.check_connection():
             print(f"\n[!] LM Studio n'est pas accessible.")

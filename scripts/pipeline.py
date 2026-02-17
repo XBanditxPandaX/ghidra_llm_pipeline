@@ -27,6 +27,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from LLM_client import LMStudioClient, TaskType, LLMSuggestion
+from config_loader import get_ghidra_path, get_model, get_lm_studio_url
 
 
 class GhidraLLMPipeline:
@@ -35,7 +36,7 @@ class GhidraLLMPipeline:
     def __init__(self, ghidra_path: str, model: str = "codellama"):
         self.ghidra_path = Path(ghidra_path)
         self.model = model
-        self.llm_client = LMStudioClient(model=model)
+        self.llm_client = LMStudioClient(base_url=get_lm_studio_url(), model=model)
 
         # Chemins Ghidra
         if sys.platform == "win32":
@@ -415,8 +416,8 @@ Exemples:
     )
 
     parser.add_argument("--binary", "-b", required=True, help="Chemin du binaire a analyser")
-    parser.add_argument("--ghidra", "-g", required=True, help="Chemin d'installation de Ghidra")
-    parser.add_argument("--model", "-m", default="deepseek-coder-6.7b-instruct", help="Modele LM Studio (defaut: deepseek-coder-6.7b-instruct)")
+    parser.add_argument("--ghidra", "-g", default=None, help="Chemin d'installation de Ghidra (sinon lu depuis config.json)")
+    parser.add_argument("--model", "-m", default=None, help="Modele LM Studio (sinon lu depuis config.json)")
     parser.add_argument("--task", "-t", default="full",
                        choices=["rename", "detect_apis", "comments", "full"],
                        help="Type de tache (defaut: full)")
@@ -424,6 +425,10 @@ Exemples:
     parser.add_argument("--verify-only", action="store_true", help="Verifier la configuration uniquement")
 
     args = parser.parse_args()
+
+    # Resoudre ghidra_path et model via CLI ou config.json
+    ghidra_path = get_ghidra_path(args.ghidra)
+    model = get_model(args.model)
 
     # Mapper la tache
     task_map = {
@@ -433,7 +438,7 @@ Exemples:
         "full": TaskType.FULL_ANALYSIS
     }
 
-    pipeline = GhidraLLMPipeline(args.ghidra, args.model)
+    pipeline = GhidraLLMPipeline(ghidra_path, model)
 
     if not pipeline.verify_setup():
         sys.exit(1)

@@ -2,40 +2,59 @@
 
 ## Introduction
 
-Ce projet implémente un pipeline d'amélioration automatique de l'analyse statique Ghidra via un modèle de langage (LLM). Le pipeline effectue trois tâches principales :
+Ce projet implemente un pipeline d'amelioration automatique de l'analyse statique Ghidra via un modele de langage (LLM). Le pipeline effectue trois taches principales :
 
 1. **Renommage de fonctions** : Propose des noms descriptifs pour les fonctions
-2. **Détection d'API implicites** : Identifie les patterns et APIs utilisés
-3. **Génération de commentaires** : Crée des commentaires explicatifs
+2. **Detection d'API implicites** : Identifie les patterns et APIs utilises
+3. **Generation de commentaires** : Cree des commentaires explicatifs
 
 ---
 
-## Prérequis
+## Prerequis
 
 ### 1. Ghidra
 
-### 2. LM Studio + DeepSeek Coder
+Telecharger depuis https://ghidra-sre.org/ et extraire dans un dossier de votre choix.
+
+**Ou trouver le chemin Ghidra ?**
+
+Apres extraction, le dossier ressemble a :
+```
+ghidra_12.0.1_PUBLIC/
+├── support/
+│   ├── analyzeHeadless.bat   <-- c'est ce fichier que le pipeline utilise
+│   └── ...
+├── Ghidra/
+└── ghidraRun.bat
+```
+
+Le chemin a retenir est le dossier racine, par exemple :
+- Windows : `C:/Users/votre_nom/ghidra_12.0.1_PUBLIC`
+- Linux : `/home/votre_nom/ghidra_12.0.1_PUBLIC`
+- Mac : `/Applications/ghidra_12.0.1_PUBLIC`
+
+### 2. LM Studio + Modeles
 
 **Installation :**
 
-1. Télécharger LM Studio depuis https://lmstudio.ai/
+1. Telecharger LM Studio depuis https://lmstudio.ai/
 2. Installer et lancer LM Studio
 
-**Télécharger le modèle DeepSeek Coder :**
+**Telecharger les modeles :**
 
-1. Dans LM Studio, aller dans l'onglet "Discover"
-2. Rechercher "deepseek-coder-6.7B-instruct-GGUF" (par TheBloke)
-3. Télécharger une version quantifiée (recommandé: Q4_K_M ou Q5_K_M)
-   - Source: https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF
+Dans LM Studio, onglet "Discover", telecharger un ou plusieurs de ces modeles :
+- `deepseek-r1-0528-qwen3-8b`
+- `qwen2.5-coder-7b-instruct`
+- `codellama-7b-instruct`
 
-**Démarrer le serveur local :**
+**Demarrer le serveur local :**
 
-1. Aller dans l'onglet "Local Server" (icône serveur à gauche)
-2. Sélectionner le modèle deepseek-coder chargé
+1. Aller dans l'onglet "Local Server" (icone serveur a gauche)
+2. Selectionner le modele charge
 3. Cliquer sur "Start Server"
-4. Le serveur écoute par défaut sur http://localhost:1234
+4. Le serveur ecoute par defaut sur http://localhost:1234
 
-**Vérifier le serveur :**
+**Verifier le serveur :**
 
 ```bash
 curl http://localhost:1234/v1/models
@@ -43,24 +62,75 @@ curl http://localhost:1234/v1/models
 
 ### 3. Python 3.8+
 
-**Installer les dépendances :**
+**Installer les dependances :**
 
 ```bash
-pip install requests
-pip install nltk rouge-score
-python -c "import nltk; nltk.download('punkt')"
+pip install -r requirements.txt
 ```
 
 ### 4. Compilateur C (pour les binaires de test)
 
-**Option A : MinGW (GCC)**
-
 ```bash
-# Via chocolatey
+# Via chocolatey (Windows)
 choco install mingw
 
-# Ou télécharger depuis https://www.mingw-w64.org/
+# Ou telecharger depuis https://www.mingw-w64.org/
 ```
+
+---
+
+## Configuration (config.json)
+
+**A la premiere utilisation**, le projet cree automatiquement un fichier `config.json` a partir de `config.example.json`. Il faut ensuite le modifier avec vos chemins.
+
+### Etape 1 : Generer le config.json
+
+Lancez n'importe quelle commande du pipeline, par exemple :
+
+```bash
+python scripts/quick_test.py
+```
+
+Le fichier `config.json` sera cree a la racine du projet. Le script vous demandera de l'editer.
+
+### Etape 2 : Editer config.json
+
+Ouvrez `config.json` et modifiez le champ `ghidra_path` avec votre chemin Ghidra :
+
+```json
+{
+    "ghidra_path": "C:/Users/votre_nom/ghidra_12.0.1_PUBLIC",
+    "lm_studio": {
+        "base_url": "http://localhost:1234/v1",
+        "model": "deepseek-r1-0528-qwen3-8b"
+    }
+}
+```
+
+**Important :**
+- Utilisez des `/` (slashes) meme sous Windows (pas des `\`)
+- Le chemin doit pointer vers le dossier qui contient `support/analyzeHeadless.bat`
+- `config.json` est dans le `.gitignore` : vos chemins personnels ne seront jamais envoyes sur git
+
+### Etape 3 : Verifier
+
+```bash
+python scripts/quick_test.py
+```
+
+Si tout est OK, vous verrez `[+] Ghidra trouve: ...`
+
+### Alternative : passer les chemins en argument
+
+Vous pouvez aussi passer le chemin Ghidra et le modele directement en argument, sans toucher au config :
+
+```bash
+python scripts/pipeline.py --binary test.exe --ghidra "C:/chemin/vers/ghidra" --model "deepseek-r1-0528-qwen3-8b"
+```
+
+Les arguments CLI sont toujours prioritaires sur le `config.json`.
+
+---
 
 ## Structure du Projet
 
@@ -68,277 +138,221 @@ choco install mingw
 ghidra_llm_pipeline/
 ├── scripts/
 │   ├── pipeline.py          # Pipeline principal
-│   ├── ollama_client.py     # Client pour Ollama
-│   └── evaluate_results.py  # Évaluation des résultats
+│   ├── LLM_client.py        # Client LM Studio (API OpenAI)
+│   ├── config_loader.py     # Chargement de la configuration
+│   ├── evaluate_results.py  # Evaluation des resultats (BLEU, ROUGE, etc.)
+│   ├── multipass.py         # Analyse multi-passes avec enrichissement
+│   ├── benchmark.py         # Benchmark comparatif multi-modeles
+│   └── quick_test.py        # Test rapide de l'environnement
 ├── ghidra_scripts/
-│   ├── extract_functions.py # Script Ghidra d'extraction
-│   └── inject_annotations.py # Script Ghidra d'injection
+│   ├── java/
+│   │   ├── extract_functions.java   # Extraction Ghidra (headless)
+│   │   └── inject_annotations.java  # Injection Ghidra (headless)
+│   └── python/
+│       ├── extract_functions.py     # Extraction (PyGhidra)
+│       └── inject_annotations.py    # Injection (PyGhidra)
 ├── test_binaries/
 │   ├── src/                  # Code source C de test
-│   ├── bin/                  # Binaires compilés
+│   ├── bin/                  # Binaires compiles
+│   ├── extracted_files/      # JSONs extraits par Ghidra
+│   ├── suggested_files/      # Suggestions du LLM
+│   ├── report_files/         # Rapports d'execution
 │   └── compile.bat           # Script de compilation
 ├── expected_results/
-│   └── ground_truth.json     # Résultats attendus
-├── results/                   # Résultats des analyses
+│   └── ground_truth.json     # Resultats attendus
+├── config.example.json       # Configuration exemple (a copier en config.json)
+├── config.json               # Votre configuration locale (non versionne)
 └── TUTORIEL.md               # Ce fichier
 ```
 
 ---
 
-## Partie 1 : Test Manuel Pas à Pas
+## Partie 1 : Test Rapide
 
-### Étape 1 : Compiler les binaires de test
+### Verifier l'environnement
 
 ```bash
-cd "C:\Users\themi\OneDrive - Institut Catholique de Lille\Bureau\CoursM1\M2\ghidra_llm_pipeline\test_binaries"
+python scripts/quick_test.py
+```
+
+Le chemin Ghidra est lu depuis `config.json`. Vous pouvez aussi le passer en argument :
+
+```bash
+python scripts/quick_test.py --ghidra "C:/chemin/vers/ghidra"
+```
+
+### Compiler les binaires de test
+
+```bash
+cd test_binaries
 compile.bat
 ```
 
-### Étape 2 : Extraire les fonctions avec Ghidra (manuel)
-
-**Méthode A : Via l'interface graphique**
-
-1. Lancer Ghidra
-2. Créer un nouveau projet ou utiliser un projet existant
-3. Importer un binaire de test (File > Import File)
-4. Double-cliquer pour ouvrir dans CodeBrowser
-5. Laisser l'analyse automatique se terminer
-6. Aller dans Window > Script Manager
-7. Chercher "extract_functions.py" et l'exécuter
-
-Cela génère un fichier `test1_buffer.exe_extracted.json` contenant toutes les informations sur les fonctions.
-
-### Étape 3 : Tester LM Studio manuellement
-
-1. **Vérifier que LM Studio fonctionne :**
-
-```bash
-curl http://localhost:1234/v1/models
-```
-
-2. **Tester une requête simple :**
-
-```bash
-curl http://localhost:1234/v1/chat/completions -H "Content-Type: application/json" -d "{\"model\": \"deepseek-coder-6.7b-instruct\", \"messages\": [{\"role\": \"user\", \"content\": \"What does this function do? void* func(void* src, size_t size) { void* dst = malloc(size); memcpy(dst, src, size); return dst; }\"}]}"
-```
-
-3. **Tester avec le client Python :**
-
-```bash
-cd "C:\Users\themi\Desktop\CoursM1\M2\ghidra_llm_pipeline\scripts"
-python LLM_client.py
-```
-
-### Étape 4 : Analyser une fonction manuellement
-
-Ouvrez le fichier JSON extrait et copiez une fonction. Envoyez-la à LLM avec ce prompt :
-
-```
-Tu es un expert en reverse engineering. Analyse ce code décompilé et propose :
-1. Un nom de fonction descriptif
-2. Les types de paramètres appropriés
-3. Un commentaire explicatif
-
-Code :
-void * FUN_00401000(int param_1, int param_2) {
-    void *pvVar1;
-    pvVar1 = malloc(param_2);
-    if (pvVar1 != (void *)0x0) {
-        memcpy(pvVar1, param_1, param_2);
-    }
-    return pvVar1;
-}
-
-Réponds en JSON avec ce format :
-{
-    "suggested_name": "...",
-    "suggested_return_type": "...",
-    "suggested_param_types": [{"original": "param_1", "suggested_name": "...", "suggested_type": "..."}],
-    "comments": "...",
-    "confidence": 0.8
-}
-```
-
 ---
 
-## Partie 2 : Utilisation du Pipeline Automatique
+## Partie 2 : Pipeline Automatique
 
-### Étape 1 : Vérifier la configuration
+### Verifier la configuration
 
 ```bash
-cd "C:\Users\themi\Bureau\CoursM1\M2\ghidra_llm_pipeline\scripts"
-
-python pipeline.py ^
-    --ghidra "C:\Users\themi\Bureau\CoursM1\M2\ghidra_12.0.1_PUBLIC" ^
-    --model deepseek-coder-6.7b-instruct ^
+python scripts/pipeline.py ^
+    --binary test_binaries/bin/test1_buffer.exe ^
     --verify-only
 ```
 
-### Étape 2 : Exécuter le pipeline complet
+### Executer le pipeline complet
 
 ```bash
-python pipeline.py ^
-    --binary "C:\Users\themi\Bureau\CoursM1\M2\ghidra_llm_pipeline\test_binaries\bin\test1_buffer.exe" ^
-    --ghidra "C:\Users\themi\Bureau\CoursM1\M2\ghidra_12.0.1_PUBLIC" ^
-    --model deepseek-coder-6.7b-instruct ^
-    --task full ^
-    --output "../results"
+python scripts/pipeline.py ^
+    --binary test_binaries/bin/test1_buffer.exe ^
+    --task full
 ```
 
-### Étape 3 : Options du pipeline
+Le chemin Ghidra et le modele sont lus depuis `config.json`. Vous pouvez les surcharger :
 
-| Option           | Description                                                |
-| ---------------- | ---------------------------------------------------------- |
-| `--binary`, `-b` | Chemin du binaire à analyser                               |
-| `--ghidra`, `-g` | Chemin d'installation Ghidra                               |
-| `--model`, `-m`  | Modèle LM Studio (défaut: deepseek-coder-6.7b-instruct)    |
-| `--task`, `-t`   | Type de tâche: `rename`, `detect_apis`, `comments`, `full` |
-| `--output`, `-o` | Répertoire de sortie                                       |
+```bash
+python scripts/pipeline.py ^
+    --binary test_binaries/bin/test1_buffer.exe ^
+    --ghidra "C:/chemin/vers/ghidra" ^
+    --model deepseek-r1-0528-qwen3-8b ^
+    --task full
+```
 
-### Étape 4 : Analyser les résultats
+Les fichiers de sortie seront dans :
+- `test_binaries/extracted_files/` : JSONs extraits
+- `test_binaries/suggested_files/` : Suggestions LLM
+- `test_binaries/report_files/` : Rapports
 
-Le pipeline génère plusieurs fichiers :
+### Options du pipeline
 
-- `*_extracted.json` : Fonctions extraites de Ghidra
-- `*_suggestions.json` : Suggestions du LLM
-- `*_report.json` : Rapport d'exécution
+| Option           | Description                                                           |
+| ---------------- | --------------------------------------------------------------------- |
+| `--binary`, `-b` | Chemin du binaire a analyser (obligatoire)                            |
+| `--ghidra`, `-g` | Chemin d'installation Ghidra (optionnel si config.json)               |
+| `--model`, `-m`  | Modele LM Studio (optionnel si config.json)                          |
+| `--task`, `-t`   | Type de tache: `rename`, `detect_apis`, `comments`, `full`           |
+| `--verify-only`  | Verifier la configuration sans lancer l'analyse                      |
+
+### Script batch (Windows)
+
+```bash
+run_pipeline.bat test_binaries\bin\test1_buffer.exe
+```
+
+Ou avec un chemin Ghidra explicite :
+
+```bash
+run_pipeline.bat test_binaries\bin\test1_buffer.exe "C:\chemin\vers\ghidra"
+```
 
 ---
 
-## Partie 3 : Évaluation des Résultats
-
-### Utiliser le script d'évaluation
+## Partie 3 : Evaluation des Resultats
 
 ```bash
-python evaluate_results.py ^
-    --suggestions "../results/test1_buffer_suggestions_*.json" ^
-    --ground-truth "../expected_results/ground_truth.json" ^
-    --output "../results/evaluation_report.json"
+python scripts/evaluate_results.py ^
+    --suggestions test_binaries/suggested_files/test1_buffer_suggestions.json ^
+    --ground-truth expected_results/ground_truth.json ^
+    --output evaluation_report.json
 ```
 
-### Métriques d'évaluation
+### Metriques d'evaluation
 
-| Métrique                  | Description                               |
+| Metrique                  | Description                               |
 | ------------------------- | ----------------------------------------- |
 | **Exact Match Rate**      | Pourcentage de noms exactement corrects   |
 | **Acceptable Match Rate** | Pourcentage de noms acceptables           |
-| **Semantic Score**        | Similarité sémantique moyenne (0-1)       |
-| **API Precision**         | Précision des APIs détectées              |
-| **API Recall**            | Rappel des APIs détectées                 |
-| **Comment Score**         | Score de qualité des commentaires         |
-| **Hallucination Rate**    | Taux de suggestions incorrectes/inventées |
+| **Semantic Score**        | Similarite semantique moyenne (0-1)       |
+| **BLEU**                  | Score BLEU des commentaires               |
+| **ROUGE-1/2/L**           | Scores ROUGE des commentaires             |
+| **API Precision/Recall**  | Precision et rappel des APIs detectees    |
+| **Hallucination Rate**    | Taux de suggestions incorrectes/inventees |
 
 ---
 
-## Partie 4 : Protocole Expérimental pour le Mémoire
+## Partie 4 : Benchmark Multi-Modeles
 
-### Phase 1 : Préparation
-
-1. **Compiler les 5 binaires de test**
-2. **Vérifier LMStudio** avec différents modèles
-3. **Établir la baseline** : analyser manuellement 2-3 fonctions par binaire
-
-### Phase 2 : Expérimentation
-
-Pour chaque binaire, effectuer :
+### Single-pass (un modele)
 
 ```bash
-# Analyse avec DeepSeek Coder
-python pipeline.py -b binary.exe -g /path/to/ghidra -m deepseek-coder-6.7b-instruct -t full -o results/deepseek/
+python scripts/benchmark.py ^
+    --models "deepseek-r1-0528-qwen3-8b" ^
+    --inputs test_binaries/extracted_files/*_extracted.json ^
+    --ground-truth expected_results/ground_truth.json ^
+    --output results/benchmark/ ^
+    --no-multipass
 ```
 
-### Phase 3 : Évaluation=
-
-1. **Évaluation automatique** :
+### Benchmark complet (3 modeles + multi-pass)
 
 ```bash
-python evaluate_results.py -s results/*_suggestions.json -g expected_results/ground_truth.json -o final_evaluation.json
+python scripts/benchmark.py ^
+    --models "deepseek-r1-0528-qwen3-8b" "qwen2.5-coder-7b-instruct" "codellama-7b-instruct" ^
+    --inputs test_binaries/extracted_files/*_extracted.json ^
+    --ground-truth expected_results/ground_truth.json ^
+    --output results/benchmark/ ^
+    --multipass
 ```
 
-2. **Évaluation manuelle** :
-   - Sélectionner 20-30 fonctions aléatoires
-   - Faire noter par 2-3 évaluateurs
-   - Utiliser une échelle de 1-5 pour :
-     - Pertinence du nom (1=incorrect, 5=parfait)
-     - Utilité du commentaire
-     - Précision des types
-
-### Phase 4 : Analyse
-
-Calculer et documenter :
-
-- Précision globale par tâche
-- Variation selon la complexité des fonctions
-- Taux d'hallucinations par catégorie
-- Comparaison entre modèles
+Le script demandera de charger chaque modele dans LM Studio quand c'est son tour.
 
 ---
 
-## Partie 6 : Dépannage
-
-### Problème : LM Studio ne répond pas
+## Partie 5 : Multi-Pass Iteratif
 
 ```bash
-# Vérifier si le serveur tourne
+python scripts/multipass.py ^
+    --input test_binaries/extracted_files/test1_buffer.exe_extracted.json ^
+    --ground-truth expected_results/ground_truth.json ^
+    --output results/multipass/
+```
+
+Le modele est lu depuis `config.json`. Vous pouvez le surcharger :
+
+```bash
+python scripts/multipass.py ^
+    --input test_binaries/extracted_files/test1_buffer.exe_extracted.json ^
+    --ground-truth expected_results/ground_truth.json ^
+    --model "deepseek-r1-0528-qwen3-8b" ^
+    --output results/multipass/
+```
+
+Le multi-pass effectue 3 passes successives :
+1. **Passe 1** : Renommage des fonctions
+2. **Passe 2** : Analyse complete avec noms enrichis
+3. **Passe 3** : Generation de commentaires avec contexte maximal
+
+---
+
+## Depannage
+
+### LM Studio ne repond pas
+
+```bash
 curl http://localhost:1234/v1/models
-
-# Solutions:
-# 1. Vérifier que LM Studio est lancé
-# 2. Aller dans l'onglet "Local Server"
-# 3. Vérifier qu'un modèle est chargé
-# 4. Cliquer sur "Start Server" si nécessaire
-# 5. Vérifier le port (par défaut 1234)
+# Si pas de reponse: lancer LM Studio, charger un modele, demarrer le serveur
 ```
 
-### Problème : Ghidra headless échoue
+### Ghidra headless echoue
 
-```bash
-# Vérifier les permissions
-# Vérifier le chemin du JDK
+- Verifier que Java 17+ est installe (`java -version`)
+- Verifier le chemin Ghidra dans `config.json` (doit contenir `support/analyzeHeadless.bat`)
+- Ghidra 12+ ne supporte plus les scripts Python en headless, utiliser les scripts Java
 
-# Exécuter avec plus de logs
-support\analyzeHeadless.bat ... -log analysis.log
-```
+### config.json non trouve
 
-### Problème : Modèle trop lent
+Si le fichier `config.json` n'existe pas, lancez n'importe quel script et il sera cree automatiquement depuis `config.example.json`. Editez ensuite le champ `ghidra_path`.
 
-```
-# Solutions dans LM Studio:
-# 1. Utiliser une quantification plus aggressive (Q4_K_S au lieu de Q5_K_M)
-# 2. Réduire le context length dans les paramètres du serveur
-# 3. Activer GPU acceleration si disponible
-# 4. Ajuster max_tokens dans ollama_client.py (réduire à 512)
-```
+### Modele trop lent
 
-### Problème : Extraction JSON vide
-
-- Vérifier que le binaire a été correctement analysé
-- Vérifier les permissions d'écriture
-- Exécuter le script dans l'interface Ghidra pour voir les erreurs
-
----
-
-## Annexe : Commandes Utiles
-
-```bash
-# Vérifier que LM Studio répond
-curl http://localhost:1234/v1/models
-
-# Tester une requête simple
-curl http://localhost:1234/v1/chat/completions ^
-  -H "Content-Type: application/json" ^
-  -d "{\"model\": \"deepseek-coder-6.7b-instruct\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}]}"
-
-# Tester le client Python
-python scripts/ollama_client.py
-```
+- Utiliser une quantification plus agressive (Q4_K_S)
+- Reduire max_tokens dans config.json (`lm_studio.options.max_tokens`)
+- Activer GPU acceleration dans LM Studio
 
 ---
 
 ## Ressources
 
 - [Documentation Ghidra](https://ghidra-sre.org/)
-- [API Ghidra Python](https://ghidra.re/ghidra_docs/api/)
 - [LM Studio](https://lmstudio.ai/)
-- [DeepSeek Coder GGUF (TheBloke)](https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF)
-- [DeepSeek Coder Paper](https://arxiv.org/abs/2401.14196)
+- [DeepSeek Coder](https://github.com/deepseek-ai/DeepSeek-Coder)

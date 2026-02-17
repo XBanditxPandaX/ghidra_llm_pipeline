@@ -24,6 +24,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from LLM_client import LMStudioClient, TaskType, LLMSuggestion
 from evaluate_results import evaluate_binary, evaluate_function, BinaryEvaluation
+from config_loader import get_model, get_lm_studio_url
 
 
 def filter_functions(functions: List[Dict]) -> List[Dict]:
@@ -289,10 +290,13 @@ def main():
     parser = argparse.ArgumentParser(description="Analyse multi-passes avec enrichissement iteratif")
     parser.add_argument("--input", "-i", required=True, help="Fichier JSON extrait par Ghidra")
     parser.add_argument("--ground-truth", "-g", required=True, help="Fichier JSON ground truth")
-    parser.add_argument("--model", "-m", default="deepseek-coder-6.7b-instruct", help="Modele LM Studio")
+    parser.add_argument("--model", "-m", default=None, help="Modele LM Studio (sinon lu depuis config.json)")
     parser.add_argument("--output", "-o", default="./results/multipass", help="Repertoire de sortie")
 
     args = parser.parse_args()
+
+    # Resoudre le modele via CLI ou config.json
+    model = get_model(args.model)
 
     # Charger le ground truth
     with open(args.ground_truth, 'r', encoding='utf-8') as f:
@@ -312,7 +316,7 @@ def main():
         sys.exit(1)
 
     # Creer le client et lancer
-    client = LMStudioClient(model=args.model)
+    client = LMStudioClient(base_url=get_lm_studio_url(), model=model)
 
     if not client.check_connection():
         print("[!] LM Studio n'est pas accessible. Lancez LM Studio et chargez un modele.")

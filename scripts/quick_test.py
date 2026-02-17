@@ -1,11 +1,16 @@
 """
 Script de test rapide pour verifier l'installation
 
-Usage: python quick_test.py
+Usage: python quick_test.py [--ghidra "chemin/vers/ghidra"]
 """
 
 import sys
 import os
+import argparse
+
+# Ajouter le repertoire courant au path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 
 def check_python():
     """Verifie la version Python"""
@@ -16,6 +21,7 @@ def check_python():
     print("[+] Python OK")
     return True
 
+
 def check_requests():
     """Verifie que requests est installe"""
     try:
@@ -25,6 +31,27 @@ def check_requests():
     except ImportError:
         print("[!] requests non installe. Executez: pip install requests")
         return False
+
+
+def check_nltk():
+    """Verifie que nltk et rouge-score sont installes"""
+    ok = True
+    try:
+        import nltk
+        print(f"[+] nltk {nltk.__version__} OK")
+    except ImportError:
+        print("[!] nltk non installe. Executez: pip install nltk")
+        ok = False
+
+    try:
+        from rouge_score import rouge_scorer
+        print("[+] rouge-score OK")
+    except ImportError:
+        print("[!] rouge-score non installe. Executez: pip install rouge-score")
+        ok = False
+
+    return ok
+
 
 def check_lm_studio():
     """Verifie que LM Studio est accessible"""
@@ -41,23 +68,30 @@ def check_lm_studio():
     except Exception as e:
         print(f"[!] LM Studio non accessible: {e}")
         print("    1. Lancez LM Studio")
-        print("    2. Chargez deepseek-coder-6.7B-instruct-GGUF")
+        print("    2. Chargez un modele (ex: deepseek-r1-0528-qwen3-8b)")
         print("    3. Demarrez le serveur local (onglet Local Server)")
         return False
 
-def check_ghidra():
-    """Verifie que Ghidra est installe"""
-    # Chemin par defaut
-    ghidra_path = r"C:\Users\themi\OneDrive - Institut Catholique de Lille\Bureau\CoursM1\M2\ghidra_12.0.1_PUBLIC"
 
-    headless = os.path.join(ghidra_path, "support", "analyzeHeadless.bat")
+def check_ghidra(ghidra_path):
+    """Verifie que Ghidra est installe"""
+    if not ghidra_path:
+        print("[*] Chemin Ghidra non specifie (utilisez --ghidra pour verifier)")
+        return True  # On ne bloque pas si non specifie
+
+    if sys.platform == "win32":
+        headless = os.path.join(ghidra_path, "support", "analyzeHeadless.bat")
+    else:
+        headless = os.path.join(ghidra_path, "support", "analyzeHeadless")
 
     if os.path.exists(headless):
         print(f"[+] Ghidra trouve: {ghidra_path}")
         return True
     else:
         print(f"[!] Ghidra non trouve a: {ghidra_path}")
+        print("    Telechargez Ghidra depuis https://ghidra-sre.org/")
         return False
+
 
 def check_scripts():
     """Verifie que les scripts sont presents"""
@@ -66,10 +100,12 @@ def check_scripts():
 
     files_to_check = [
         os.path.join(script_dir, "pipeline.py"),
-        os.path.join(script_dir, "ollama_client.py"),
+        os.path.join(script_dir, "LLM_client.py"),
         os.path.join(script_dir, "evaluate_results.py"),
-        os.path.join(parent_dir, "ghidra_scripts", "extract_functions.py"),
-        os.path.join(parent_dir, "ghidra_scripts", "inject_annotations.py"),
+        os.path.join(script_dir, "multipass.py"),
+        os.path.join(script_dir, "benchmark.py"),
+        os.path.join(parent_dir, "ghidra_scripts", "java", "extract_functions.java"),
+        os.path.join(parent_dir, "ghidra_scripts", "java", "inject_annotations.java"),
         os.path.join(parent_dir, "expected_results", "ground_truth.json"),
     ]
 
@@ -78,10 +114,11 @@ def check_scripts():
         if os.path.exists(f):
             print(f"[+] {os.path.basename(f)} OK")
         else:
-            print(f"[!] Manquant: {f}")
+            print(f"[!] Manquant: {os.path.relpath(f, parent_dir)}")
             all_ok = False
 
     return all_ok
+
 
 def test_lm_studio_query():
     """Teste une requete LM Studio simple"""
@@ -90,8 +127,13 @@ def test_lm_studio_query():
 
         print("\n[*] Test de requete LM Studio...")
 
+        # Recuperer le premier modele disponible
+        models_resp = requests.get("http://localhost:1234/v1/models", timeout=5)
+        models = [m["id"] for m in models_resp.json().get("data", [])]
+        model = models[0] if models else "default"
+
         payload = {
-            "model": "deepseek-coder-6.7b-instruct",
+            "model": model,
             "messages": [
                 {"role": "user", "content": "What does 'malloc' do in C? Answer in one sentence."}
             ],
@@ -107,7 +149,7 @@ def test_lm_studio_query():
 
         if response.status_code == 200:
             result = response.json().get("choices", [{}])[0].get("message", {}).get("content", "")
-            print(f"[+] Reponse LM Studio: {result[:200]}...")
+            print(f"[+] Reponse LM Studio ({model}): {result[:200]}")
             return True
         else:
             print(f"[!] Erreur LM Studio: {response.status_code}")
@@ -117,7 +159,24 @@ def test_lm_studio_query():
         print(f"[!] Erreur: {e}")
         return False
 
+
 def main():
+    parser = argparse.ArgumentParser(description="Test de l'environnement pipeline Ghidra + LLM")
+    parser.add_argument("--ghidra", "-g", default=None, help="Chemin d'installation de Ghidra (sinon lu depuis config.json)")
+    args = parser.parse_args()
+
+    # Resoudre le chemin Ghidra via CLI ou config.json
+    ghidra_path = args.ghidra
+    if not ghidra_path:
+        try:
+            from config_loader import load_config
+            config = load_config()
+            ghidra_path = config.get("ghidra_path", "")
+            if ghidra_path and "chemin/vers" not in ghidra_path:
+                print(f"[*] Chemin Ghidra lu depuis config.json: {ghidra_path}")
+        except Exception:
+            pass
+
     print("="*60)
     print("TEST DE L'ENVIRONNEMENT - Pipeline Ghidra + LLM")
     print("="*60)
@@ -129,18 +188,19 @@ def main():
 
     print("\n--- Verification des dependances ---")
     results.append(("requests", check_requests()))
+    results.append(("nltk/rouge", check_nltk()))
 
     print("\n--- Verification LM Studio ---")
     results.append(("LM Studio", check_lm_studio()))
 
     print("\n--- Verification Ghidra ---")
-    results.append(("Ghidra", check_ghidra()))
+    results.append(("Ghidra", check_ghidra(ghidra_path)))
 
     print("\n--- Verification des scripts ---")
     results.append(("Scripts", check_scripts()))
 
     # Test LM Studio uniquement si disponible
-    if results[2][1]:  # LM Studio OK
+    if results[3][1]:  # LM Studio OK
         results.append(("Test LM Studio", test_lm_studio_query()))
 
     # Resume
@@ -158,12 +218,13 @@ def main():
     if all_ok:
         print("\n[+] Tout est pret! Vous pouvez executer le pipeline.")
         print("\nCommande de test:")
-        print('  python pipeline.py --ghidra "chemin/vers/ghidra" --binary "chemin/vers/binaire.exe" --model deepseek-coder-6.7b-instruct')
+        print('  python scripts/pipeline.py --binary test_binaries/bin/test1_buffer.exe --ghidra "chemin/vers/ghidra"')
     else:
         print("\n[!] Certains composants ne sont pas prets.")
         print("    Consultez le TUTORIEL.md pour les instructions d'installation.")
 
     return 0 if all_ok else 1
+
 
 if __name__ == "__main__":
     sys.exit(main())
