@@ -3,7 +3,7 @@ Pipeline Principal - Amelioration automatique Ghidra via LLM
 
 Ce script orchestre le processus complet:
 1. Extraction des fonctions depuis Ghidra (mode headless)
-2. Analyse par LLM (Ollama)
+2. Analyse par LLM (LM Studio)
 3. Reinjection des annotations dans Ghidra
 
 Usage:
@@ -26,7 +26,7 @@ from datetime import datetime
 # Ajouter le repertoire courant au path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from ollama_client import OllamaClient, TaskType, LLMSuggestion
+from LLM_client import LMStudioClient, TaskType, LLMSuggestion
 
 
 class GhidraLLMPipeline:
@@ -35,7 +35,7 @@ class GhidraLLMPipeline:
     def __init__(self, ghidra_path: str, model: str = "codellama"):
         self.ghidra_path = Path(ghidra_path)
         self.model = model
-        self.ollama = OllamaClient(model=model)
+        self.llm_client = LMStudioClient(model=model)
 
         # Chemins Ghidra
         if sys.platform == "win32":
@@ -58,18 +58,20 @@ class GhidraLLMPipeline:
         if not self.analyze_headless.exists():
             errors.append(f"analyzeHeadless non trouve: {self.analyze_headless}")
 
-        # Verifier les scripts Ghidra
-        extract_script = self.ghidra_scripts / "extract_functions.py"
-        inject_script = self.ghidra_scripts / "inject_annotations.py"
+        # Verifier les scripts Ghidra (Python prefere, Java en fallback)
+        extract_py = self.ghidra_scripts / "python" / "extract_functions.py"
+        extract_java = self.ghidra_scripts / "java" / "extract_functions.java"
+        inject_py = self.ghidra_scripts / "python" / "inject_annotations.py"
+        inject_java = self.ghidra_scripts / "java" / "inject_annotations.java"
 
-        if not extract_script.exists():
-            errors.append(f"Script d'extraction non trouve: {extract_script}")
-        if not inject_script.exists():
-            errors.append(f"Script d'injection non trouve: {inject_script}")
+        if not extract_py.exists() and not extract_java.exists():
+            errors.append(f"Script d'extraction non trouve dans: {self.ghidra_scripts}")
+        if not inject_py.exists() and not inject_java.exists():
+            errors.append(f"Script d'injection non trouve dans: {self.ghidra_scripts}")
 
         # Verifier Ollama
-        if not self.ollama.check_connection():
-            errors.append("Ollama n'est pas accessible (http://localhost:11434)")
+        if not self.llm_client.check_connection():
+            errors.append("LM Studio n'est pas accessible (http://localhost:1234)")
 
         if errors:
             print("[!] Erreurs de configuration:")
@@ -78,34 +80,60 @@ class GhidraLLMPipeline:
             return False
 
         # Verifier le modele
-        available_models = self.ollama.list_models()
-        print(f"[*] Modeles Ollama disponibles: {available_models}")
+        available_models = self.llm_client.list_models()
+        print(f"[*] Modeles LM Studio disponibles: {available_models}")
 
         if self.model not in available_models and not any(self.model in m for m in available_models):
-            print(f"[!] Modele '{self.model}' non trouve. Telechargez-le avec: ollama pull {self.model}")
+            print(f"[!] Modele '{self.model}' non trouve. Chargez-le dans LM Studio.")
             return False
 
         print("[+] Configuration verifiee avec succes")
         return True
 
+    def _get_output_dirs(self, binary_path: Path) -> dict:
+        """Calcule les repertoires de sortie a partir du chemin du binaire.
+
+        Structure:
+            test_binaries/
+                bin/                 <- binaires
+                extracted_files/     <- JSONs extraits par Ghidra
+                suggested_files/     <- suggestions LLM
+                report_files/        <- rapports
+        """
+        base_dir = binary_path.parent.parent  # test_binaries/
+        dirs = {
+            "extracted": base_dir / "extracted_files",
+            "suggested": base_dir / "suggested_files",
+            "reports":   base_dir / "report_files",
+        }
+        for d in dirs.values():
+            d.mkdir(parents=True, exist_ok=True)
+        return dirs
+
     def extract_functions(self, binary_path: str, output_json: str) -> bool:
-        """Execute l'extraction Ghidra en mode headless"""
+        """Execute l'extraction Ghidra en mode headless.
+        Le JSON est sauvegarde directement dans extracted_files/ par le script Ghidra.
+        output_json est le chemin attendu dans extracted_files/.
+        """
         binary_path = Path(binary_path).resolve()
         project_name = binary_path.stem + "_project"
 
         print(f"[*] Extraction des fonctions de: {binary_path}")
+
+        # Utiliser le script Java (Ghidra 12+ ne supporte plus Jython en headless)
+        extract_script = self.ghidra_scripts / "java" / "extract_functions.java"
+        if not extract_script.exists():
+            extract_script = self.ghidra_scripts / "python" / "extract_functions.py"
 
         cmd = [
             str(self.analyze_headless),
             str(self.temp_project_dir),
             project_name,
             "-import", str(binary_path),
-            "-postScript", str(self.ghidra_scripts / "extract_functions.py"),
-            "-deleteProject",  # Nettoyer apres
-            "-scriptPath", str(self.ghidra_scripts)
+            "-postScript", str(extract_script),
+            "-deleteProject",
+            "-scriptPath", str(extract_script.parent)
         ]
-
-        print(f"[*] Commande: {' '.join(cmd)}")
 
         try:
             result = subprocess.run(
@@ -115,21 +143,63 @@ class GhidraLLMPipeline:
                 timeout=300  # 5 minutes max
             )
 
+            # Afficher uniquement les lignes de notre script et les erreurs critiques
+            if result.stdout:
+                for line in result.stdout.splitlines():
+                    # Lignes de notre script (extract_functions.java> [...])
+                    if 'extract_functions' in line and '>' in line:
+                        # Extraire juste le message apres ">"
+                        msg = line.split('>', 1)[-1].strip()
+                        if msg:
+                            print(f"    {msg}")
+                    # Erreurs critiques (pas DWARF, pas les paths)
+                    elif 'SCRIPT ERROR' in line or 'ClassNotFoundException' in line:
+                        print(f"    [!] {line.strip()}")
+
             if result.returncode != 0:
-                print(f"[!] Erreur Ghidra:\n{result.stderr}")
+                print(f"[!] Erreur Ghidra (code {result.returncode}):")
+                if result.stderr:
+                    print(result.stderr[:2000])
                 return False
 
-            # Trouver le fichier JSON genere
-            expected_json = binary_path.parent / (binary_path.name + "_extracted.json")
+            # Verifier que le fichier a ete genere a l'emplacement attendu
+            output_path = Path(output_json)
+            if output_path.exists():
+                print(f"[+] Extraction sauvegardee: {output_path}")
+                return True
 
-            if expected_json.exists():
-                # Copier vers la destination
+            # Recherche de secours si le script Ghidra a ecrit ailleurs
+            search_locations = [
+                binary_path.parent.parent / "extracted_files" / (binary_path.name + "_extracted.json"),
+                binary_path.parent / (binary_path.name + "_extracted.json"),
+                binary_path.parent / (binary_path.stem + "_extracted.json"),
+                Path.cwd() / (binary_path.name + "_extracted.json"),
+                self.temp_project_dir / (binary_path.name + "_extracted.json"),
+            ]
+
+            found_json = None
+            for candidate in search_locations:
+                if candidate.exists() and candidate != output_path:
+                    found_json = candidate
+                    break
+
+            if not found_json:
+                project_root = Path(__file__).parent.parent
+                for match in project_root.glob(f"**/*{binary_path.stem}*extracted*.json"):
+                    found_json = match
+                    break
+
+            if found_json:
                 import shutil
-                shutil.copy(expected_json, output_json)
-                print(f"[+] Extraction sauvegardee: {output_json}")
+                shutil.move(str(found_json), str(output_path))
+                print(f"[+] Extraction trouvee: {found_json}")
+                print(f"[+] Deplacee vers: {output_path}")
                 return True
             else:
-                print(f"[!] Fichier d'extraction non trouve: {expected_json}")
+                print(f"[!] Fichier d'extraction non trouve.")
+                print(f"    Emplacements verifies:")
+                for loc in search_locations:
+                    print(f"      - {loc} {'(existe)' if loc.exists() else '(absent)'}")
                 return False
 
         except subprocess.TimeoutExpired:
@@ -165,7 +235,7 @@ class GhidraLLMPipeline:
         print(f"[*] {len(filtered_functions)} fonctions filtrees pour analyse")
 
         # Analyser avec le LLM
-        suggestions = self.ollama.analyze_batch(filtered_functions, task)
+        suggestions = self.llm_client.analyze_batch(filtered_functions, task)
 
         return suggestions
 
@@ -184,20 +254,28 @@ class GhidraLLMPipeline:
         print(f"[+] Suggestions sauvegardees: {output_path}")
 
     def inject_annotations(self, binary_path: str, suggestions_json: str) -> bool:
-        """Reinjecte les annotations dans Ghidra"""
+        """Reinjecte les annotations dans Ghidra.
+        suggestions_json: chemin vers le fichier dans suggested_files/
+        """
         binary_path = Path(binary_path).resolve()
+        suggestions_json = Path(suggestions_json).resolve()
         project_name = binary_path.stem + "_annotated"
 
-        print(f"[*] Injection des annotations dans: {binary_path}")
+        print(f"[*] Injection des annotations dans: {binary_path.name}")
+
+        inject_script = self.ghidra_scripts / "java" / "inject_annotations.java"
+        if not inject_script.exists():
+            inject_script = self.ghidra_scripts / "python" / "inject_annotations.py"
 
         cmd = [
             str(self.analyze_headless),
             str(self.temp_project_dir),
             project_name,
             "-import", str(binary_path),
-            "-postScript", str(self.ghidra_scripts / "inject_annotations.py"),
+            "-postScript", str(inject_script),
             str(suggestions_json),
-            "-scriptPath", str(self.ghidra_scripts)
+            "-deleteProject",
+            "-scriptPath", str(inject_script.parent)
         ]
 
         try:
@@ -205,36 +283,54 @@ class GhidraLLMPipeline:
                 cmd,
                 capture_output=True,
                 text=True,
-                timeout=300
+                timeout=600  # 10 minutes max
             )
 
+            # Afficher uniquement les lignes de notre script
+            if result.stdout:
+                for line in result.stdout.splitlines():
+                    if 'inject_annotations' in line and '>' in line:
+                        msg = line.split('>', 1)[-1].strip()
+                        if msg:
+                            print(f"    {msg}")
+                    elif 'SCRIPT ERROR' in line or 'ClassNotFoundException' in line:
+                        print(f"    [!] {line.strip()}")
+
             if result.returncode != 0:
-                print(f"[!] Erreur Ghidra:\n{result.stderr}")
+                print(f"[!] Erreur Ghidra (code {result.returncode})")
                 return False
 
             print("[+] Annotations injectees avec succes")
             return True
 
+        except subprocess.TimeoutExpired:
+            print("[!] Timeout lors de l'injection (600s)")
+            return False
         except Exception as e:
             print(f"[!] Erreur: {e}")
             return False
 
-    def run_full_pipeline(self, binary_path: str, output_dir: str, task: TaskType = TaskType.FULL_ANALYSIS) -> dict:
-        """Execute le pipeline complet"""
+    def run_full_pipeline(self, binary_path: str, output_dir: str = None, task: TaskType = TaskType.FULL_ANALYSIS) -> dict:
+        """Execute le pipeline complet.
+
+        Structure de sortie (relative au dossier parent de bin/):
+            extracted_files/   <- JSONs extraits par Ghidra
+            suggested_files/   <- suggestions LLM
+            report_files/      <- rapports
+        """
         binary_path = Path(binary_path).resolve()
-        output_dir = Path(output_dir)
-        output_dir.mkdir(parents=True, exist_ok=True)
-
         binary_name = binary_path.stem
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # Fichiers intermediaires
-        extracted_json = output_dir / f"{binary_name}_extracted_{timestamp}.json"
-        suggestions_json = output_dir / f"{binary_name}_suggestions_{timestamp}.json"
+        # Calculer les repertoires de sortie
+        dirs = self._get_output_dirs(binary_path)
+
+        # Fichiers de sortie (noms simples, sans timestamp)
+        extracted_json = dirs["extracted"] / f"{binary_path.name}_extracted.json"
+        suggestions_json = dirs["suggested"] / f"{binary_name}_suggestions.json"
+        report_path = dirs["reports"] / f"{binary_name}_report.json"
 
         results = {
             "binary": str(binary_path),
-            "timestamp": timestamp,
             "model": self.model,
             "task": task.value,
             "steps": {}
@@ -293,7 +389,6 @@ class GhidraLLMPipeline:
             results["steps"]["injection"] = {"success": False}
 
         # Sauvegarder le rapport
-        report_path = output_dir / f"{binary_name}_report_{timestamp}.json"
         with open(report_path, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2)
 
