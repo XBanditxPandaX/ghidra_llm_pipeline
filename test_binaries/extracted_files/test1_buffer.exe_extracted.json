@@ -1,0 +1,1690 @@
+{
+  "name": "test1_buffer.exe",
+  "path": "/C:/Users/themi/Desktop/CoursM1/M2/ghidra_llm_pipeline/test_binaries/bin/test1_buffer.exe",
+  "format": "Portable Executable (PE)",
+  "language": "x86/little/64/default",
+  "compiler": "gcc:unknown",
+  "image_base": "140000000",
+  "functions": [
+    {
+      "name": "__mingw_invalidParameterHandler",
+      "address": "140001000",
+      "signature": "void __fastcall __mingw_invalidParameterHandler(wchar_t * expression, wchar_t * function, wchar_t * file, uint line, uintptr_t pReserved)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 5,
+      "size": 1,
+      "parameters": [
+        {"name": "expression", "type": "wchar_t *", "storage": "RCX:8"},
+        {"name": "function", "type": "wchar_t *", "storage": "RDX:8"},
+        {"name": "file", "type": "wchar_t *", "storage": "R8:8"},
+        {"name": "line", "type": "uint", "storage": "R9D:4"},
+        {"name": "pReserved", "type": "typedef uintptr_t ulonglong", "storage": "Stack[0x28]:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __mingw_invalidParameterHandler\r\n               (wchar_t *expression,wchar_t *function,wchar_t *file,uint line,uintptr_t pReserved)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__tmainCRTStartup",
+      "address": "140001010",
+      "signature": "int __tmainCRTStartup(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 926,
+      "parameters": [],
+      "local_variables": [
+        {"name": "startinfo", "type": "/DWARF/internal.h/_startupinfo\npack()\nStructure _startupinfo {\n   0   int   4   newmode   \"\"\n}\nLength: 4 Alignment: 4\n", "storage": "Stack[-0x4c]:4"},
+        {"name": "local_5c", "type": "undefined4", "storage": "Stack[-0x5c]:4"},
+        {"name": "local_78", "type": "undefined8", "storage": "Stack[-0x78]:8"}],
+      "called_functions": [
+        {"name": "__p___initenv", "address": "140002920"},
+        {"name": "__main", "address": "1400017f0"},
+        {"name": "malloc", "address": "140002aa8"},
+        {"name": "_cexit", "address": "140002a00"},
+        {"name": "exit", "address": "140002a50"},
+        {"name": "__dyn_tls_init", "address": "140001840"},
+        {"name": "_fpreset", "address": "1400023e0"},
+        {"name": "_set_invalid_parameter_handler", "address": "140002a40"},
+        {"name": "__set_app_type", "address": "140002a28"},
+        {"name": "__getmainargs", "address": "140002960"},
+        {"name": "__mingw_setusermatherr", "address": "140001f70"},
+        {"name": "_setargv", "address": "140001810"},
+        {"name": "__p__commode", "address": "1400029d8"},
+        {"name": "main", "address": "140001623"},
+        {"name": "__p__fmode", "address": "1400029e0"},
+        {"name": "_configthreadlocale", "address": "140002a80"},
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"},
+        {"name": "_amsg_exit", "address": "140002930"},
+        {"name": "_initterm_e", "address": "140002a38"},
+        {"name": "memcpy", "address": "140002a68"},
+        {"name": "Sleep", "address": "EXTERNAL:00000007"},
+        {"name": "strlen", "address": "1400029c0"},
+        {"name": "_initterm", "address": "140002a30"},
+        {"name": "SetUnhandledExceptionFilter", "address": "EXTERNAL:00000006"}],
+      "calling_functions": [
+        {"name": "WinMainCRTStartup", "address": "1400013e0"},
+        {"name": "mainCRTStartup", "address": "140001400"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nint __tmainCRTStartup(void)\r\n\r\n{\r\n  undefined *puVar1;\r\n  undefined *puVar2;\r\n  _TCHAR **pp_Var3;\r\n  int iVar4;\r\n  int iVar5;\r\n  char ***pppcVar6;\r\n  LPTOP_LEVEL_EXCEPTION_FILTER pPVar7;\r\n  int *piVar8;\r\n  undefined4 *puVar9;\r\n  _TCHAR **pp_Var10;\r\n  size_t sVar11;\r\n  _TCHAR *_Dst;\r\n  _TCHAR **pp_Var12;\r\n  longlong lVar13;\r\n  longlong lVar14;\r\n  longlong unaff_GS_OFFSET;\r\n  bool bVar15;\r\n  int in_stack_ffffffffffffff68;\r\n  char **in_stack_ffffffffffffff70;\r\n  _startupinfo startinfo;\r\n  \r\n                    /* Unresolved local var: void * lock_free@[???]\r\n                       Unresolved local var: void * fiberid@[???]\r\n                       Unresolved local var: BOOL nested@[???]\r\n                       Unresolved local var: int ret@[???] */\r\n  puVar1 = _refptr___native_startup_lock;\r\n                    /* Unresolved local var: ulonglong ret@[???] */\r\n  lVar14 = *(longlong *)(*(longlong *)(unaff_GS_OFFSET + 0x30) + 8);\r\n  while( true ) {\r\n    LOCK();\r\n    lVar13 = *(longlong *)puVar1;\r\n    bVar15 = lVar13 == 0;\r\n    if (bVar15) {\r\n      *(longlong *)puVar1 = lVar14;\r\n      lVar13 = 0;\r\n    }\r\n    puVar2 = _refptr___native_startup_state;\r\n    UNLOCK();\r\n    if (bVar15) {\r\n      bVar15 = false;\r\n      goto LAB_14000105c;\r\n    }\r\n    if (lVar14 == lVar13) break;\r\n    Sleep(1000);\r\n  }\r\n  bVar15 = true;\r\nLAB_14000105c:\r\n  if (*(int *)_refptr___native_startup_state == 1) {\r\n                    /* WARNING: Subroutine does not return */\r\n    _amsg_exit(0x1f);\r\n  }\r\n  if (*(int *)_refptr___native_startup_state != 0) {\r\n    has_cctor = 1;\r\nLAB_140001084:\r\n    if (!bVar15) {\r\n      LOCK();\r\n      *(undefined8 *)puVar1 = 0;\r\n      UNLOCK();\r\n    }\r\n    if (*(code **)_refptr___dyn_tls_init_callback != (code *)0x0) {\r\n      (**(code **)_refptr___dyn_tls_init_callback)(0,2,0);\r\n    }\r\n    pppcVar6 = __p___initenv();\r\n    *pppcVar6 = envp;\r\n    iVar4 = main(in_stack_ffffffffffffff68,in_stack_ffffffffffffff70);\r\n    if (managedapp != 0) {\r\n      if (has_cctor == 0) {\r\n        _cexit();\r\n      }\r\n      return iVar4;\r\n    }\r\n                    /* WARNING: Subroutine does not return */\r\n    exit(iVar4);\r\n  }\r\n  *(undefined4 *)_refptr___native_startup_state = 1;\r\n  _pei386_runtime_relocator();\r\n  pPVar7 = SetUnhandledExceptionFilter(_gnu_exception_handler);\r\n  *(LPTOP_LEVEL_EXCEPTION_FILTER *)_refptr___mingw_oldexcpt_handler = pPVar7;\r\n  _set_invalid_parameter_handler(__mingw_invalidParameterHandler);\r\n  _fpreset();\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pPEHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER32 pNTHeader32@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER64 pNTHeader64@[???] */\r\n  managedapp = 0;\r\n  *(undefined4 *)_refptr___mingw_initltsdrot_force = 1;\r\n  *(undefined4 *)_refptr___mingw_initltsdyn_force = 1;\r\n  *(undefined4 *)_refptr___mingw_initltssuo_force = 1;\r\n  if ((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n     (piVar8 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n     *piVar8 == 0x4550)) {\r\n    if ((short)piVar8[6] == 0x10b) {\r\n      if (0xe < (uint)piVar8[0x1d]) {\r\n        managedapp = (int)(piVar8[0x3a] != 0);\r\n      }\r\n    }\r\n    else if (((short)piVar8[6] == 0x20b) && (0xe < (uint)piVar8[0x21])) {\r\n      managedapp = (int)(piVar8[0x3e] != 0);\r\n    }\r\n  }\r\n  if (*(int *)_refptr___mingw_app_type == 0) {\r\n    __set_app_type(1);\r\n  }\r\n  else {\r\n    __set_app_type(2);\r\n  }\r\n  puVar9 = (undefined4 *)__p__fmode();\r\n  *puVar9 = *(undefined4 *)_refptr__fmode;\r\n  puVar9 = (undefined4 *)__p__commode();\r\n  *puVar9 = *(undefined4 *)_refptr__commode;\r\n  iVar4 = _setargv();\r\n  if (-1 < iVar4) {\r\n    if (*(int *)_refptr__MINGW_INSTALL_DEBUG_MATHERR == 1) {\r\n      __mingw_setusermatherr(_matherr);\r\n    }\r\n    if (*(int *)_refptr___globallocalestatus == -1) {\r\n      _configthreadlocale(-1);\r\n    }\r\n    iVar4 = _initterm_e(_refptr___xi_a,_refptr___xi_z);\r\n    if (iVar4 != 0) {\r\n      return 0xff;\r\n    }\r\n    startinfo.newmode = *(int *)_refptr__newmode;\r\n    iVar5 = __getmainargs(&argc,&argv,&envp,*(int *)_refptr__dowildcard,&startinfo);\r\n    iVar4 = argc;\r\n    if (-1 < iVar5) {\r\n      lVar14 = (longlong)argc;\r\n                    /* Unresolved local var: _TCHAR * * avl@[???]\r\n                       Unresolved local var: int i@[???]\r\n                       Unresolved local var: _TCHAR * * n@[???] */\r\n      pp_Var10 = malloc((longlong)(argc + 1) << 3);\r\n      pp_Var3 = argv;\r\n      if (pp_Var10 != (_TCHAR **)0x0) {\r\n        pp_Var12 = pp_Var10;\r\n        if (iVar4 < 1) {\r\nLAB_14000134c:\r\n          *pp_Var12 = (_TCHAR *)0x0;\r\n          argv = pp_Var10;\r\n          _initterm(_refptr___xc_a,_refptr___xc_z);\r\n          __main();\r\n          *(undefined4 *)puVar2 = 2;\r\n          goto LAB_140001084;\r\n        }\r\n        lVar13 = 1;\r\n        while( true ) {\r\n          sVar11 = strlen(pp_Var3[lVar13 + -1]);\r\n          _Dst = malloc(sVar11 + 1);\r\n          pp_Var10[lVar13 + -1] = _Dst;\r\n          if (_Dst == (_TCHAR *)0x0) break;\r\n                    /* Unresolved local var: size_t l@[???] */\r\n          memcpy(_Dst,pp_Var3[lVar13 + -1],sVar11 + 1);\r\n          if (lVar14 == lVar13) {\r\n            pp_Var12 = pp_Var10 + lVar14;\r\n            goto LAB_14000134c;\r\n          }\r\n          lVar13 = lVar13 + 1;\r\n        }\r\n      }\r\n    }\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  _amsg_exit(8);\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "WinMainCRTStartup",
+      "address": "1400013e0",
+      "signature": "int WinMainCRTStartup(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 29,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nint WinMainCRTStartup(void)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* Unresolved local var: int ret@[???] */\r\n  *(undefined4 *)_refptr___mingw_app_type = 1;\r\n  iVar1 = __tmainCRTStartup();\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "mainCRTStartup",
+      "address": "140001400",
+      "signature": "int mainCRTStartup(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 29,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nint mainCRTStartup(void)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* Unresolved local var: int ret@[???] */\r\n  *(undefined4 *)_refptr___mingw_app_type = 0;\r\n  iVar1 = __tmainCRTStartup();\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "atexit",
+      "address": "140001420",
+      "signature": "int __fastcall atexit(_PVFV func)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 5,
+      "parameters": [
+        {"name": "func", "type": "typedef _PVFV _func_void *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__gcc_register_frame", "address": "140001430"},
+        {"name": "__do_global_ctors", "address": "140001770"}],
+      "decompiled_code": "\r\nint atexit(_PVFV func)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a10. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = _crt_atexit();\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__gcc_register_frame",
+      "address": "140001430",
+      "signature": "undefined __fastcall __gcc_register_frame(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 12,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "atexit", "address": "140001420"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __gcc_register_frame(void)\r\n\r\n{\r\n  atexit(__gcc_deregister_frame);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__gcc_deregister_frame",
+      "address": "140001440",
+      "signature": "undefined __fastcall __gcc_deregister_frame(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 1,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __gcc_deregister_frame(void)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "func_001",
+      "address": "140001450",
+      "signature": "void * func_001(void * src, size_t size)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 2,
+      "size": 72,
+      "parameters": [
+        {"name": "src", "type": "void *", "storage": "Stack[0x8]:8"},
+        {"name": "size", "type": "typedef size_t ulonglong", "storage": "Stack[0x10]:8"}],
+      "local_variables": [
+        {"name": "dst", "type": "void *", "storage": "Stack[-0x10]:8"}],
+      "called_functions": [
+        {"name": "malloc", "address": "140002aa8"},
+        {"name": "memcpy", "address": "140002a68"}],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nvoid * func_001(void *src,size_t size)\r\n\r\n{\r\n  void *_Dst;\r\n  void *in_RCX;\r\n  size_t in_RDX;\r\n  void *dst;\r\n  \r\n  _Dst = malloc(in_RDX);\r\n  if (_Dst != (void *)0x0) {\r\n    memcpy(_Dst,in_RCX,in_RDX);\r\n  }\r\n  return _Dst;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "func_002",
+      "address": "140001498",
+      "signature": "void func_002(void * * ptr)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 1,
+      "size": 64,
+      "parameters": [
+        {"name": "ptr", "type": "void * *", "storage": "Stack[0x8]:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "free", "address": "140002aa0"}],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nvoid func_002(void **ptr)\r\n\r\n{\r\n  longlong *in_RCX;\r\n  \r\n  if ((in_RCX != (longlong *)0x0) && (*in_RCX != 0)) {\r\n    free((void *)*in_RCX);\r\n    *in_RCX = 0;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "func_003",
+      "address": "1400014d8",
+      "signature": "void * func_003(void * old_buf, size_t old_size, size_t new_size)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 3,
+      "size": 107,
+      "parameters": [
+        {"name": "old_buf", "type": "void *", "storage": "Stack[0x8]:8"},
+        {"name": "old_size", "type": "typedef size_t ulonglong", "storage": "Stack[0x10]:8"},
+        {"name": "new_size", "type": "typedef size_t ulonglong", "storage": "Stack[0x18]:8"}],
+      "local_variables": [
+        {"name": "new_buf", "type": "void *", "storage": "Stack[-0x10]:8"},
+        {"name": "copy_size", "type": "typedef size_t ulonglong", "storage": "Stack[-0x18]:8"}],
+      "called_functions": [
+        {"name": "malloc", "address": "140002aa8"},
+        {"name": "memcpy", "address": "140002a68"},
+        {"name": "free", "address": "140002aa0"}],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nvoid * func_003(void *old_buf,size_t old_size,size_t new_size)\r\n\r\n{\r\n  void *_Dst;\r\n  void *in_RCX;\r\n  ulonglong in_RDX;\r\n  size_t in_R8;\r\n  size_t copy_size;\r\n  void *new_buf;\r\n  \r\n  _Dst = malloc(in_R8);\r\n  if (_Dst != (void *)0x0) {\r\n    if (in_R8 <= in_RDX) {\r\n      in_RDX = in_R8;\r\n    }\r\n    memcpy(_Dst,in_RCX,in_RDX);\r\n    free(in_RCX);\r\n  }\r\n  return _Dst;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "func_004",
+      "address": "140001543",
+      "signature": "int func_004(void * buf1, void * buf2, size_t size)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 3,
+      "size": 144,
+      "parameters": [
+        {"name": "buf1", "type": "void *", "storage": "Stack[0x8]:8"},
+        {"name": "buf2", "type": "void *", "storage": "Stack[0x10]:8"},
+        {"name": "size", "type": "typedef size_t ulonglong", "storage": "Stack[0x18]:8"}],
+      "local_variables": [
+        {"name": "i", "type": "typedef size_t ulonglong", "storage": "Stack[-0x10]:8"},
+        {"name": "p1", "type": "uchar *", "storage": "Stack[-0x18]:8"},
+        {"name": "p2", "type": "uchar *", "storage": "Stack[-0x20]:8"}],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nint func_004(void *buf1,void *buf2,size_t size)\r\n\r\n{\r\n  longlong in_RCX;\r\n  longlong in_RDX;\r\n  ulonglong in_R8;\r\n  uchar *p2;\r\n  uchar *p1;\r\n  size_t i;\r\n  \r\n  i = 0;\r\n  while( true ) {\r\n    if (in_R8 <= i) {\r\n      return 0;\r\n    }\r\n    if (*(char *)(i + in_RCX) != *(char *)(i + in_RDX)) break;\r\n    i = i + 1;\r\n  }\r\n  return (uint)*(byte *)(i + in_RCX) - (uint)*(byte *)(i + in_RDX);\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "func_005",
+      "address": "1400015d3",
+      "signature": "void func_005(void * buf, size_t size, uchar pattern)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 3,
+      "size": 80,
+      "parameters": [
+        {"name": "buf", "type": "void *", "storage": "Stack[0x8]:8"},
+        {"name": "size", "type": "typedef size_t ulonglong", "storage": "Stack[0x10]:8"},
+        {"name": "pattern", "type": "uchar", "storage": "Stack[0x18]:1"}],
+      "local_variables": [
+        {"name": "i", "type": "typedef size_t ulonglong", "storage": "Stack[-0x10]:8"},
+        {"name": "p", "type": "uchar *", "storage": "Stack[-0x18]:8"}],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nvoid func_005(void *buf,size_t size,uchar pattern)\r\n\r\n{\r\n  longlong in_RCX;\r\n  ulonglong in_RDX;\r\n  undefined1 in_R8B;\r\n  uchar *p;\r\n  size_t i;\r\n  \r\n  for (i = 0; i < in_RDX; i = i + 1) {\r\n    *(undefined1 *)(in_RCX + i) = in_R8B;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "main",
+      "address": "140001623",
+      "signature": "int main(int argc, char * * argv)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 2,
+      "size": 248,
+      "parameters": [
+        {"name": "argc", "type": "int", "storage": "Stack[0x8]:4"},
+        {"name": "argv", "type": "char * *", "storage": "Stack[0x10]:8"}],
+      "local_variables": [
+        {"name": "result", "type": "int", "storage": "Stack[-0xc]:4"},
+        {"name": "data", "type": "char[14]", "storage": "Stack[-0x1a]:14"},
+        {"name": "copy", "type": "void *", "storage": "Stack[-0x28]:8"},
+        {"name": "test", "type": "char[64]", "storage": "Stack[-0x68]:64"}],
+      "called_functions": [
+        {"name": "__main", "address": "1400017f0"},
+        {"name": "printf", "address": "140002860"},
+        {"name": "func_002", "address": "140001498"},
+        {"name": "func_001", "address": "140001450"},
+        {"name": "func_005", "address": "1400015d3"},
+        {"name": "func_003", "address": "1400014d8"},
+        {"name": "func_004", "address": "140001543"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention */\r\n\r\nint main(int argc,char **argv)\r\n\r\n{\r\n  uint uVar1;\r\n  void **in_stack_ffffffffffffff78;\r\n  void *in_stack_ffffffffffffff80;\r\n  uchar in_stack_ffffffffffffff88;\r\n  undefined7 in_stack_ffffffffffffff89;\r\n  char test [64];\r\n  void *copy;\r\n  char data [14];\r\n  int result;\r\n  \r\n  __main();\r\n  func_001(in_stack_ffffffffffffff78,(size_t)in_stack_ffffffffffffff80);\r\n  func_005(in_stack_ffffffffffffff78,(size_t)in_stack_ffffffffffffff80,in_stack_ffffffffffffff88);\r\n  func_003(in_stack_ffffffffffffff78,(size_t)in_stack_ffffffffffffff80,\r\n           CONCAT71(in_stack_ffffffffffffff89,in_stack_ffffffffffffff88));\r\n  uVar1 = func_004(in_stack_ffffffffffffff78,in_stack_ffffffffffffff80,\r\n                   CONCAT71(in_stack_ffffffffffffff89,in_stack_ffffffffffffff88));\r\n  func_002(in_stack_ffffffffffffff78);\r\n  printf(\"Result: %d\\n\",(ulonglong)uVar1);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140004000", "value": "Result: %d\n"}]
+    },
+    {
+      "name": "__do_global_dtors",
+      "address": "140001720",
+      "signature": "void __do_global_dtors(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 66,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid __do_global_dtors(void)\r\n\r\n{\r\n  func_ptr p_Var1;\r\n  \r\n  p_Var1 = *__do_global_dtors::p;\r\n  while (p_Var1 != (func_ptr)0x0) {\r\n    (*p_Var1)();\r\n    p_Var1 = __do_global_dtors::p[1];\r\n    __do_global_dtors::p = __do_global_dtors::p + 1;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__do_global_ctors",
+      "address": "140001770",
+      "signature": "void __do_global_ctors(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 111,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "atexit", "address": "140001420"},
+        {"name": ".text", "address": "140002b10"}],
+      "calling_functions": [
+        {"name": "__main", "address": "1400017f0"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid __do_global_ctors(void)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  uint uVar2;\r\n  ulonglong uVar3;\r\n  undefined8 *puVar4;\r\n  \r\n                    /* Unresolved local var: ulong nptrs@[???]\r\n                       Unresolved local var: ulong i@[???] */\r\n  uVar2 = (uint)*(undefined8 *)_refptr___CTOR_LIST__;\r\n  if (uVar2 == 0xffffffff) {\r\n    uVar3 = 0;\r\n    do {\r\n      uVar2 = (uint)uVar3;\r\n      uVar3 = (ulonglong)(uVar2 + 1);\r\n    } while (*(longlong *)(_refptr___CTOR_LIST__ + uVar3 * 8) != 0);\r\n  }\r\n  if (uVar2 != 0) {\r\n    puVar4 = (undefined8 *)(_refptr___CTOR_LIST__ + (ulonglong)uVar2 * 8);\r\n    puVar1 = (undefined8 *)\r\n             (_refptr___CTOR_LIST__ + ((ulonglong)uVar2 - (ulonglong)(uVar2 - 1)) * 8 + -8);\r\n    do {\r\n      (*(code *)*puVar4)();\r\n      puVar4 = puVar4 + -1;\r\n    } while (puVar4 != puVar1);\r\n  }\r\n  atexit(__do_global_dtors);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__main",
+      "address": "1400017f0",
+      "signature": "void __main(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 26,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__do_global_ctors", "address": "140001770"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"},
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid __main(void)\r\n\r\n{\r\n  if (initialized != 0) {\r\n    return;\r\n  }\r\n  initialized = 1;\r\n  __do_global_ctors();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_setargv",
+      "address": "140001810",
+      "signature": "int _setargv(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 3,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nint _setargv(void)\r\n\r\n{\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__dyn_tls_dtor",
+      "address": "140001820",
+      "signature": "void __fastcall __dyn_tls_dtor(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 15,
+      "parameters": [
+        {"name": "hDllHandle", "type": "typedef HANDLE void *", "storage": "RCX:8"},
+        {"name": "dwReason", "type": "typedef DWORD uint", "storage": "EDX:4"},
+        {"name": "lpreserved", "type": "typedef LPVOID void *", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__mingw_TLScallback", "address": "1400022d0"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __dyn_tls_dtor(HANDLE hDllHandle,DWORD dwReason,LPVOID lpreserved)\r\n\r\n{\r\n  if ((dwReason != 3) && (dwReason != 0)) {\r\n    return;\r\n  }\r\n  __mingw_TLScallback(hDllHandle,dwReason,lpreserved);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__dyn_tls_init",
+      "address": "140001840",
+      "signature": "void __fastcall __dyn_tls_init(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 110,
+      "parameters": [
+        {"name": "hDllHandle", "type": "typedef HANDLE void *", "storage": "RCX:8"},
+        {"name": "dwReason", "type": "typedef DWORD uint", "storage": "EDX:4"},
+        {"name": "lpreserved", "type": "typedef LPVOID void *", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__mingw_TLScallback", "address": "1400022d0"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Removing unreachable block (ram,0x000140001885) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001890) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001898) */\r\n/* WARNING: Removing unreachable block (ram,0x00014000189a) */\r\n/* WARNING: Removing unreachable block (ram,0x0001400018a3) */\r\n\r\nvoid __dyn_tls_init(HANDLE hDllHandle,DWORD dwReason,LPVOID lpreserved)\r\n\r\n{\r\n                    /* Unresolved local var: _PVFV * pfunc@[???]\r\n                       Unresolved local var: uintptr_t ps@[???] */\r\n  if (*(int *)_refptr__CRT_MT != 2) {\r\n    *(undefined4 *)_refptr__CRT_MT = 2;\r\n  }\r\n  if ((dwReason != 2) && (dwReason == 1)) {\r\n    __mingw_TLScallback(hDllHandle,1,lpreserved);\r\n    return;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__tlregdtor",
+      "address": "1400018c0",
+      "signature": "int __fastcall __tlregdtor(_PVFV func)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 3,
+      "parameters": [
+        {"name": "func", "type": "typedef _PVFV _func_void *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint __tlregdtor(_PVFV func)\r\n\r\n{\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_matherr",
+      "address": "1400018d0",
+      "signature": "int __fastcall _matherr(_exception * pexcept)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 218,
+      "parameters": [
+        {"name": "pexcept", "type": "_exception *", "storage": "RCX:8"}],
+      "local_variables": [
+        {"name": "local_28", "type": "undefined1[16]", "storage": "Stack[-0x28]:16"},
+        {"name": "local_38", "type": "undefined1[16]", "storage": "Stack[-0x38]:16"},
+        {"name": "local_48", "type": "undefined1[16]", "storage": "Stack[-0x48]:16"},
+        {"name": "local_58", "type": "undefined8", "storage": "Stack[-0x58]:8"},
+        {"name": "local_60", "type": "undefined8", "storage": "Stack[-0x60]:8"},
+        {"name": "local_68", "type": "undefined8", "storage": "Stack[-0x68]:8"}],
+      "called_functions": [
+        {"name": "fprintf", "address": "1400028c0"},
+        {"name": "__acrt_iob_func", "address": "1400029d0"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint _matherr(_exception *pexcept)\r\n\r\n{\r\n  double dVar1;\r\n  double dVar2;\r\n  double dVar3;\r\n  char *pcVar4;\r\n  FILE_conflict *_File;\r\n  char *pcVar5;\r\n  \r\n                    /* Unresolved local var: char * type@[???] */\r\n  switch(pexcept->type) {\r\n  default:\r\n    pcVar5 = \"Unknown error\";\r\n    break;\r\n  case 1:\r\n    pcVar5 = \"Argument domain error (DOMAIN)\";\r\n    break;\r\n  case 2:\r\n    pcVar5 = \"Argument singularity (SIGN)\";\r\n    break;\r\n  case 3:\r\n    pcVar5 = \"Overflow range error (OVERFLOW)\";\r\n    break;\r\n  case 4:\r\n    pcVar5 = \"The result is too small to be represented (UNDERFLOW)\";\r\n    break;\r\n  case 5:\r\n    pcVar5 = \"Total loss of significance (TLOSS)\";\r\n    break;\r\n  case 6:\r\n    pcVar5 = \"Partial loss of significance (PLOSS)\";\r\n  }\r\n  dVar1 = pexcept->retval;\r\n  dVar2 = pexcept->arg2;\r\n  dVar3 = pexcept->arg1;\r\n  pcVar4 = pexcept->name;\r\n  _File = (FILE_conflict *)__acrt_iob_func(2);\r\n  fprintf(_File,\"_matherr(): %s in %s(%g, %g)  (retval=%g)\\n\",pcVar5,pcVar4,dVar3,dVar2,dVar1);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "14000409f", "value": "Argument singularity (SIGN)"},
+        {"address": "1400040e0", "value": "Partial loss of significance (PLOSS)"},
+        {"address": "140004178", "value": "_matherr(): %s in %s(%g, %g)  (retval=%g)\n"},
+        {"address": "140004080", "value": "Argument domain error (DOMAIN)"},
+        {"address": "1400040e0", "value": "Partial loss of significance (PLOSS)"},
+        {"address": "1400040c0", "value": "Overflow range error (OVERFLOW)"},
+        {"address": "140004130", "value": "The result is too small to be represented (UNDERFLOW)"},
+        {"address": "140004108", "value": "Total loss of significance (TLOSS)"},
+        {"address": "140004166", "value": "Unknown error"}]
+    },
+    {
+      "name": "__report_error",
+      "address": "1400019d0",
+      "signature": "noreturn void __fastcall __report_error(char * msg, ...)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 93,
+      "parameters": [
+        {"name": "msg", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "argp", "type": "typedef va_list __gnuc_va_list", "storage": "Stack[-0x20]:8"}],
+      "called_functions": [
+        {"name": "vfprintf", "address": "140002820"},
+        {"name": "fprintf", "address": "1400028c0"},
+        {"name": "abort", "address": "140002a48"},
+        {"name": "__acrt_iob_func", "address": "1400029d0"}],
+      "calling_functions": [
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"},
+        {"name": "mark_section_writable", "address": "140001a30"}],
+      "decompiled_code": "\r\nvoid __report_error(char *msg,...)\r\n\r\n{\r\n  FILE_conflict *pFVar1;\r\n  undefined8 in_RDX;\r\n  undefined8 in_R8;\r\n  undefined8 in_R9;\r\n  undefined8 local_res10;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  va_list argp;\r\n  \r\n  local_res10 = in_RDX;\r\n  local_res18 = in_R8;\r\n  local_res20 = in_R9;\r\n  pFVar1 = (FILE_conflict *)__acrt_iob_func(2);\r\n  fprintf(pFVar1,\"Mingw-w64 runtime failure:\\n\");\r\n  pFVar1 = (FILE_conflict *)__acrt_iob_func(2);\r\n  vfprintf(pFVar1,msg,(va_list)&local_res10);\r\n                    /* WARNING: Subroutine does not return */\r\n  abort();\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "1400041c0", "value": "Mingw-w64 runtime failure:\n"}]
+    },
+    {
+      "name": "mark_section_writable",
+      "address": "140001a30",
+      "signature": "void __fastcall mark_section_writable(LPVOID addr)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 346,
+      "parameters": [
+        {"name": "addr", "type": "typedef LPVOID void *", "storage": "RCX:8"}],
+      "local_variables": [
+        {"name": "b", "type": "typedef MEMORY_BASIC_INFORMATION _MEMORY_BASIC_INFORMATION", "storage": "Stack[-0x48]:48"}],
+      "called_functions": [
+        {"name": "VirtualQuery", "address": "EXTERNAL:0000000a"},
+        {"name": "_GetPEImageBase", "address": "140002650"},
+        {"name": "GetLastError", "address": "EXTERNAL:00000003"},
+        {"name": "__report_error", "address": "1400019d0"},
+        {"name": "VirtualProtect", "address": "EXTERNAL:00000009"},
+        {"name": "__mingw_GetSectionForAddress", "address": "140002510"}],
+      "calling_functions": [
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"}],
+      "decompiled_code": "\r\nvoid mark_section_writable(LPVOID addr)\r\n\r\n{\r\n  uint uVar1;\r\n  BOOL BVar2;\r\n  DWORD DVar3;\r\n  PBYTE *ppBVar4;\r\n  PIMAGE_SECTION_HEADER p_Var5;\r\n  sSecInfo *psVar6;\r\n  PBYTE pBVar7;\r\n  SIZE_T SVar8;\r\n  longlong lVar9;\r\n  int iVar10;\r\n  MEMORY_BASIC_INFORMATION b;\r\n  \r\n                    /* Unresolved local var: PIMAGE_SECTION_HEADER h@[???]\r\n                       Unresolved local var: int i@[???] */\r\n  lVar9 = (longlong)maxSections;\r\n  if (maxSections < 1) {\r\n    lVar9 = 0;\r\n  }\r\n  else {\r\n    iVar10 = 0;\r\n    ppBVar4 = &the_secs->sec_start;\r\n    do {\r\n      if ((*ppBVar4 <= addr) &&\r\n         (addr < *ppBVar4 + (((PIMAGE_SECTION_HEADER)ppBVar4[1])->Misc).PhysicalAddress)) {\r\n        return;\r\n      }\r\n      iVar10 = iVar10 + 1;\r\n      ppBVar4 = ppBVar4 + 5;\r\n    } while (iVar10 != maxSections);\r\n  }\r\n  p_Var5 = __mingw_GetSectionForAddress(addr);\r\n  if (p_Var5 == (PIMAGE_SECTION_HEADER)0x0) {\r\n                    /* WARNING: Subroutine does not return */\r\n    __report_error(\"Address %p has no image-section\",addr);\r\n  }\r\n  psVar6 = the_secs + lVar9;\r\n  psVar6->hash = p_Var5;\r\n  psVar6->old_protect = 0;\r\n  pBVar7 = _GetPEImageBase();\r\n  uVar1 = p_Var5->VirtualAddress;\r\n  the_secs[lVar9].sec_start = pBVar7 + uVar1;\r\n  SVar8 = VirtualQuery(pBVar7 + uVar1,(PMEMORY_BASIC_INFORMATION)&b,0x30);\r\n  if (SVar8 != 0) {\r\n    if (((b.Protect - 4 & 0xfffffffb) != 0) && ((b.Protect - 0x40 & 0xffffffbf) != 0)) {\r\n                    /* Unresolved local var: ULONG new_protect@[???] */\r\n      DVar3 = 0x40;\r\n      if (b.Protect == 2) {\r\n        DVar3 = 4;\r\n      }\r\n      psVar6 = the_secs + lVar9;\r\n      psVar6->base_address = b.BaseAddress;\r\n      psVar6->region_size = b.RegionSize;\r\n      BVar2 = VirtualProtect(b.BaseAddress,b.RegionSize,DVar3,&psVar6->old_protect);\r\n      if (BVar2 == 0) {\r\n        DVar3 = GetLastError();\r\n                    /* WARNING: Subroutine does not return */\r\n        __report_error(\"  VirtualProtect failed with code 0x%x\",(ulonglong)DVar3);\r\n      }\r\n    }\r\n    maxSections = maxSections + 1;\r\n    return;\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  __report_error(\"  VirtualQuery failed for %d bytes at address %p\",\r\n                 (ulonglong)(p_Var5->Misc).PhysicalAddress,the_secs[lVar9].sec_start);\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140004238", "value": "  VirtualProtect failed with code 0x%x"},
+        {"address": "140004200", "value": "  VirtualQuery failed for %d bytes at address %p"},
+        {"address": "1400041e0", "value": "Address %p has no image-section"}]
+    },
+    {
+      "name": "_pei386_runtime_relocator",
+      "address": "140001ba0",
+      "signature": "void _pei386_runtime_relocator(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 886,
+      "parameters": [],
+      "local_variables": [
+        {"name": "local_40", "type": "undefined", "storage": "Stack[-0x40]:1"},
+        {"name": "local_48", "type": "undefined", "storage": "Stack[-0x48]:1"},
+        {"name": "reldata", "type": "typedef ptrdiff_t longlong", "storage": "Stack[-0x50]:8"}],
+      "called_functions": [
+        {"name": "__report_error", "address": "1400019d0"},
+        {"name": "___chkstk_ms", "address": "1400027e0"},
+        {"name": "VirtualProtect", "address": "EXTERNAL:00000009"},
+        {"name": "memcpy", "address": "140002a68"},
+        {"name": "__mingw_GetSectionCount", "address": "140002590"},
+        {"name": "mark_section_writable", "address": "140001a30"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Function: ___chkstk_ms replaced with injection: alloca_probe */\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid _pei386_runtime_relocator(void)\r\n\r\n{\r\n  uint uVar1;\r\n  DWORD flNewProtect;\r\n  SIZE_T dwSize;\r\n  LPVOID lpAddress;\r\n  longlong lVar2;\r\n  undefined *puVar3;\r\n  undefined *puVar4;\r\n  int iVar5;\r\n  ulonglong uVar6;\r\n  DWORD *pDVar7;\r\n  uint uVar8;\r\n  uint *puVar9;\r\n  longlong lVar10;\r\n  int *piVar11;\r\n  longlong *plVar12;\r\n  uint *addr;\r\n  undefined8 auStack_90 [5];\r\n  ptrdiff_t apStack_68 [3];\r\n  ptrdiff_t reldata;\r\n  \r\n                    /* Unresolved local var: int mSecs@[???] */\r\n  if (_pei386_runtime_relocator::was_init != 0) {\r\n    return;\r\n  }\r\n  _pei386_runtime_relocator::was_init = 1;\r\n  auStack_90[0] = 0x140001bdf;\r\n  iVar5 = __mingw_GetSectionCount();\r\n  puVar4 = _refptr___RUNTIME_PSEUDO_RELOC_LIST_END__;\r\n  puVar3 = _refptr___ImageBase;\r\n  auStack_90[0] = 0x140001bf6;\r\n                    /* Unresolved local var: ptrdiff_t addr_imp@[???]\r\n                       Unresolved local var: ptrdiff_t reloc_target@[???]\r\n                       Unresolved local var: runtime_pseudo_reloc_v2 * v2_hdr@[???]\r\n                       Unresolved local var: runtime_pseudo_reloc_item_v2 * r@[???]\r\n                       Unresolved local var: uint bits@[???] */\r\n  lVar2 = -((longlong)iVar5 * 0x28 + 0xfU & 0xfffffffffffffff0);\r\n  maxSections = 0;\r\n  the_secs = (sSecInfo *)((longlong)apStack_68 + lVar2 + 0x10);\r\n  if ((longlong)_refptr___RUNTIME_PSEUDO_RELOC_LIST_END__ -\r\n      (longlong)_refptr___RUNTIME_PSEUDO_RELOC_LIST__ < 8) {\r\n    maxSections = 0;\r\n    return;\r\n  }\r\n  piVar11 = (int *)_refptr___RUNTIME_PSEUDO_RELOC_LIST__;\r\n  if ((longlong)_refptr___RUNTIME_PSEUDO_RELOC_LIST_END__ -\r\n      (longlong)_refptr___RUNTIME_PSEUDO_RELOC_LIST__ < 0xc) {\r\nLAB_140001c33:\r\n    if ((*piVar11 != 0) || (piVar11[1] != 0)) {\r\nLAB_140001dcd:\r\n                    /* Unresolved local var: runtime_pseudo_reloc_item_v1 * o@[???] */\r\n      if (_refptr___RUNTIME_PSEUDO_RELOC_LIST_END__ <= piVar11) {\r\n        maxSections = 0;\r\n        return;\r\n      }\r\n      do {\r\n        uVar1 = piVar11[1];\r\n        iVar5 = *piVar11;\r\n        piVar11 = piVar11 + 2;\r\n        reldata = CONCAT44(reldata._4_4_,iVar5 + *(int *)(puVar3 + uVar1));\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001e0a;\r\n        mark_section_writable(puVar3 + uVar1);\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001e1c;\r\n        memcpy(puVar3 + uVar1,&reldata,4);\r\n      } while (piVar11 < puVar4);\r\n      goto LAB_140001d60;\r\n    }\r\n  }\r\n  else {\r\n    if ((*(int *)_refptr___RUNTIME_PSEUDO_RELOC_LIST__ != 0) ||\r\n       (*(int *)(_refptr___RUNTIME_PSEUDO_RELOC_LIST__ + 4) != 0)) goto LAB_140001dcd;\r\n    if (*(int *)(_refptr___RUNTIME_PSEUDO_RELOC_LIST__ + 8) == 0) {\r\n      piVar11 = (int *)(_refptr___RUNTIME_PSEUDO_RELOC_LIST__ + 0xc);\r\n      goto LAB_140001c33;\r\n    }\r\n  }\r\n  if (piVar11[2] != 1) {\r\n                    /* WARNING: Subroutine does not return */\r\n    *(undefined **)((longlong)auStack_90 + lVar2) = &UNK_140001f2f;\r\n    __report_error(\"  Unknown pseudo relocation protocol version %d.\\n\");\r\n  }\r\n  puVar9 = (uint *)(piVar11 + 3);\r\n  if (_refptr___RUNTIME_PSEUDO_RELOC_LIST_END__ <= puVar9) {\r\n    maxSections = 0;\r\n    return;\r\n  }\r\n  do {\r\n    while( true ) {\r\n      uVar1 = puVar9[2];\r\n      plVar12 = (longlong *)(puVar3 + *puVar9);\r\n      uVar8 = uVar1 & 0xff;\r\n      lVar10 = *plVar12;\r\n      addr = (uint *)(puVar3 + puVar9[1]);\r\n      if (uVar8 != 0x20) break;\r\n      uVar6 = (ulonglong)*addr;\r\n      if ((int)*addr < 0) {\r\n        uVar6 = uVar6 | 0xffffffff00000000;\r\n      }\r\n      reldata = (uVar6 - (longlong)plVar12) + lVar10;\r\n      if (((uVar1 & 0xc0) == 0) && ((0xffffffff < reldata || (reldata < -0x80000000))))\r\n      goto LAB_140001f0f;\r\n      *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001e7b;\r\n      mark_section_writable(addr);\r\n      *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001e8c;\r\n      memcpy(addr,&reldata,4);\r\nLAB_140001cd7:\r\n      puVar9 = puVar9 + 3;\r\n      if (puVar4 <= puVar9) goto LAB_140001d60;\r\n    }\r\n    if (uVar8 < 0x21) {\r\n      if (uVar8 == 8) {\r\n        uVar6 = (ulonglong)(byte)*addr;\r\n        if ((char)(byte)*addr < '\\0') {\r\n          uVar6 = uVar6 | 0xffffffffffffff00;\r\n        }\r\n        reldata = (uVar6 - (longlong)plVar12) + lVar10;\r\n        if (((uVar1 & 0xc0) == 0) && ((0xff < reldata || (reldata < -0x80)))) {\r\nLAB_140001f0f:\r\n          *(ptrdiff_t *)((longlong)apStack_68 + lVar2) = reldata;\r\n                    /* WARNING: Subroutine does not return */\r\n          *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001f23;\r\n          __report_error(\"%d bit pseudo relocation at %p out of range, targeting %p, yielding the value %p.\\n\"\r\n                         ,(ulonglong)uVar8,addr);\r\n        }\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001ed1;\r\n        mark_section_writable(addr);\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001ee2;\r\n        memcpy(addr,&reldata,1);\r\n      }\r\n      else {\r\n        if (uVar8 != 0x10) goto LAB_140001efb;\r\n        uVar6 = (ulonglong)(ushort)*addr;\r\n        if ((short)(ushort)*addr < 0) {\r\n          uVar6 = uVar6 | 0xffffffffffff0000;\r\n        }\r\n        reldata = (uVar6 - (longlong)plVar12) + lVar10;\r\n                    /* Unresolved local var: ptrdiff_t max_unsigned@[???]\r\n                       Unresolved local var: ptrdiff_t min_signed@[???] */\r\n        if (((uVar1 & 0xc0) == 0) && ((0xffff < reldata || (reldata < -0x8000))))\r\n        goto LAB_140001f0f;\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001cc6;\r\n        mark_section_writable(addr);\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001cd7;\r\n        memcpy(addr,&reldata,2);\r\n      }\r\n      goto LAB_140001cd7;\r\n    }\r\n    if (uVar8 != 0x40) {\r\nLAB_140001efb:\r\n      reldata = 0;\r\n                    /* WARNING: Subroutine does not return */\r\n      *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001f0f;\r\n      __report_error(\"  Unknown pseudo relocation bit size %d.\\n\");\r\n    }\r\n    reldata = (*(longlong *)addr - (longlong)plVar12) + lVar10;\r\n    if (((uVar1 & 0xc0) == 0) && (-1 < reldata)) goto LAB_140001f0f;\r\n    puVar9 = puVar9 + 3;\r\n    *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001d3f;\r\n    mark_section_writable(addr);\r\n    *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001d50;\r\n    memcpy(addr,&reldata,8);\r\n  } while (puVar9 < puVar4);\r\nLAB_140001d60:\r\n                    /* Unresolved local var: int i@[???] */\r\n  if (0 < maxSections) {\r\n    lVar10 = 0;\r\n    iVar5 = 0;\r\n    do {\r\n      pDVar7 = (DWORD *)((longlong)&the_secs->old_protect + lVar10);\r\n      flNewProtect = *pDVar7;\r\n      if (flNewProtect != 0) {\r\n        dwSize = *(SIZE_T *)(pDVar7 + 4);\r\n        lpAddress = *(LPVOID *)(pDVar7 + 2);\r\n        *(undefined8 *)((longlong)auStack_90 + lVar2) = 0x140001d9f;\r\n        VirtualProtect(lpAddress,dwSize,flNewProtect,(PDWORD)&reldata);\r\n      }\r\n      iVar5 = iVar5 + 1;\r\n      lVar10 = lVar10 + 0x28;\r\n    } while (iVar5 < maxSections);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140004298", "value": "  Unknown pseudo relocation bit size %d.\n"},
+        {"address": "1400042c8", "value": "%d bit pseudo relocation at %p out of range, targeting %p, yielding the value %p.\n"},
+        {"address": "140004260", "value": "  Unknown pseudo relocation protocol version %d.\n"}]
+    },
+    {
+      "name": "__mingw_raise_matherr",
+      "address": "140001f30",
+      "signature": "void __fastcall __mingw_raise_matherr(int typ, char * name, double a1, double a2, double rslt)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 5,
+      "size": 62,
+      "parameters": [
+        {"name": "typ", "type": "int", "storage": "ECX:4"},
+        {"name": "name", "type": "char *", "storage": "RDX:8"},
+        {"name": "a1", "type": "double", "storage": "XMM2_Qa:8"},
+        {"name": "a2", "type": "double", "storage": "XMM3_Qa:8"},
+        {"name": "rslt", "type": "double", "storage": "Stack[0x28]:8"}],
+      "local_variables": [
+        {"name": "ex", "type": "/DWARF/math.h/_exception\npack()\nStructure _exception {\n   0   int   4   type   \"\"\n   8   char *   8   name   \"\"\n   16   double   8   arg1   \"\"\n   24   double   8   arg2   \"\"\n   32   double   8   retval   \"\"\n}\nLength: 40 Alignment: 8\n", "storage": "Stack[-0x38]:40"}],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __mingw_raise_matherr(int typ,char *name,double a1,double a2,double rslt)\r\n\r\n{\r\n  _exception ex;\r\n  \r\n  if (stUserMathErr != (fUserMathErr)0x0) {\r\n    ex.retval = rslt;\r\n    ex.type = typ;\r\n    ex.name = name;\r\n    ex.arg1 = a1;\r\n    ex.arg2 = a2;\r\n    (*stUserMathErr)(&ex);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingw_setusermatherr",
+      "address": "140001f70",
+      "signature": "void __fastcall __mingw_setusermatherr(_func_int__exception_ptr * f)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 12,
+      "parameters": [
+        {"name": "f", "type": "_func_int__exception_ptr *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__setusermatherr", "address": "140002a70"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __mingw_setusermatherr(_func_int__exception_ptr *f)\r\n\r\n{\r\n  stUserMathErr = f;\r\n  __setusermatherr();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_gnu_exception_handler",
+      "address": "140001f80",
+      "signature": "long __fastcall _gnu_exception_handler(EXCEPTION_POINTERS * exception_data)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 390,
+      "parameters": [
+        {"name": "exception_data", "type": "EXCEPTION_POINTERS *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "signal", "address": "140002a58"},
+        {"name": "_fpreset", "address": "1400023e0"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nlong _gnu_exception_handler(EXCEPTION_POINTERS *exception_data)\r\n\r\n{\r\n  uint uVar1;\r\n  LONG LVar2;\r\n  code *extraout_RAX;\r\n  code *pcVar3;\r\n  code *extraout_RAX_00;\r\n  code *extraout_RAX_01;\r\n  code *extraout_RAX_02;\r\n  \r\n                    /* Unresolved local var: _func_void_int * old_handler@[???]\r\n                       Unresolved local var: long action@[???]\r\n                       Unresolved local var: int reset_fpu@[???] */\r\n  uVar1 = exception_data->ExceptionRecord->ExceptionCode;\r\n  if (((uVar1 & 0x20ffffff) == 0x20474343) &&\r\n     ((exception_data->ExceptionRecord->ExceptionFlags & 1) == 0)) {\r\n    return -1;\r\n  }\r\n  if (0xc0000096 < uVar1) goto LAB_140001fef;\r\n  if (uVar1 < 0xc000008c) {\r\n    if (uVar1 == 0xc0000005) {\r\n      signal(0xb);\r\n      if (extraout_RAX_02 == (code *)0x1) {\r\n        signal(0xb);\r\n        return -1;\r\n      }\r\n      if (extraout_RAX_02 != (code *)0x0) {\r\n        (*extraout_RAX_02)(0xb);\r\n        return -1;\r\n      }\r\n      goto LAB_140001fef;\r\n    }\r\n    if (uVar1 < 0xc0000006) {\r\n      if (uVar1 == 0x80000002) {\r\n        return -1;\r\n      }\r\n      goto LAB_140001fef;\r\n    }\r\n    if (uVar1 == 0xc0000008) {\r\n      return -1;\r\n    }\r\n    if (uVar1 != 0xc000001d) goto LAB_140001fef;\r\nswitchD_140001fc7_caseD_c0000096:\r\n    signal(4);\r\n    if (extraout_RAX_00 == (code *)0x1) {\r\n      signal(4);\r\n    }\r\n    else {\r\n      if (extraout_RAX_00 == (code *)0x0) goto LAB_140001fef;\r\n      (*extraout_RAX_00)(4);\r\n    }\r\n  }\r\n  else {\r\n    switch(uVar1) {\r\n    case 0xc000008d:\r\n    case 0xc000008e:\r\n    case 0xc000008f:\r\n    case 0xc0000090:\r\n    case 0xc0000091:\r\n    case 0xc0000093:\r\n      signal(8);\r\n      pcVar3 = extraout_RAX;\r\n      if (extraout_RAX == (code *)0x1) {\r\n        signal(8);\r\n        _fpreset();\r\n        return -1;\r\n      }\r\n      break;\r\n    default:\r\n      goto switchD_140001fc7_caseD_c0000092;\r\n    case 0xc0000094:\r\n      signal(8);\r\n      pcVar3 = extraout_RAX_01;\r\n      if (extraout_RAX_01 == (code *)0x1) {\r\n        signal(8);\r\n        return -1;\r\n      }\r\n      break;\r\n    case 0xc0000096:\r\n      goto switchD_140001fc7_caseD_c0000096;\r\n    }\r\n    if (pcVar3 == (code *)0x0) {\r\nLAB_140001fef:\r\n      if (__mingw_oldexcpt_handler == (LPTOP_LEVEL_EXCEPTION_FILTER)0x0) {\r\n        return 0;\r\n      }\r\n                    /* WARNING: Could not recover jumptable at 0x000140002003. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n      LVar2 = (*__mingw_oldexcpt_handler)(exception_data);\r\n      return LVar2;\r\n    }\r\n    (*pcVar3)(8);\r\n  }\r\nswitchD_140001fc7_caseD_c0000092:\r\n  return -1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingwthr_run_key_dtors",
+      "address": "140002140",
+      "signature": "void __mingwthr_run_key_dtors(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 106,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "GetLastError", "address": "EXTERNAL:00000003"},
+        {"name": "TlsGetValue", "address": "EXTERNAL:00000008"}],
+      "calling_functions": [
+        {"name": "__mingw_TLScallback", "address": "1400022d0"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid __mingwthr_run_key_dtors(void)\r\n\r\n{\r\n  __mingwthr_key_t *p_Var1;\r\n  DWORD DVar2;\r\n  LPVOID pvVar3;\r\n  \r\n                    /* Unresolved local var: __mingwthr_key_t * keyp@[???] */\r\n  EnterCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n  for (p_Var1 = key_dtor_list; p_Var1 != (__mingwthr_key_t *)0x0; p_Var1 = p_Var1->next) {\r\n                    /* Unresolved local var: LPVOID value@[???] */\r\n    pvVar3 = TlsGetValue(p_Var1->key);\r\n    DVar2 = GetLastError();\r\n    if ((pvVar3 != (LPVOID)0x0) && (DVar2 == 0)) {\r\n      (*p_Var1->dtor)(pvVar3);\r\n    }\r\n  }\r\n                    /* WARNING: Could not recover jumptable at 0x0001400021a3. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  LeaveCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "___w64_mingwthr_add_key_dtor",
+      "address": "1400021b0",
+      "signature": "int __fastcall ___w64_mingwthr_add_key_dtor(DWORD key, _func_void_void_ptr * dtor)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 134,
+      "parameters": [
+        {"name": "key", "type": "typedef DWORD uint", "storage": "ECX:4"},
+        {"name": "dtor", "type": "_func_void_void_ptr *", "storage": "RDX:8"}],
+      "local_variables": [
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "local_res8", "type": "undefined4", "storage": "Stack[0x8]:4"},
+        {"name": "local_10", "type": "undefined8", "storage": "Stack[-0x10]:8"}],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "calloc", "address": "140002a98"},
+        {"name": "LeaveCriticalSection", "address": "EXTERNAL:00000005"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint ___w64_mingwthr_add_key_dtor(DWORD key,_func_void_void_ptr *dtor)\r\n\r\n{\r\n  __mingwthr_key_t *p_Var1;\r\n  \r\n                    /* Unresolved local var: __mingwthr_key_t * new_key@[???] */\r\n  if (__mingwthr_cs_init != 0) {\r\n    p_Var1 = calloc(1,0x18);\r\n    if (p_Var1 == (__mingwthr_key_t *)0x0) {\r\n      return -1;\r\n    }\r\n    p_Var1->key = key;\r\n    p_Var1->dtor = dtor;\r\n    EnterCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n    p_Var1->next = key_dtor_list;\r\n    key_dtor_list = p_Var1;\r\n    LeaveCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "___w64_mingwthr_remove_key_dtor",
+      "address": "140002240",
+      "signature": "int __fastcall ___w64_mingwthr_remove_key_dtor(DWORD key)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 123,
+      "parameters": [
+        {"name": "key", "type": "typedef DWORD uint", "storage": "ECX:4"}],
+      "local_variables": [
+        {"name": "local_res8", "type": "undefined4", "storage": "Stack[0x8]:4"}],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "free", "address": "140002aa0"},
+        {"name": "LeaveCriticalSection", "address": "EXTERNAL:00000005"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint ___w64_mingwthr_remove_key_dtor(DWORD key)\r\n\r\n{\r\n  __mingwthr_key_t *p_Var1;\r\n  __mingwthr_key_t *_Memory;\r\n  __mingwthr_key_t *p_Var2;\r\n  \r\n                    /* Unresolved local var: __mingwthr_key_t * prev_key@[???]\r\n                       Unresolved local var: __mingwthr_key_t * cur_key@[???] */\r\n  if (__mingwthr_cs_init == 0) {\r\n    return 0;\r\n  }\r\n  EnterCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n  if (key_dtor_list != (__mingwthr_key_t *)0x0) {\r\n    p_Var1 = key_dtor_list;\r\n    p_Var2 = (__mingwthr_key_t *)0x0;\r\n    do {\r\n      _Memory = p_Var1;\r\n      p_Var1 = _Memory->next;\r\n      if (_Memory->key == key) {\r\n        if (p_Var2 != (__mingwthr_key_t *)0x0) {\r\n          p_Var2->next = p_Var1;\r\n          p_Var1 = key_dtor_list;\r\n        }\r\n        key_dtor_list = p_Var1;\r\n        free(_Memory);\r\n        break;\r\n      }\r\n      p_Var2 = _Memory;\r\n    } while (p_Var1 != (__mingwthr_key_t *)0x0);\r\n  }\r\n  LeaveCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingw_TLScallback",
+      "address": "1400022d0",
+      "signature": "WINBOOL __fastcall __mingw_TLScallback(HANDLE hDllHandle, DWORD reason, LPVOID reserved)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 232,
+      "parameters": [
+        {"name": "hDllHandle", "type": "typedef HANDLE void *", "storage": "RCX:8"},
+        {"name": "reason", "type": "typedef DWORD uint", "storage": "EDX:4"},
+        {"name": "reserved", "type": "typedef LPVOID void *", "storage": "R8:8"}],
+      "local_variables": [
+        {"name": "local_10", "type": "undefined8", "storage": "Stack[-0x10]:8"}],
+      "called_functions": [
+        {"name": "InitializeCriticalSection", "address": "EXTERNAL:00000004"},
+        {"name": "__mingwthr_run_key_dtors", "address": "140002140"},
+        {"name": "DeleteCriticalSection", "address": "EXTERNAL:00000001"},
+        {"name": "_fpreset", "address": "1400023e0"},
+        {"name": "free", "address": "140002aa0"}],
+      "calling_functions": [
+        {"name": "__dyn_tls_dtor", "address": "140001820"},
+        {"name": "__dyn_tls_init", "address": "140001840"}],
+      "decompiled_code": "\r\nWINBOOL __mingw_TLScallback(HANDLE hDllHandle,DWORD reason,LPVOID reserved)\r\n\r\n{\r\n  __mingwthr_key_t *p_Var1;\r\n  __mingwthr_key_t *_Memory;\r\n  \r\n  if (reason != 2) {\r\n    if (reason < 3) {\r\n      if (reason == 0) {\r\n                    /* Unresolved local var: __mingwthr_key_t * keyp@[???] */\r\n        if (__mingwthr_cs_init != 0) {\r\n          __mingwthr_run_key_dtors();\r\n        }\r\n        if (__mingwthr_cs_init == 1) {\r\n          __mingwthr_cs_init = 1;\r\n          _Memory = key_dtor_list;\r\n          while (_Memory != (__mingwthr_key_t *)0x0) {\r\n            p_Var1 = _Memory->next;\r\n            free(_Memory);\r\n            _Memory = p_Var1;\r\n          }\r\n          key_dtor_list = (__mingwthr_key_t *)0x0;\r\n          __mingwthr_cs_init = 0;\r\n          DeleteCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n        }\r\n      }\r\n      else {\r\n        if (__mingwthr_cs_init == 0) {\r\n          InitializeCriticalSection((LPCRITICAL_SECTION)&__mingwthr_cs);\r\n        }\r\n        __mingwthr_cs_init = 1;\r\n      }\r\n    }\r\n    else {\r\n                    /* Unresolved local var: __mingwthr_key_t * keyp@[???] */\r\n      if ((reason == 3) && (__mingwthr_cs_init != 0)) {\r\n        __mingwthr_run_key_dtors();\r\n      }\r\n    }\r\n    return 1;\r\n  }\r\n  _fpreset();\r\n  return 1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_fpreset",
+      "address": "1400023e0",
+      "signature": "void _fpreset(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 3,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_gnu_exception_handler", "address": "140001f80"},
+        {"name": "__mingw_TLScallback", "address": "1400022d0"},
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid _fpreset(void)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_ValidateImageBase",
+      "address": "1400023f0",
+      "signature": "WINBOOL __fastcall _ValidateImageBase(PBYTE pImageBase)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 37,
+      "parameters": [
+        {"name": "pImageBase", "type": "typedef PBYTE BYTE *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nWINBOOL _ValidateImageBase(PBYTE pImageBase)\r\n\r\n{\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[DW_OP_reg2(RCX)]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n  if ((*(short *)pImageBase == 0x5a4d) &&\r\n     (*(int *)(pImageBase + *(int *)(pImageBase + 0x3c)) == 0x4550)) {\r\n    return (WINBOOL)((short)*(int *)((longlong)(pImageBase + *(int *)(pImageBase + 0x3c)) + 0x18) ==\r\n                    0x20b);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_FindPESection",
+      "address": "140002420",
+      "signature": "PIMAGE_SECTION_HEADER __fastcall _FindPESection(PBYTE pImageBase, DWORD_PTR rva)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 80,
+      "parameters": [
+        {"name": "pImageBase", "type": "typedef PBYTE BYTE *", "storage": "RCX:8"},
+        {"name": "rva", "type": "typedef DWORD_PTR ULONG_PTR", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nPIMAGE_SECTION_HEADER _FindPESection(PBYTE pImageBase,DWORD_PTR rva)\r\n\r\n{\r\n  PIMAGE_SECTION_HEADER p_Var1;\r\n  int iVar2;\r\n  PIMAGE_SECTION_HEADER p_Var3;\r\n  \r\n                    /* Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???] */\r\n  iVar2 = *(int *)(pImageBase + 0x3c);\r\n  if (*(ushort *)(pImageBase + (longlong)iVar2 + 6) != 0) {\r\n    p_Var3 = (PIMAGE_SECTION_HEADER)\r\n             (pImageBase +\r\n             (ulonglong)*(ushort *)(pImageBase + (longlong)iVar2 + 0x14) + (longlong)iVar2 + 0x18);\r\n    p_Var1 = p_Var3 + (ulonglong)(*(ushort *)(pImageBase + (longlong)iVar2 + 6) - 1) + 1;\r\n    do {\r\n      if ((p_Var3->VirtualAddress <= rva) &&\r\n         (rva < p_Var3->VirtualAddress + (p_Var3->Misc).PhysicalAddress)) {\r\n        return p_Var3;\r\n      }\r\n      p_Var3 = p_Var3 + 1;\r\n    } while (p_Var3 != p_Var1);\r\n  }\r\n  return (PIMAGE_SECTION_HEADER)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_FindPESectionByName",
+      "address": "140002470",
+      "signature": "PIMAGE_SECTION_HEADER __fastcall _FindPESectionByName(char * pName)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 144,
+      "parameters": [
+        {"name": "pName", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "strlen", "address": "1400029c0"},
+        {"name": "strncmp", "address": "1400029c8"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nPIMAGE_SECTION_HEADER _FindPESectionByName(char *pName)\r\n\r\n{\r\n  int iVar1;\r\n  size_t sVar2;\r\n  PIMAGE_SECTION_HEADER _Str1;\r\n  int *piVar3;\r\n  uint uVar4;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???] */\r\n  sVar2 = strlen(pName);\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n  if ((((sVar2 < 9) && (*(short *)_refptr___ImageBase == 0x5a4d)) &&\r\n      (piVar3 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n      *piVar3 == 0x4550)) &&\r\n     (((short)piVar3[6] == 0x20b && (*(short *)((longlong)piVar3 + 6) != 0)))) {\r\n    uVar4 = 0;\r\n    _Str1 = (PIMAGE_SECTION_HEADER)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    do {\r\n      iVar1 = strncmp((char *)_Str1,pName,8);\r\n      if (iVar1 == 0) {\r\n        return _Str1;\r\n      }\r\n      uVar4 = uVar4 + 1;\r\n      _Str1 = _Str1 + 1;\r\n    } while (uVar4 < *(ushort *)((longlong)piVar3 + 6));\r\n  }\r\n  return (PIMAGE_SECTION_HEADER)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingw_GetSectionForAddress",
+      "address": "140002510",
+      "signature": "PIMAGE_SECTION_HEADER __fastcall __mingw_GetSectionForAddress(LPVOID p)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 121,
+      "parameters": [
+        {"name": "p", "type": "typedef LPVOID void *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "mark_section_writable", "address": "140001a30"}],
+      "decompiled_code": "\r\nPIMAGE_SECTION_HEADER __mingw_GetSectionForAddress(LPVOID p)\r\n\r\n{\r\n  PIMAGE_SECTION_HEADER p_Var1;\r\n  PIMAGE_SECTION_HEADER p_Var2;\r\n  int *piVar3;\r\n  \r\n  p_Var2 = (PIMAGE_SECTION_HEADER)0x0;\r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: DWORD_PTR rva@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???] */\r\n  if ((((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n       (piVar3 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n       *piVar3 == 0x4550)) && ((short)piVar3[6] == 0x20b)) &&\r\n     (p_Var2 = (PIMAGE_SECTION_HEADER)0x0, *(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    p_Var2 = (PIMAGE_SECTION_HEADER)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    p_Var1 = p_Var2 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) + 1;\r\n    while (((ulonglong)((longlong)p - (longlong)_refptr___ImageBase) <\r\n            (ulonglong)p_Var2->VirtualAddress ||\r\n           ((ulonglong)(p_Var2->VirtualAddress + (p_Var2->Misc).PhysicalAddress) <=\r\n            (ulonglong)((longlong)p - (longlong)_refptr___ImageBase)))) {\r\n      p_Var2 = p_Var2 + 1;\r\n      if (p_Var2 == p_Var1) {\r\n        return (PIMAGE_SECTION_HEADER)0x0;\r\n      }\r\n    }\r\n  }\r\n  return p_Var2;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingw_GetSectionCount",
+      "address": "140002590",
+      "signature": "int __mingw_GetSectionCount(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 49,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nint __mingw_GetSectionCount(void)\r\n\r\n{\r\n  int *piVar1;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n  if (((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n      (piVar1 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n      *piVar1 == 0x4550)) && ((short)piVar1[6] == 0x20b)) {\r\n    return (uint)*(ushort *)((longlong)piVar1 + 6);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_FindPESectionExec",
+      "address": "1400025d0",
+      "signature": "PIMAGE_SECTION_HEADER __fastcall _FindPESectionExec(size_t eNo)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 116,
+      "parameters": [
+        {"name": "eNo", "type": "typedef size_t ulonglong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nPIMAGE_SECTION_HEADER _FindPESectionExec(size_t eNo)\r\n\r\n{\r\n  PIMAGE_SECTION_HEADER p_Var1;\r\n  PIMAGE_SECTION_HEADER p_Var2;\r\n  int *piVar3;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n  if ((((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n       (piVar3 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n       *piVar3 == 0x4550)) && ((short)piVar3[6] == 0x20b)) &&\r\n     (*(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    p_Var2 = (PIMAGE_SECTION_HEADER)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    p_Var1 = p_Var2 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) + 1;\r\n    do {\r\n      if ((p_Var2->Characteristics & 0x20000000) != 0) {\r\n        if (eNo == 0) {\r\n          return p_Var2;\r\n        }\r\n        eNo = eNo - 1;\r\n      }\r\n      p_Var2 = p_Var2 + 1;\r\n    } while (p_Var1 != p_Var2);\r\n    return (PIMAGE_SECTION_HEADER)0x0;\r\n  }\r\n  return (PIMAGE_SECTION_HEADER)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_GetPEImageBase",
+      "address": "140002650",
+      "signature": "PBYTE _GetPEImageBase(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 49,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "mark_section_writable", "address": "140001a30"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nPBYTE _GetPEImageBase(void)\r\n\r\n{\r\n  PBYTE pBVar1;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n  if ((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n     (*(int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)) == 0x4550)) {\r\n    pBVar1 = (PBYTE)0x0;\r\n    if ((short)*(int *)((longlong)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)) +\r\n                       0x18) == 0x20b) {\r\n      pBVar1 = _refptr___ImageBase;\r\n    }\r\n    return pBVar1;\r\n  }\r\n  return (PBYTE)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_IsNonwritableInCurrentImage",
+      "address": "140002690",
+      "signature": "WINBOOL __fastcall _IsNonwritableInCurrentImage(PBYTE pTarget)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 130,
+      "parameters": [
+        {"name": "pTarget", "type": "typedef PBYTE BYTE *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nWINBOOL _IsNonwritableInCurrentImage(PBYTE pTarget)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  int *piVar3;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: DWORD_PTR rvaTarget@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???] */\r\n  if ((((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n       (piVar3 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n       *piVar3 == 0x4550)) && ((short)piVar3[6] == 0x20b)) &&\r\n     (*(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    lVar2 = (longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18;\r\n    lVar1 = lVar2 + 0x28;\r\n    while (((ulonglong)((longlong)pTarget - (longlong)_refptr___ImageBase) <\r\n            (ulonglong)*(uint *)(lVar2 + 0xc) ||\r\n           ((ulonglong)(*(uint *)(lVar2 + 0xc) + *(int *)(lVar2 + 8)) <=\r\n            (ulonglong)((longlong)pTarget - (longlong)_refptr___ImageBase)))) {\r\n      lVar2 = lVar2 + 0x28;\r\n      if (lVar1 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) * 0x28 == lVar2) {\r\n        return 0;\r\n      }\r\n    }\r\n    return ~*(uint *)(lVar2 + 0x24) >> 0x1f;\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__mingw_enum_import_library_names",
+      "address": "140002720",
+      "signature": "char * __fastcall __mingw_enum_import_library_names(int i)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 173,
+      "parameters": [
+        {"name": "i", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nchar * __mingw_enum_import_library_names(int i)\r\n\r\n{\r\n  longlong lVar1;\r\n  ulonglong uVar2;\r\n  undefined *puVar3;\r\n  int *piVar4;\r\n  longlong lVar5;\r\n  \r\n                    /* Unresolved local var: PBYTE pImageBase@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_IMPORT_DESCRIPTOR importDesc@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: DWORD importsStartRVA@[???]\r\n                       Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_DOS_HEADER pDOSHeader@[???]\r\n                       Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_OPTIONAL_HEADER pOptHeader@[???] */\r\n                    /* Unresolved local var: PIMAGE_NT_HEADERS pNTHeader@[???]\r\n                       Unresolved local var: PIMAGE_SECTION_HEADER pSection@[???]\r\n                       Unresolved local var: uint iSection@[???] */\r\n  if ((((*(short *)_refptr___ImageBase == 0x5a4d) &&\r\n       (piVar4 = (int *)(_refptr___ImageBase + *(int *)(_refptr___ImageBase + 0x3c)),\r\n       *piVar4 == 0x4550)) && ((short)piVar4[6] == 0x20b)) &&\r\n     ((uVar2 = (ulonglong)(uint)piVar4[0x24], piVar4[0x24] != 0 &&\r\n      (*(ushort *)((longlong)piVar4 + 6) != 0)))) {\r\n    lVar5 = (longlong)piVar4 + (ulonglong)*(ushort *)(piVar4 + 5) + 0x18;\r\n    lVar1 = lVar5 + 0x28;\r\n    while ((uVar2 < *(uint *)(lVar5 + 0xc) ||\r\n           (*(uint *)(lVar5 + 0xc) + *(int *)(lVar5 + 8) <= uVar2))) {\r\n      lVar5 = lVar5 + 0x28;\r\n      if (lVar1 + (ulonglong)(*(ushort *)((longlong)piVar4 + 6) - 1) * 0x28 == lVar5) {\r\n        return (char *)0x0;\r\n      }\r\n    }\r\n    for (puVar3 = _refptr___ImageBase + uVar2;\r\n        (*(int *)(puVar3 + 4) != 0 || (*(int *)(puVar3 + 0xc) != 0)); puVar3 = puVar3 + 0x14) {\r\n      if (i < 1) {\r\n        return _refptr___ImageBase + *(uint *)(puVar3 + 0xc);\r\n      }\r\n      i = i + -1;\r\n    }\r\n    return (char *)0x0;\r\n  }\r\n  return (char *)0x0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140008680", "value": "KERNEL32.dll"},
+        {"address": "140008694", "value": "api-ms-win-crt-environment-l1-1-0.dll"}]
+    },
+    {
+      "name": "___chkstk_ms",
+      "address": "1400027e0",
+      "signature": "ulonglong __fastcall ___chkstk_ms(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 50,
+      "parameters": [],
+      "local_variables": [
+        {"name": "local_res8", "type": "undefined", "storage": "Stack[0x8]:1"},
+        {"name": "local_ff8", "type": "undefined8", "storage": "Stack[-0xff8]:8"}],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"}],
+      "decompiled_code": "\r\n/* WARNING: This is an inlined function */\r\n\r\nulonglong ___chkstk_ms(void)\r\n\r\n{\r\n  ulonglong in_RAX;\r\n  ulonglong uVar1;\r\n  undefined8 *puVar2;\r\n  undefined8 local_res8 [4];\r\n  \r\n  puVar2 = local_res8;\r\n  uVar1 = in_RAX;\r\n  if (0xfff < in_RAX) {\r\n    do {\r\n      puVar2 = puVar2 + -0x200;\r\n      *puVar2 = *puVar2;\r\n      uVar1 = uVar1 - 0x1000;\r\n    } while (0x1000 < uVar1);\r\n  }\r\n  *(undefined8 *)((longlong)puVar2 - uVar1) = *(undefined8 *)((longlong)puVar2 - uVar1);\r\n  return in_RAX;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "vfprintf",
+      "address": "140002820",
+      "signature": "int __fastcall vfprintf(FILE.conflict * _File, char * _Format, va_list _ArgList)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 51,
+      "parameters": [
+        {"name": "_File", "type": "FILE.conflict *", "storage": "RCX:8"},
+        {"name": "_Format", "type": "char *", "storage": "RDX:8"},
+        {"name": "_ArgList", "type": "typedef va_list __gnuc_va_list", "storage": "R8:8"}],
+      "local_variables": [
+        {"name": "local_28", "type": "undefined8", "storage": "Stack[-0x28]:8"}],
+      "called_functions": [
+        {"name": "__stdio_common_vfprintf", "address": "1400029e8"},
+        {"name": "__local_stdio_printf_options", "address": "140002910"}],
+      "calling_functions": [
+        {"name": "__report_error", "address": "1400019d0"}],
+      "decompiled_code": "\r\nint vfprintf(FILE_conflict *_File,char *_Format,va_list _ArgList)\r\n\r\n{\r\n  int iVar1;\r\n  ulonglong *puVar2;\r\n  \r\n  puVar2 = __local_stdio_printf_options();\r\n  iVar1 = __stdio_common_vfprintf(*puVar2,_File,_Format,0,_ArgList);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "printf",
+      "address": "140002860",
+      "signature": "int __fastcall printf(char * _Format, ...)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 83,
+      "parameters": [
+        {"name": "_Format", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "ap", "type": "char *", "storage": "Stack[-0x20]:8"},
+        {"name": "local_38", "type": "undefined8", "storage": "Stack[-0x38]:8"}],
+      "called_functions": [
+        {"name": "__stdio_common_vfprintf", "address": "1400029e8"},
+        {"name": "__acrt_iob_func", "address": "1400029d0"},
+        {"name": "__local_stdio_printf_options", "address": "140002910"}],
+      "calling_functions": [
+        {"name": "main", "address": "140001623"}],
+      "decompiled_code": "\r\nint printf(char *_Format,...)\r\n\r\n{\r\n  int iVar1;\r\n  undefined8 uVar2;\r\n  ulonglong *puVar3;\r\n  undefined8 in_RDX;\r\n  undefined8 in_R8;\r\n  undefined8 in_R9;\r\n  undefined8 local_res10;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  char *ap;\r\n  \r\n                    /* Unresolved local var: int ret@[???] */\r\n  local_res10 = in_RDX;\r\n  local_res18 = in_R8;\r\n  local_res20 = in_R9;\r\n  uVar2 = __acrt_iob_func(1);\r\n  puVar3 = __local_stdio_printf_options();\r\n  iVar1 = __stdio_common_vfprintf(*puVar3,uVar2,_Format,0,&local_res10);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "fprintf",
+      "address": "1400028c0",
+      "signature": "int __fastcall fprintf(FILE.conflict * _File, char * _Format, ...)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 68,
+      "parameters": [
+        {"name": "_File", "type": "FILE.conflict *", "storage": "RCX:8"},
+        {"name": "_Format", "type": "char *", "storage": "RDX:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "ap", "type": "char *", "storage": "Stack[-0x20]:8"},
+        {"name": "local_38", "type": "undefined8", "storage": "Stack[-0x38]:8"}],
+      "called_functions": [
+        {"name": "__stdio_common_vfprintf", "address": "1400029e8"},
+        {"name": "__local_stdio_printf_options", "address": "140002910"}],
+      "calling_functions": [
+        {"name": "_matherr", "address": "1400018d0"},
+        {"name": "__report_error", "address": "1400019d0"},
+        {"name": "_amsg_exit", "address": "140002930"}],
+      "decompiled_code": "\r\nint fprintf(FILE_conflict *_File,char *_Format,...)\r\n\r\n{\r\n  int iVar1;\r\n  ulonglong *puVar2;\r\n  undefined8 in_R8;\r\n  undefined8 in_R9;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  char *ap;\r\n  \r\n                    /* Unresolved local var: int ret@[???] */\r\n  local_res18 = in_R8;\r\n  local_res20 = in_R9;\r\n  puVar2 = __local_stdio_printf_options();\r\n  iVar1 = __stdio_common_vfprintf(*puVar2,_File,_Format,0,&local_res18);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__local_stdio_printf_options",
+      "address": "140002910",
+      "signature": "ulonglong * __local_stdio_printf_options(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 8,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "vfprintf", "address": "140002820"},
+        {"name": "printf", "address": "140002860"},
+        {"name": "fprintf", "address": "1400028c0"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nulonglong * __local_stdio_printf_options(void)\r\n\r\n{\r\n  return &options;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p___initenv",
+      "address": "140002920",
+      "signature": "char * * * __p___initenv(void)",
+      "is_thunk": false,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 11,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nchar *** __p___initenv(void)\r\n\r\n{\r\n  return *(char ****)_refptr___imp___initenv;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_amsg_exit",
+      "address": "140002930",
+      "signature": "noreturn void __fastcall _amsg_exit(int ret)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 45,
+      "parameters": [
+        {"name": "ret", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "_exit", "address": "140002a18"},
+        {"name": "fprintf", "address": "1400028c0"},
+        {"name": "__acrt_iob_func", "address": "1400029d0"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _amsg_exit(int ret)\r\n\r\n{\r\n  FILE_conflict *_File;\r\n  \r\n  _File = (FILE_conflict *)__acrt_iob_func(2);\r\n  fprintf(_File,\"runtime error %d\\n\",(ulonglong)(uint)ret);\r\n                    /* WARNING: Subroutine does not return */\r\n  _exit(0xff);\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140004350", "value": "runtime error %d\n"}]
+    },
+    {
+      "name": "__getmainargs",
+      "address": "140002960",
+      "signature": "int __fastcall __getmainargs(int * argc, char * * * argv, char * * * env, int DoWildCard, _startupinfo * StartInfo)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 5,
+      "size": 95,
+      "parameters": [
+        {"name": "argc", "type": "int *", "storage": "RCX:8"},
+        {"name": "argv", "type": "char * * *", "storage": "RDX:8"},
+        {"name": "env", "type": "char * * *", "storage": "R8:8"},
+        {"name": "DoWildCard", "type": "int", "storage": "R9D:4"},
+        {"name": "StartInfo", "type": "_startupinfo *", "storage": "Stack[0x28]:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__p___argc", "address": "1400029f0"},
+        {"name": "_configure_narrow_argv", "address": "140002a08"},
+        {"name": "_initialize_narrow_environment", "address": "140002a20"},
+        {"name": "__p___argv", "address": "1400029f8"},
+        {"name": "__p__environ", "address": "140002ab0"},
+        {"name": "_set_new_mode", "address": "140002a90"}],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nint __getmainargs(int *argc,char ***argv,char ***env,int DoWildCard,_startupinfo *StartInfo)\r\n\r\n{\r\n  int *piVar1;\r\n  undefined8 *puVar2;\r\n  \r\n  _initialize_narrow_environment();\r\n  _configure_narrow_argv(2 - (uint)(DoWildCard == 0));\r\n  piVar1 = (int *)__p___argc();\r\n  *argc = *piVar1;\r\n  puVar2 = (undefined8 *)__p___argv();\r\n  *argv = (char **)*puVar2;\r\n  puVar2 = (undefined8 *)__p__environ();\r\n  *env = (char **)*puVar2;\r\n  _set_new_mode(StartInfo->newmode);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "strlen",
+      "address": "1400029c0",
+      "signature": "size_t __cdecl strlen(char * _Str)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Str", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"},
+        {"name": "_FindPESectionByName", "address": "140002470"}],
+      "decompiled_code": "\r\nsize_t __cdecl strlen(char *_Str)\r\n\r\n{\r\n  size_t sVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x0001400029c0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  sVar1 = strlen(_Str);\r\n  return sVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "strncmp",
+      "address": "1400029c8",
+      "signature": "int __cdecl strncmp(char * _Str1, char * _Str2, size_t _MaxCount)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 3,
+      "size": 6,
+      "parameters": [
+        {"name": "_Str1", "type": "char *", "storage": "RCX:8"},
+        {"name": "_Str2", "type": "char *", "storage": "RDX:8"},
+        {"name": "_MaxCount", "type": "typedef size_t ulonglong", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_FindPESectionByName", "address": "140002470"}],
+      "decompiled_code": "\r\nint __cdecl strncmp(char *_Str1,char *_Str2,size_t _MaxCount)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x0001400029c8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = strncmp(_Str1,_Str2,_MaxCount);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__acrt_iob_func",
+      "address": "1400029d0",
+      "signature": "undefined __acrt_iob_func(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_matherr", "address": "1400018d0"},
+        {"name": "__report_error", "address": "1400019d0"},
+        {"name": "printf", "address": "140002860"},
+        {"name": "_amsg_exit", "address": "140002930"}],
+      "decompiled_code": "\r\nvoid __acrt_iob_func(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029d0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __acrt_iob_func();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__commode",
+      "address": "1400029d8",
+      "signature": "undefined __p__commode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __p__commode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029d8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__commode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__fmode",
+      "address": "1400029e0",
+      "signature": "undefined __p__fmode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __p__fmode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029e0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__fmode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__stdio_common_vfprintf",
+      "address": "1400029e8",
+      "signature": "undefined __stdio_common_vfprintf(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "vfprintf", "address": "140002820"},
+        {"name": "printf", "address": "140002860"},
+        {"name": "fprintf", "address": "1400028c0"}],
+      "decompiled_code": "\r\nvoid __stdio_common_vfprintf(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029e8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __stdio_common_vfprintf();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p___argc",
+      "address": "1400029f0",
+      "signature": "undefined __p___argc(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid __p___argc(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029f0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p___argc();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p___argv",
+      "address": "1400029f8",
+      "signature": "undefined __p___argv(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid __p___argv(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x0001400029f8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p___argv();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_cexit",
+      "address": "140002a00",
+      "signature": "void __cdecl _cexit(void)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __cdecl _cexit(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a00. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _cexit();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_configure_narrow_argv",
+      "address": "140002a08",
+      "signature": "undefined _configure_narrow_argv(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid _configure_narrow_argv(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a08. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _configure_narrow_argv();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_crt_atexit",
+      "address": "140002a10",
+      "signature": "undefined _crt_atexit(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid _crt_atexit(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a10. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _crt_atexit();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_exit",
+      "address": "140002a18",
+      "signature": "noreturn void __cdecl _exit(int _Code)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Code", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_amsg_exit", "address": "140002930"}],
+      "decompiled_code": "\r\nvoid __cdecl _exit(int _Code)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a18. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _exit(_Code);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initialize_narrow_environment",
+      "address": "140002a20",
+      "signature": "undefined _initialize_narrow_environment(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid _initialize_narrow_environment(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a20. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initialize_narrow_environment();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__set_app_type",
+      "address": "140002a28",
+      "signature": "undefined __set_app_type(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __set_app_type(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a28. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _set_app_type();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initterm",
+      "address": "140002a30",
+      "signature": "undefined _initterm(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _initterm(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a30. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initterm();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initterm_e",
+      "address": "140002a38",
+      "signature": "undefined _initterm_e(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _initterm_e(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a38. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initterm_e();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_set_invalid_parameter_handler",
+      "address": "140002a40",
+      "signature": "_invalid_parameter_handler __cdecl _set_invalid_parameter_handler(_invalid_parameter_handler _Handler)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Handler", "type": "typedef _invalid_parameter_handler _invalid_parameter_handler *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\n_invalid_parameter_handler __cdecl\r\n_set_invalid_parameter_handler(_invalid_parameter_handler _Handler)\r\n\r\n{\r\n  _invalid_parameter_handler p_Var1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a40. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  p_Var1 = _set_invalid_parameter_handler(_Handler);\r\n  return p_Var1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "abort",
+      "address": "140002a48",
+      "signature": "noreturn void __cdecl abort(void)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__report_error", "address": "1400019d0"}],
+      "decompiled_code": "\r\nvoid __cdecl abort(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a48. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  abort();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "exit",
+      "address": "140002a50",
+      "signature": "noreturn void __cdecl exit(int _Code)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Code", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __cdecl exit(int _Code)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a50. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  exit(_Code);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "signal",
+      "address": "140002a58",
+      "signature": "void signal(int param_1)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "param_1", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "_gnu_exception_handler", "address": "140001f80"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid signal(int param_1)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a58. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  signal(param_1);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__C_specific_handler",
+      "address": "140002a60",
+      "signature": "EXCEPTION_DISPOSITION __C_specific_handler(_EXCEPTION_RECORD * ExceptionRecord, void * EstablisherFrame, _CONTEXT * ContextRecord, _DISPATCHER_CONTEXT * DispatcherContext)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 4,
+      "size": 6,
+      "parameters": [
+        {"name": "ExceptionRecord", "type": "_EXCEPTION_RECORD *", "storage": "RCX:8"},
+        {"name": "EstablisherFrame", "type": "void *", "storage": "RDX:8"},
+        {"name": "ContextRecord", "type": "_CONTEXT *", "storage": "R8:8"},
+        {"name": "DispatcherContext", "type": "_DISPATCHER_CONTEXT *", "storage": "R9:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nEXCEPTION_DISPOSITION\r\n__C_specific_handler\r\n          (_EXCEPTION_RECORD *ExceptionRecord,void *EstablisherFrame,_CONTEXT *ContextRecord,\r\n          _DISPATCHER_CONTEXT *DispatcherContext)\r\n\r\n{\r\n  EXCEPTION_DISPOSITION EVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a60. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  EVar1 = __C_specific_handler(ExceptionRecord,EstablisherFrame,ContextRecord,DispatcherContext);\r\n  return EVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "memcpy",
+      "address": "140002a68",
+      "signature": "void * __cdecl memcpy(void * _Dst, void * _Src, size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 3,
+      "size": 6,
+      "parameters": [
+        {"name": "_Dst", "type": "void *", "storage": "RCX:8"},
+        {"name": "_Src", "type": "void *", "storage": "RDX:8"},
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"},
+        {"name": "_pei386_runtime_relocator", "address": "140001ba0"},
+        {"name": "func_001", "address": "140001450"},
+        {"name": "func_003", "address": "1400014d8"}],
+      "decompiled_code": "\r\nvoid * __cdecl memcpy(void *_Dst,void *_Src,size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a68. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = memcpy(_Dst,_Src,_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__setusermatherr",
+      "address": "140002a70",
+      "signature": "undefined __setusermatherr(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__mingw_setusermatherr", "address": "140001f70"}],
+      "decompiled_code": "\r\nvoid __setusermatherr(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a70. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __setusermatherr();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_configthreadlocale",
+      "address": "140002a80",
+      "signature": "int __cdecl _configthreadlocale(int _Flag)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Flag", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"}],
+      "decompiled_code": "\r\nint __cdecl _configthreadlocale(int _Flag)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a80. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = _configthreadlocale(_Flag);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_set_new_mode",
+      "address": "140002a90",
+      "signature": "undefined _set_new_mode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid _set_new_mode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002a90. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _set_new_mode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "calloc",
+      "address": "140002a98",
+      "signature": "void * __cdecl calloc(size_t _Count, size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 2,
+      "size": 6,
+      "parameters": [
+        {"name": "_Count", "type": "typedef size_t ulonglong", "storage": "RCX:8"},
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "___w64_mingwthr_add_key_dtor", "address": "1400021b0"}],
+      "decompiled_code": "\r\nvoid * __cdecl calloc(size_t _Count,size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002a98. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = calloc(_Count,_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "free",
+      "address": "140002aa0",
+      "signature": "void __cdecl free(void * _Memory)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Memory", "type": "void *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__mingw_TLScallback", "address": "1400022d0"},
+        {"name": "___w64_mingwthr_remove_key_dtor", "address": "140002240"},
+        {"name": "func_002", "address": "140001498"},
+        {"name": "func_003", "address": "1400014d8"}],
+      "decompiled_code": "\r\nvoid __cdecl free(void *_Memory)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002aa0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  free(_Memory);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "malloc",
+      "address": "140002aa8",
+      "signature": "void * __cdecl malloc(size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__tmainCRTStartup", "address": "140001010"},
+        {"name": "func_001", "address": "140001450"},
+        {"name": "func_003", "address": "1400014d8"}],
+      "decompiled_code": "\r\nvoid * __cdecl malloc(size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002aa8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = malloc(_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__environ",
+      "address": "140002ab0",
+      "signature": "undefined __p__environ(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__getmainargs", "address": "140002960"}],
+      "decompiled_code": "\r\nvoid __p__environ(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002ab0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__environ();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "VirtualQuery",
+      "address": "140002ac0",
+      "signature": "SIZE_T __stdcall VirtualQuery(LPCVOID lpAddress, PMEMORY_BASIC_INFORMATION lpBuffer, SIZE_T dwLength)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 3,
+      "size": 6,
+      "parameters": [
+        {"name": "lpAddress", "type": "typedef LPCVOID void *", "storage": "RCX:8"},
+        {"name": "lpBuffer", "type": "typedef PMEMORY_BASIC_INFORMATION _MEMORY_BASIC_INFORMATION *", "storage": "RDX:8"},
+        {"name": "dwLength", "type": "typedef SIZE_T ULONG_PTR", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nSIZE_T __stdcall VirtualQuery(LPCVOID lpAddress,PMEMORY_BASIC_INFORMATION lpBuffer,SIZE_T dwLength)\r\n\r\n{\r\n  SIZE_T SVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002ac0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  SVar1 = VirtualQuery(lpAddress,lpBuffer,dwLength);\r\n  return SVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "VirtualProtect",
+      "address": "140002ac8",
+      "signature": "BOOL __stdcall VirtualProtect(LPVOID lpAddress, SIZE_T dwSize, DWORD flNewProtect, PDWORD lpflOldProtect)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 4,
+      "size": 6,
+      "parameters": [
+        {"name": "lpAddress", "type": "typedef LPVOID void *", "storage": "RCX:8"},
+        {"name": "dwSize", "type": "typedef SIZE_T ULONG_PTR", "storage": "RDX:8"},
+        {"name": "flNewProtect", "type": "typedef DWORD ulong", "storage": "R8D:4"},
+        {"name": "lpflOldProtect", "type": "typedef PDWORD DWORD *", "storage": "R9:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nBOOL __stdcall\r\nVirtualProtect(LPVOID lpAddress,SIZE_T dwSize,DWORD flNewProtect,PDWORD lpflOldProtect)\r\n\r\n{\r\n  BOOL BVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002ac8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  BVar1 = VirtualProtect(lpAddress,dwSize,flNewProtect,lpflOldProtect);\r\n  return BVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "TlsGetValue",
+      "address": "140002ad0",
+      "signature": "LPVOID __stdcall TlsGetValue(DWORD dwTlsIndex)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "dwTlsIndex", "type": "typedef DWORD ulong", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nLPVOID __stdcall TlsGetValue(DWORD dwTlsIndex)\r\n\r\n{\r\n  LPVOID pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002ad0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = TlsGetValue(dwTlsIndex);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "Sleep",
+      "address": "140002ad8",
+      "signature": "void __stdcall Sleep(DWORD dwMilliseconds)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "dwMilliseconds", "type": "typedef DWORD ulong", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __stdcall Sleep(DWORD dwMilliseconds)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002ad8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  Sleep(dwMilliseconds);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "SetUnhandledExceptionFilter",
+      "address": "140002ae0",
+      "signature": "LPTOP_LEVEL_EXCEPTION_FILTER __stdcall SetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "lpTopLevelExceptionFilter", "type": "typedef LPTOP_LEVEL_EXCEPTION_FILTER PTOP_LEVEL_EXCEPTION_FILTER", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nLPTOP_LEVEL_EXCEPTION_FILTER __stdcall\r\nSetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter)\r\n\r\n{\r\n  LPTOP_LEVEL_EXCEPTION_FILTER pPVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002ae0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pPVar1 = SetUnhandledExceptionFilter(lpTopLevelExceptionFilter);\r\n  return pPVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "LeaveCriticalSection",
+      "address": "140002ae8",
+      "signature": "void __stdcall LeaveCriticalSection(LPCRITICAL_SECTION lpCriticalSection)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "lpCriticalSection", "type": "typedef LPCRITICAL_SECTION PRTL_CRITICAL_SECTION", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __stdcall LeaveCriticalSection(LPCRITICAL_SECTION lpCriticalSection)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002ae8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  LeaveCriticalSection(lpCriticalSection);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "InitializeCriticalSection",
+      "address": "140002af0",
+      "signature": "void __stdcall InitializeCriticalSection(LPCRITICAL_SECTION lpCriticalSection)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "lpCriticalSection", "type": "typedef LPCRITICAL_SECTION PRTL_CRITICAL_SECTION", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __stdcall InitializeCriticalSection(LPCRITICAL_SECTION lpCriticalSection)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002af0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  InitializeCriticalSection(lpCriticalSection);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "GetLastError",
+      "address": "140002af8",
+      "signature": "DWORD __stdcall GetLastError(void)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nDWORD __stdcall GetLastError(void)\r\n\r\n{\r\n  DWORD DVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002af8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  DVar1 = GetLastError();\r\n  return DVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "EnterCriticalSection",
+      "address": "140002b00",
+      "signature": "void __stdcall EnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "lpCriticalSection", "type": "typedef LPCRITICAL_SECTION PRTL_CRITICAL_SECTION", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __stdcall EnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b00. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  EnterCriticalSection(lpCriticalSection);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "DeleteCriticalSection",
+      "address": "140002b08",
+      "signature": "void __stdcall DeleteCriticalSection(LPCRITICAL_SECTION lpCriticalSection)",
+      "is_thunk": true,
+      "calling_convention": "__stdcall",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "lpCriticalSection", "type": "typedef LPCRITICAL_SECTION PRTL_CRITICAL_SECTION", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid __stdcall DeleteCriticalSection(LPCRITICAL_SECTION lpCriticalSection)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b08. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  DeleteCriticalSection(lpCriticalSection);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": ".text",
+      "address": "140002b10",
+      "signature": "undefined __fastcall .text(void)",
+      "is_thunk": true,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 5,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "__do_global_ctors", "address": "140001770"}],
+      "decompiled_code": "\r\nvoid _text(void)\r\n\r\n{\r\n  atexit(__gcc_deregister_frame);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    }
+  ]
+}
