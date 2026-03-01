@@ -3,3 +3,16 @@ __pycache__/
 results/
 temp_projects/
 config.json
+
+# Fichiers generes par LaTeX
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.out
+*.toc
+
+# Exemples de posters (binaires lourds)
+exemplesPoster/

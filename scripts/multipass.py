@@ -85,6 +85,9 @@ def enrich_extracted_json(extracted_data: dict, suggestions: list) -> dict:
         # Renommer la fonction elle-meme
         old_name = func.get("name", "")
         if old_name in name_map:
+            # Conserver le nom original (avant toute passe) pour l'evaluation
+            if "original_name" not in func:
+                func["original_name"] = old_name
             func["name"] = name_map[old_name]
 
         # Mettre a jour called_functions
@@ -247,27 +250,20 @@ class MultiPassRunner:
         # Calculer les gains
         sem1 = pass1_eval['avg_semantic_score']
         sem2 = pass2_eval['avg_semantic_score']
-        sem3 = pass3_eval['avg_semantic_score']
 
         gains = {
+            # Gain semantique : P1 (renommage) -> P2 (analyse complete avec contexte enrichi)
+            # P3 est exclue car la tache COMMENTS ne produit pas de suggested_name
             "semantic_score": {
-                "pass1": sem1, "pass2": sem2, "pass3": sem3,
-                "gain": f"+{((sem3 - sem1) / sem1 * 100):.1f}%" if sem1 > 0 else "N/A"
+                "pass1": sem1,
+                "pass2": sem2,
+                "gain_p1_p2": f"{((sem2 - sem1) / sem1 * 100):+.1f}%" if sem1 > 0 else "N/A"
             },
-            "comment_score": {
-                "pass1": pass1_eval['avg_comment_score'],
-                "pass2": pass2_eval['avg_comment_score'],
-                "pass3": pass3_eval['avg_comment_score'],
-            },
-            "bleu": {
-                "pass1": pass1_eval['avg_bleu'],
-                "pass2": pass2_eval['avg_bleu'],
-                "pass3": pass3_eval['avg_bleu'],
-            },
-            "rougeL": {
-                "pass1": pass1_eval['avg_rougeL'],
-                "pass2": pass2_eval['avg_rougeL'],
-                "pass3": pass3_eval['avg_rougeL'],
+            # Qualite des commentaires : uniquement P3
+            "comments_quality": {
+                "comment_score": pass3_eval['avg_comment_score'],
+                "rougeL": pass3_eval['avg_rougeL'],
+                "bleu": pass3_eval['avg_bleu'],
             }
         }
 

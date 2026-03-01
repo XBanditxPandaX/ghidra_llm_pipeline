@@ -36,7 +36,7 @@ class LMStudioClient:
     """Client pour communiquer avec LM Studio (API compatible OpenAI)"""
 
     def __init__(self, base_url: str = "http://localhost:1234/v1", model: str = "deepseek-coder",
-                 temperature: float = 0.3, max_tokens: int = 1024):
+                 temperature: float = 0.3, max_tokens: int = 2048):
         self.base_url = base_url.rstrip('/')
         self.model = model
         self.temperature = temperature
@@ -65,8 +65,9 @@ class LMStudioClient:
     def _build_prompt(self, task: TaskType, func_info: Dict, all_functions_context: str = "") -> str:
         """Construit le prompt selon la tache"""
 
-        base_context = f"""Tu es un expert en reverse engineering et analyse de binaires.
-Analyse le code decompile suivant et reponds UNIQUEMENT en JSON valide.
+        base_context = f"""Analyse le code decompile suivant et reponds UNIQUEMENT en JSON valide.
+Ne reflechis pas trop longuement, va droit au but.
+IMPORTANT: tous les noms de fonctions et de parametres proposes doivent etre en anglais (snake_case).
 
 Informations sur la fonction:
 - Nom actuel: {func_info.get('name', 'unknown')}
@@ -151,7 +152,7 @@ Reponds UNIQUEMENT avec ce JSON:
                 "messages": [
                     {
                         "role": "system",
-                        "content": "Tu es un expert en reverse engineering et analyse de binaires. Reponds toujours en JSON valide."
+                        "content": "Tu es un expert en reverse engineering. Reponds UNIQUEMENT en JSON valide, sans explication supplementaire. Sois concis et direct."
                     },
                     {
                         "role": "user",
@@ -166,7 +167,7 @@ Reponds UNIQUEMENT avec ce JSON:
             response = requests.post(
                 self.api_endpoint,
                 json=payload,
-                timeout=120
+                timeout=600
             )
 
             if response.status_code == 200:
@@ -180,15 +181,59 @@ Reponds UNIQUEMENT avec ce JSON:
         return None
 
     def _parse_json_response(self, response: str) -> Optional[Dict]:
-        """Parse la reponse JSON du LLM"""
-        try:
-            # Chercher le JSON dans la reponse
-            start = response.find('{')
-            end = response.rfind('}') + 1
+        """Parse la reponse JSON du LLM.
 
-            if start != -1 and end > start:
-                json_str = response[start:end]
+        Gere les modeles 'thinking' (DeepSeek R1) qui emettent
+        <think>...</think> avant le JSON.
+        """
+        import re
+
+        # Retirer les blocs <think>...</think> fermes (DeepSeek R1)
+        cleaned = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL).strip()
+
+        # Si un <think> est ouvert mais jamais ferme (reponse tronquee),
+        # tout supprimer a partir de <think>
+        if '<think>' in cleaned:
+            cleaned = cleaned[:cleaned.find('<think>')].strip()
+
+        # Retirer les blocs ```json ... ``` si presents (fermes ou non)
+        md_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', cleaned, flags=re.DOTALL)
+        if md_match:
+            cleaned = md_match.group(1)
+        elif '```' in cleaned:
+            # Bloc non ferme (reponse tronquee) : extraire ce qui suit ```json
+            after_fence = re.sub(r'^```(?:json)?\s*', '', cleaned[cleaned.find('```'):], flags=re.DOTALL)
+            cleaned = after_fence.strip()
+
+        # Chercher le JSON dans la reponse nettoyee
+        start = cleaned.find('{')
+        if start == -1:
+            return None
+
+        end = cleaned.rfind('}') + 1
+
+        # Cas normal : JSON complet
+        if end > start:
+            try:
+                json_str = cleaned[start:end]
                 return json.loads(json_str)
+            except json.JSONDecodeError:
+                pass
+
+        # Cas tronque : JSON coupe (finish_reason=length)
+        # Tenter de fermer les accolades/crochets manquants
+        partial = cleaned[start:]
+        # Fermer les chaines ouvertes, crochets et accolades
+        open_braces = partial.count('{') - partial.count('}')
+        open_brackets = partial.count('[') - partial.count(']')
+        # Couper au dernier champ complet (derniere virgule ou derniere valeur)
+        last_comma = partial.rfind(',')
+        last_colon = partial.rfind(':')
+        if last_comma > last_colon:
+            partial = partial[:last_comma]
+        repaired = partial + ']' * open_brackets + '}' * open_braces
+        try:
+            return json.loads(repaired)
         except json.JSONDecodeError:
             pass
 
@@ -206,11 +251,12 @@ Reponds UNIQUEMENT avec ce JSON:
 
         parsed = self._parse_json_response(response)
         if not parsed:
-            print(f"[!] Impossible de parser la reponse pour {func_info.get('name')}")
+            preview = response[:200].replace('\n', ' ') if response else '(vide)'
+            print(f"[!] Impossible de parser la reponse pour {func_info.get('name')}: {preview}")
             return None
 
         suggestion = LLMSuggestion(
-            original_name=func_info.get('name', 'unknown'),
+            original_name=func_info.get('original_name') or func_info.get('name', 'unknown'),
             suggested_name=parsed.get('suggested_name'),
             suggested_return_type=parsed.get('suggested_return_type'),
             suggested_param_types=parsed.get('suggested_param_types'),

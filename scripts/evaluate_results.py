@@ -82,6 +82,8 @@ class BinaryEvaluation:
 
 def normalize_name(name: str) -> str:
     """Normalise un nom de fonction pour la comparaison"""
+    if not name:
+        return ""
     # Convertir en minuscules
     name = name.lower()
     # Remplacer les separateurs par des underscores

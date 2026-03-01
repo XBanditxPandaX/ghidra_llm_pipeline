@@ -1,0 +1,344 @@
+%% Poster academique - Pipeline Ghidra + LLM
+%% pdflatex depuis le dossier poster/
+\documentclass[a0paper, portrait]{tikzposter}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+
+%% ── Couleurs ──────────────────────────────────────────────────────
+\definecolor{Navy}{HTML}{1A3A5C}
+\definecolor{Blue}{HTML}{2E86C1}
+\definecolor{LBlue}{HTML}{D6EAF8}
+\definecolor{Green}{HTML}{1E8449}
+\definecolor{LGreen}{HTML}{D5F5E3}
+\definecolor{Orange}{HTML}{BA4A00}
+\definecolor{LOrange}{HTML}{FDEBD0}
+\definecolor{Gray}{HTML}{F0F3F4}
+\definecolor{DGray}{HTML}{2C3E50}
+\definecolor{CBg}{HTML}{1E1E1E}
+\definecolor{CFg}{HTML}{D4D4D4}
+\definecolor{CKw}{HTML}{569CD6}
+\definecolor{CCm}{HTML}{6A9955}
+
+%% ── Thème ─────────────────────────────────────────────────────────
+\usetheme{Simple}
+\tikzposterlatexaffectionproofoff
+\definecolorstyle{Clean}{}{
+  \colorlet{backgroundcolor}{white}
+  \colorlet{framecolor}{Navy}
+  \colorlet{blocktitlebgcolor}{Navy}
+  \colorlet{blocktitlefgcolor}{white}
+  \colorlet{blockbodybgcolor}{Gray}
+  \colorlet{blockbodyfgcolor}{DGray}
+}
+\usecolorstyle{Clean}
+
+%% ── Listings ──────────────────────────────────────────────────────
+\lstset{
+  basicstyle=\ttfamily\small\color{CFg},
+  backgroundcolor=\color{CBg},
+  keywordstyle=\color{CKw}\bfseries,
+  commentstyle=\color{CCm}\itshape,
+  stringstyle=\color{orange!80},
+  language=C,
+  breaklines=true, frame=none, numbers=none,
+  xleftmargin=5pt, xrightmargin=5pt,
+  aboveskip=0pt, belowskip=0pt,
+  showstringspaces=false
+}
+
+%% ── Styles TikZ (pipeline) ────────────────────────────────────────
+\tikzset{
+  pnode/.style={
+    rectangle, rounded corners=6pt,
+    minimum width=8.5cm, minimum height=2.2cm,
+    text centered, text width=8cm,
+    draw=#1, line width=2pt, fill=#1!15,
+    font=\normalsize\bfseries, text=#1
+  },
+  arr/.style={-Stealth, line width=2.5pt, color=DGray!60}
+}
+
+%% ── Titre ─────────────────────────────────────────────────────────
+\title{\parbox{0.9\linewidth}{\centering
+  \textbf{\huge Am\'elioration automatique de l'analyse de code d\'ecompil\'e
+    par mod\`eles de langage}\\[0.5em]
+  {\large Pipeline Ghidra $+$ LM Studio\quad---\quad
+    Benchmark multi-mod\`eles : single-pass \& multi-pass it\'eratif}
+}}
+\author{\Large [Pr\'enom Nom]}
+\institute{\Large FGES --- Universit\'e Catholique de Lille
+  \quad $\cdot$ \quad Master 2 Informatique \quad $\cdot$ \quad 2026}
+
+%% ══════════════════════════════════════════════════════════════════
+\begin{document}
+\maketitle
+
+%% ── Bloc pleine largeur : pipeline ────────────────────────────────
+\block{Vue d'ensemble du pipeline}{%
+\begin{center}
+\begin{tikzpicture}[node distance=2.8cm]
+  \node[pnode=Navy]  (A) {\textbf{Binaire}\\\small\texttt{.exe / ELF}};
+  \node[pnode=Navy,  right=2.5cm of A] (B)
+    {\textbf{Ghidra Headless}\\\small Script Java};
+  \node[pnode=Green, right=2.5cm of B] (C)
+    {\textbf{JSON Extrait}\\\small fonctions $+$ code\\\small $+$ signatures};
+  \node[pnode=Blue,  right=2.5cm of C] (D)
+    {\textbf{LM Studio}\\\small API OpenAI\\\small \texttt{localhost:1234}};
+  \node[pnode=Orange,right=2.5cm of D] (E)
+    {\textbf{Suggestions}\\\small noms, types\\\small commentaires};
+  \node[pnode=Orange,right=2.5cm of E] (F)
+    {\textbf{Injection Ghidra}\\\small annotations\\\small automatiques};
+
+  \draw[arr] (A)--(B) node[midway,above,font=\small\color{DGray}]{import};
+  \draw[arr] (B)--(C) node[midway,above,font=\small\color{Green}]{extraction};
+  \draw[arr] (C)--(D) node[midway,above,font=\small\color{Blue}]{analyse};
+  \draw[arr] (D)--(E) node[midway,above,font=\small\color{Orange}]{JSON};
+  \draw[arr] (E)--(F) node[midway,above,font=\small\color{Orange}]{inject};
+\end{tikzpicture}
+
+\vspace{0.6em}
+\begin{tikzpicture}
+  \node[rectangle, rounded corners=5pt, fill=LBlue, draw=Blue,
+        line width=2pt, inner sep=10pt,
+        text width=58cm, align=center]{%
+    \large
+    \textbf{\color{Blue}Renommage de fonctions}
+    \quad\textcolor{DGray}{$\big|$}\quad
+    \textbf{\color{Green}D\'etection d'APIs Windows / POSIX}
+    \quad\textcolor{DGray}{$\big|$}\quad
+    \textbf{\color{Orange}G\'en\'eration de commentaires Doxygen}
+  };
+\end{tikzpicture}
+\end{center}
+}
+
+%% ══════════════════════════════════════════════════════════════════
+\begin{columns}
+
+%% ── Colonne gauche ────────────────────────────────────────────────
+\column{0.50}
+
+\block{Contexte \& Probl\'ematique}{%
+  Le \textbf{reverse engineering} consiste \`a comprendre un logiciel
+  \textit{sans acc\`es au code source}. Ghidra, l'outil de r\'ef\'erence
+  de la NSA, g\'en\`ere du code d\'ecompil\'e illisible :
+
+  \vspace{0.5em}
+  \begin{center}
+  \begin{tikzpicture}
+    \node[rectangle, rounded corners=5pt, fill=LOrange,
+          draw=Orange, line width=2pt,
+          text width=28cm, inner sep=12pt]{%
+      \large
+      \textbf{\color{Orange}Probl\`eme :}\quad
+      \texttt{FUN\_00401000(param\_1, param\_2)} ---
+      impossible \`a comprendre sans analyse manuelle
+      longue et sujette aux erreurs.
+    };
+  \end{tikzpicture}
+  \end{center}
+
+  \vspace{0.5em}
+  \begin{tabular}{@{}ll}
+    \textcolor{Green}{$\checkmark$} & Renommer fonctions et param\`etres \\[0.4em]
+    \textcolor{Green}{$\checkmark$} & D\'etecter les APIs utilis\'ees \\[0.4em]
+    \textcolor{Green}{$\checkmark$} & G\'en\'erer des commentaires explicatifs \\[0.4em]
+    \textcolor{Green}{$\checkmark$} & Comparer trois LLMs locaux sur ces t\^aches \\
+  \end{tabular}
+}
+
+\block{Avant\,/\,Apr\`es --- Exemple}{%
+  \begin{center}
+  \begin{minipage}[t]{0.47\linewidth}
+    \begin{center}\textbf{\color{Orange}Ghidra brut}\end{center}
+    \lstinputlisting{code_before.c}
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[t]{0.47\linewidth}
+    \begin{center}\textbf{\color{Green}Apr\`es pipeline LLM}\end{center}
+    \lstinputlisting{code_after.c}
+  \end{minipage}
+  \end{center}
+}
+
+\block{Approche Multi-Pass It\'erative}{%
+  Chaque passe \textbf{enrichit le JSON} avec les r\'esultats
+  de la passe pr\'ec\'edente. Le LLM dispose ainsi d'un contexte
+  progressivement plus riche.
+
+  \vspace{0.6em}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{@{}clp{18cm}@{}}
+    \textbf{\color{Blue}P1}
+      & \textbf{Renommage}
+      & Propose des noms descriptifs pour chaque fonction \\
+    \multicolumn{3}{c}{{\small\color{DGray}$\downarrow$ enrichissement du JSON extrait}} \\
+    \textbf{\color{Green}P2}
+      & \textbf{Analyse}
+      & Types de retour, APIs, signatures (avec noms de P1) \\
+    \multicolumn{3}{c}{{\small\color{DGray}$\downarrow$ enrichissement du JSON extrait}} \\
+    \textbf{\color{Orange}P3}
+      & \textbf{Commentaires}
+      & Commentaires Doxygen avec contexte maximal \\
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.4em}
+  \begin{center}
+  \begin{tikzpicture}
+    \node[rectangle, rounded corners=5pt, fill=LGreen,
+          draw=Green, line width=2pt,
+          inner sep=10pt, text width=28cm, align=center]{%
+      \texttt{func\_001}
+      $\;\xrightarrow{\;\mathbf{P1}\;}$
+      \texttt{copy\_alloc}
+      $\;\xrightarrow{\;\mathbf{P2}\;}$
+      \texttt{void*(void* src, size\_t n)}
+      $\;\xrightarrow{\;\mathbf{P3}\;}$
+      commentaire Doxygen
+    };
+  \end{tikzpicture}
+  \end{center}
+}
+
+%% ── Colonne droite ────────────────────────────────────────────────
+\column{0.50}
+
+\block{Mod\`eles \'evalu\'es}{%
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{@{}lp{14cm}rr@{}}
+    \toprule
+    \textbf{Mod\`ele} & \textbf{Architecture}
+      & \textbf{Vitesse} & \textbf{Halluc.} \\
+    \midrule
+    \textbf{\color{Blue}qwen2.5-coder-7b}
+      & Instruction, 7B
+      & \textbf{\color{Green}13.6\,s/fn} & \textbf{\color{Green}0\,\%} \\
+    \textbf{\color{Green}deepseek-coder-6.7b}
+      & Instruction, 6.7B
+      & 57.8\,s/fn & \textcolor{red}{40\,\%} \\
+    \textbf{\color{Orange}codellama-7b}
+      & Instruction, 7B
+      & 37.9\,s/fn & \textcolor{red}{40\,\%} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.4em}
+  {\small Tous les mod\`eles s'ex\'ecutent \textbf{localement} via LM Studio
+  (aucune donn\'ee envoy\'ee vers le cloud).}
+}
+
+\block{M\'etriques d'\'evaluation}{%
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{@{}lp{22cm}@{}}
+    \toprule
+    \textbf{M\'etrique} & \textbf{D\'efinition} \\
+    \midrule
+    \textbf{Semantic Score}
+      & Similarit\'e cosinus entre nom sugg\'er\'e et nom attendu \\
+    \textbf{Exact Match}
+      & Pourcentage de noms identiques au ground truth \\
+    \textbf{Hallucination Rate}
+      & Proportion de suggestions totalement incorrectes \\
+    \textbf{BLEU / ROUGE-L}
+      & Qualit\'e des commentaires g\'en\'er\'es (passe\,3) \\
+    \bottomrule
+  \end{tabular}
+}
+
+\block{R\'esultats exp\'erimentaux}{%
+  \textbf{Single-Pass}
+
+  \vspace{0.3em}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Mod\`ele}
+      & \textbf{Semantic} & \textbf{Exact Match}
+      & \textbf{Hallucination} & \textbf{Temps/fn} \\
+    \midrule
+    \textcolor{Blue}{\textbf{qwen2.5}}
+      & 0.53 & 20\,\%
+      & \textcolor{Green}{\textbf{0\,\%}} & \textcolor{Green}{\textbf{13\,s}} \\
+    \textcolor{Green}{\textbf{deepseek}}
+      & \textbf{0.73} & \textbf{60\,\%}
+      & \textcolor{red}{40\,\%} & 58\,s \\
+    \textcolor{Orange}{\textbf{codellama}}
+      & 0.27 & 20\,\%
+      & \textcolor{red}{40\,\%} & 38\,s \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.6em}
+  \textbf{Multi-Pass --- Gain s\'emantique P1\,$\to$\,P2}
+
+  \vspace{0.3em}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Mod\`ele} & \textbf{Passe 1} & \textbf{Passe 2}
+      & \textbf{Gain} \\
+    \midrule
+    \textcolor{Blue}{\textbf{qwen2.5}}   & 0.800 & 0.743 & $-7\,\%$ \\
+    \textcolor{Green}{\textbf{deepseek}} & 0.673 & 0.673 & $0\,\%$ \\
+    \textcolor{Orange}{\textbf{codellama}}
+      & 0.290 & 0.380 & \textcolor{Green}{\textbf{$+31\,\%$}} \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.6em}
+  \textbf{Multi-Pass --- Qualit\'e des commentaires (Passe\,3)}
+
+  \vspace{0.3em}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Mod\`ele} & \textbf{Comment Score} & \textbf{ROUGE-L} \\
+    \midrule
+    \textcolor{Blue}{\textbf{qwen2.5}}    & \textbf{0.650} & 0.075 \\
+    \textcolor{Green}{\textbf{deepseek}}  & 0.550 & 0.064 \\
+    \textcolor{Orange}{\textbf{codellama}}& 0.300 & \textbf{0.147} \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+}
+
+\block{Conclusions}{%
+  \begin{tabular}{@{}ll}
+    \textcolor{Green}{$\checkmark$} &
+      Pipeline fonctionnel end-to-end (Ghidra $\to$ LLM $\to$ Ghidra) \\[0.4em]
+    \textcolor{Blue}{$\star$} &
+      \textbf{qwen2.5} : meilleur compromis vitesse / qualit\'e / 0\,\% hallucination \\[0.4em]
+    \textcolor{Green}{$\uparrow$} &
+      L'approche multi-pass am\'eliore \textbf{codellama de $+31\,\%$} \\[0.4em]
+    \textcolor{Orange}{$\sim$} &
+      Les mod\`eles \textit{reasoning} (DeepSeek R1) sont $4\times$ trop lents \\[0.4em]
+    \textcolor{Navy}{$\to$} &
+      Perspective : \'evaluation sur binaires r\'eels, fine-tuning sp\'ecialis\'e \\
+  \end{tabular}
+
+  \vspace{0.6em}
+  \textbf{R\'ef\'erences :}\quad
+  {\small Ghidra (NSA, \texttt{ghidra-sre.org}) \quad$\cdot$\quad
+  LM Studio (\texttt{lmstudio.ai}) \quad$\cdot$\quad
+  Papineni et al., \textit{BLEU}, ACL\,2002 \quad$\cdot$\quad
+  Lin C., \textit{ROUGE}, 2004}
+}
+
+\end{columns}
+\end{document}

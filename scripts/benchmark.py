@@ -101,13 +101,14 @@ def print_single_pass_table(results: dict):
 
 
 def print_multipass_table(results: dict):
-    """Affiche le tableau comparatif multi-pass"""
-    print("\n" + "="*70)
-    print("BENCHMARK MULTI-PASS (Score Semantique)")
-    print("="*70)
+    """Affiche le tableau comparatif multi-pass en deux sections."""
 
-    header = f"{'Modele':<30} | {'Pass 1':>7} | {'Pass 2':>7} | {'Pass 3':>7} | {'Gain':>7}"
-    sep = "-"*30 + "-+-" + "-"*7 + "-+-" + "-"*7 + "-+-" + "-"*7 + "-+-" + "-"*7
+    # --- Section 1 : gain semantique P1 -> P2 ---
+    print("\n" + "="*65)
+    print("MULTI-PASS : Gain semantique (Passe 1 Renommage -> Passe 2 Analyse)")
+    print("="*65)
+    header = f"{'Modele':<30} | {'Pass 1':>7} | {'Pass 2':>7} | {'Gain':>8}"
+    sep    = "-"*30 + "-+-" + "-"*7 + "-+-" + "-"*7 + "-+-" + "-"*8
     print(header)
     print(sep)
 
@@ -115,14 +116,30 @@ def print_multipass_table(results: dict):
         mp = model_data.get("multipass_avg", {})
         if not mp:
             continue
+        sem = mp.get("semantic", {})
+        p1       = sem.get("pass1", 0)
+        p2       = sem.get("pass2", 0)
+        gain_str = sem.get("gain_p1_p2", "N/A")
+        print(f"{model_name:<30} | {p1:>7.4f} | {p2:>7.4f} | {gain_str:>8}")
 
-        gains = mp.get("gains", {}).get("semantic_score", {})
-        p1 = gains.get("pass1", 0)
-        p2 = gains.get("pass2", 0)
-        p3 = gains.get("pass3", 0)
-        gain_str = gains.get("gain", "N/A")
+    # --- Section 2 : qualite des commentaires (Passe 3) ---
+    print("\n" + "="*65)
+    print("MULTI-PASS : Qualite des commentaires (Passe 3)")
+    print("="*65)
+    header = f"{'Modele':<30} | {'Comment':>7} | {'ROUGE-L':>7} | {'BLEU':>6}"
+    sep    = "-"*30 + "-+-" + "-"*7 + "-+-" + "-"*7 + "-+-" + "-"*6
+    print(header)
+    print(sep)
 
-        print(f"{model_name:<30} | {p1:>7.4f} | {p2:>7.4f} | {p3:>7.4f} | {gain_str:>7}")
+    for model_name, model_data in results.items():
+        mp = model_data.get("multipass_avg", {})
+        if not mp:
+            continue
+        cq      = mp.get("comments_quality", {})
+        comment = cq.get("comment_score", 0)
+        rougeL  = cq.get("rougeL", 0)
+        bleu    = cq.get("bleu", 0)
+        print(f"{model_name:<30} | {comment:>7.4f} | {rougeL:>7.4f} | {bleu:>6.4f}")
 
 
 def run_benchmark(models: list, input_files: list, gt_data: dict,
@@ -238,24 +255,30 @@ def run_benchmark(models: list, input_files: list, gt_data: dict,
         if do_multipass:
             mp_evals = list(model_results["multipass"].values())
             if mp_evals:
-                # Moyenne des gains
-                avg_gains = {}
-                for metric in ["semantic_score", "comment_score", "bleu", "rougeL"]:
-                    pass1_vals = [e["gains"][metric].get("pass1", 0) for e in mp_evals if metric in e.get("gains", {})]
-                    pass2_vals = [e["gains"][metric].get("pass2", 0) for e in mp_evals if metric in e.get("gains", {})]
-                    pass3_vals = [e["gains"][metric].get("pass3", 0) for e in mp_evals if metric in e.get("gains", {})]
+                # Moyenne gain semantique P1->P2
+                p1_vals = [e["gains"]["semantic_score"].get("pass1", 0) for e in mp_evals]
+                p2_vals = [e["gains"]["semantic_score"].get("pass2", 0) for e in mp_evals]
+                p1_avg = sum(p1_vals) / len(p1_vals)
+                p2_avg = sum(p2_vals) / len(p2_vals)
 
-                    if pass1_vals:
-                        p1 = sum(pass1_vals) / len(pass1_vals)
-                        p3 = sum(pass3_vals) / len(pass3_vals)
-                        avg_gains[metric] = {
-                            "pass1": p1,
-                            "pass2": sum(pass2_vals) / len(pass2_vals),
-                            "pass3": p3,
-                            "gain": f"+{((p3 - p1) / p1 * 100):.1f}%" if p1 > 0 else "N/A"
-                        }
+                # Moyenne qualite commentaires P3
+                cq_vals = [e["gains"].get("comments_quality", {}) for e in mp_evals]
+                comment_avg = sum(c.get("comment_score", 0) for c in cq_vals) / len(cq_vals)
+                rougeL_avg  = sum(c.get("rougeL", 0) for c in cq_vals) / len(cq_vals)
+                bleu_avg    = sum(c.get("bleu", 0) for c in cq_vals) / len(cq_vals)
 
-                model_results["multipass_avg"] = {"gains": avg_gains}
+                model_results["multipass_avg"] = {
+                    "semantic": {
+                        "pass1": p1_avg,
+                        "pass2": p2_avg,
+                        "gain_p1_p2": f"{((p2_avg - p1_avg) / p1_avg * 100):+.1f}%" if p1_avg > 0 else "N/A"
+                    },
+                    "comments_quality": {
+                        "comment_score": comment_avg,
+                        "rougeL": rougeL_avg,
+                        "bleu": bleu_avg,
+                    }
+                }
 
         all_results[model_name] = model_results
 
@@ -285,6 +308,17 @@ def main():
 
     do_multipass = args.multipass and not args.no_multipass
 
+    # Expansion des wildcards (necessaire sous Windows/PowerShell)
+    import glob as _glob
+    input_files = []
+    for pattern in args.inputs:
+        expanded = _glob.glob(pattern)
+        if expanded:
+            input_files.extend(sorted(expanded))
+        else:
+            input_files.append(pattern)
+    args.inputs = input_files
+
     # Charger le ground truth
     with open(args.ground_truth, 'r', encoding='utf-8') as f:
         gt_data = json.load(f)
@@ -304,21 +338,42 @@ def main():
         do_multipass=do_multipass
     )
 
-    # Sauvegarder le rapport JSON
+    # Sauvegarder le rapport JSON (fusion avec resultats existants)
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
     report_path = output_dir / "benchmark_results.json"
 
+    # Charger les resultats existants et fusionner
+    existing = {}
+    if report_path.exists():
+        with open(report_path, 'r', encoding='utf-8') as f:
+            existing = json.load(f)
+
+    # Fusion fine : pour chaque modele, on merge single_pass et multipass
+    # separement pour ne pas ecraser un run precedent
+    for model_name, model_data in results.items():
+        if model_name not in existing:
+            existing[model_name] = model_data
+        else:
+            # Fusionner single_pass si present dans le nouveau run
+            if model_data.get("single_pass"):
+                existing[model_name]["single_pass"] = model_data["single_pass"]
+                existing[model_name]["single_pass_avg"] = model_data.get("single_pass_avg", {})
+            # Fusionner multipass si present dans le nouveau run
+            if model_data.get("multipass"):
+                existing[model_name]["multipass"] = model_data["multipass"]
+                existing[model_name]["multipass_avg"] = model_data.get("multipass_avg", {})
+
     with open(report_path, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+        json.dump(existing, f, indent=2, ensure_ascii=False)
 
     print(f"\n[+] Rapport JSON sauvegarde: {report_path}")
 
-    # Afficher les tableaux
-    print_single_pass_table(results)
+    # Afficher les tableaux (tous les resultats cumules)
+    print_single_pass_table(existing)
 
     if do_multipass:
-        print_multipass_table(results)
+        print_multipass_table(existing)
 
     print("\n[+] Benchmark termine.")
 

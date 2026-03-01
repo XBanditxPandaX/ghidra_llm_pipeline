@@ -1,0 +1,1568 @@
+{
+  "name": "test3_crypto_O2.exe",
+  "path": "/C:/Users/themi/Desktop/CoursM1/M2/ghidra_llm_pipeline/test_binaries/bin/test3_crypto_O2.exe",
+  "format": "Portable Executable (PE)",
+  "language": "x86/little/64/default",
+  "compiler": "gcc:unknown",
+  "image_base": "140000000",
+  "functions": [
+    {
+      "name": "FUN_140001000",
+      "address": "140001000",
+      "signature": "undefined __fastcall FUN_140001000(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 1,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_140001000(void)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001010",
+      "address": "140001010",
+      "signature": "ulonglong __fastcall FUN_140001010(undefined8 param_1, longlong * param_2, undefined8 param_3, PDWORD param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 931,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "longlong *", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "XMM2_Qa:8"},
+        {"name": "param_4", "type": "typedef PDWORD DWORD *", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_4c", "type": "undefined4", "storage": "Stack[-0x4c]:4"},
+        {"name": "local_5c", "type": "undefined4", "storage": "Stack[-0x5c]:4"},
+        {"name": "local_78", "type": "undefined8", "storage": "Stack[-0x78]:8"}],
+      "called_functions": [
+        {"name": "Sleep", "address": "EXTERNAL:00000007"},
+        {"name": "SetUnhandledExceptionFilter", "address": "EXTERNAL:00000006"},
+        {"name": "malloc", "address": "140002c58"},
+        {"name": "FUN_1400019b0", "address": "1400019b0"},
+        {"name": "memcpy", "address": "140002c18"},
+        {"name": "_initterm", "address": "140002be0"},
+        {"name": "FUN_140001990", "address": "140001990"},
+        {"name": "_configthreadlocale", "address": "140002c30"},
+        {"name": "FUN_140002110", "address": "140002110"},
+        {"name": "FUN_140002580", "address": "140002580"},
+        {"name": "FUN_140002b00", "address": "140002b00"},
+        {"name": "FUN_140002ad0", "address": "140002ad0"},
+        {"name": "_cexit", "address": "140002bb0"},
+        {"name": "_initterm_e", "address": "140002be8"},
+        {"name": "exit", "address": "140002c00"},
+        {"name": "FUN_140002ac0", "address": "140002ac0"},
+        {"name": "strlen", "address": "140002b60"},
+        {"name": "_set_invalid_parameter_handler", "address": "140002bf0"},
+        {"name": "FUN_140001d40", "address": "140001d40"},
+        {"name": "__p__fmode", "address": "140002b80"},
+        {"name": "__p__commode", "address": "140002b78"},
+        {"name": "tls_callback_0", "address": "1400019e0"},
+        {"name": "FUN_140002cc0", "address": "140002cc0"},
+        {"name": "_set_app_type", "address": "140002bd8"}],
+      "calling_functions": [
+        {"name": "entry", "address": "140001400"}],
+      "decompiled_code": "\r\nulonglong FUN_140001010(undefined8 param_1,longlong *param_2,undefined8 param_3,PDWORD param_4)\r\n\r\n{\r\n  undefined *puVar1;\r\n  undefined *puVar2;\r\n  undefined8 *puVar3;\r\n  uint uVar4;\r\n  int iVar5;\r\n  undefined8 *puVar6;\r\n  ulonglong uVar7;\r\n  LPTOP_LEVEL_EXCEPTION_FILTER pPVar8;\r\n  int *piVar9;\r\n  undefined4 *puVar10;\r\n  uint *puVar11;\r\n  undefined8 uVar12;\r\n  undefined8 *puVar13;\r\n  size_t sVar14;\r\n  void *_Dst;\r\n  undefined8 *puVar15;\r\n  undefined8 *_Src;\r\n  longlong lVar16;\r\n  undefined8 in_R8;\r\n  longlong lVar17;\r\n  longlong unaff_GS_OFFSET;\r\n  bool bVar18;\r\n  undefined4 local_4c [3];\r\n  \r\n  puVar1 = PTR_DAT_140005530;\r\n  lVar17 = *(longlong *)(*(longlong *)(unaff_GS_OFFSET + 0x30) + 8);\r\n  while( true ) {\r\n    LOCK();\r\n    lVar16 = *(longlong *)puVar1;\r\n    bVar18 = lVar16 == 0;\r\n    if (bVar18) {\r\n      *(longlong *)puVar1 = lVar17;\r\n      lVar16 = 0;\r\n    }\r\n    puVar2 = PTR_DAT_140005540;\r\n    UNLOCK();\r\n    if (bVar18) {\r\n      bVar18 = false;\r\n      goto LAB_14000105c;\r\n    }\r\n    if (lVar17 == lVar16) break;\r\n    param_1 = 1000;\r\n    Sleep(1000);\r\n  }\r\n  bVar18 = true;\r\nLAB_14000105c:\r\n  if (*(int *)PTR_DAT_140005540 == 1) {\r\n    uVar7 = FUN_140002ad0(0x1f,param_2,in_R8,param_4);\r\n    goto LAB_1400013d2;\r\n  }\r\n  if (*(int *)PTR_DAT_140005540 == 0) {\r\n    *(undefined4 *)PTR_DAT_140005540 = 1;\r\n    FUN_140001d40(param_1,param_2,param_3,param_4);\r\n    pPVar8 = SetUnhandledExceptionFilter(FUN_140002120);\r\n    *(LPTOP_LEVEL_EXCEPTION_FILTER *)PTR_DAT_140005520 = pPVar8;\r\n    _set_invalid_parameter_handler(FUN_140001000);\r\n    FUN_140002580();\r\n    DAT_140008008 = 0;\r\n    *(undefined4 *)PTR_DAT_1400054f0 = 1;\r\n    *(undefined4 *)PTR_DAT_140005500 = 1;\r\n    *(undefined4 *)PTR_DAT_140005510 = 1;\r\n    if ((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n       (piVar9 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar9 == 0x4550)) {\r\n      if ((short)piVar9[6] == 0x10b) {\r\n        if (0xe < (uint)piVar9[0x1d]) {\r\n          DAT_140008008 = (uint)(piVar9[0x3a] != 0);\r\n        }\r\n      }\r\n      else if (((short)piVar9[6] == 0x20b) && (0xe < (uint)piVar9[0x21])) {\r\n        param_4 = (PDWORD)(ulonglong)(uint)piVar9[0x3e];\r\n        DAT_140008008 = (uint)(piVar9[0x3e] != 0);\r\n      }\r\n    }\r\n    puVar6 = (undefined8 *)(ulonglong)*(uint *)PTR_DAT_1400054e0;\r\n    if (*(uint *)PTR_DAT_1400054e0 == 0) {\r\n      _set_app_type(1);\r\n    }\r\n    else {\r\n      _set_app_type(2);\r\n    }\r\n    puVar10 = (undefined4 *)__p__fmode();\r\n    *puVar10 = *(undefined4 *)PTR_DAT_1400055b0;\r\n    puVar11 = (uint *)__p__commode();\r\n    _Src = (undefined8 *)(ulonglong)*(uint *)PTR_DAT_140005590;\r\n    *puVar11 = *(uint *)PTR_DAT_140005590;\r\n    uVar12 = FUN_1400019b0();\r\n    if (-1 < (int)uVar12) {\r\n      if (*(int *)PTR_DAT_140005460 == 1) {\r\n        FUN_140002110(FUN_140001a70);\r\n      }\r\n      if (*(int *)PTR_DAT_1400054c0 == -1) {\r\n        _configthreadlocale(-1);\r\n      }\r\n      iVar5 = _initterm_e(PTR_DAT_140005570,PTR_DAT_140005580);\r\n      if (iVar5 != 0) {\r\n        return 0xff;\r\n      }\r\n      puVar6 = &DAT_140008010;\r\n      _Src = &DAT_140008018;\r\n      local_4c[0] = *(undefined4 *)PTR_DAT_1400055e0;\r\n      param_4 = (PDWORD)(ulonglong)*(uint *)PTR_DAT_1400055a0;\r\n      uVar12 = FUN_140002b00(&DAT_140008020,&DAT_140008018,&DAT_140008010,*(uint *)PTR_DAT_1400055a0\r\n                             ,local_4c);\r\n      uVar4 = DAT_140008020;\r\n      if (-1 < (int)uVar12) {\r\n        lVar17 = (longlong)(int)DAT_140008020;\r\n        puVar13 = malloc((longlong)(int)(DAT_140008020 + 1) << 3);\r\n        puVar3 = DAT_140008018;\r\n        if (puVar13 != (undefined8 *)0x0) {\r\n          puVar15 = puVar13;\r\n          if ((int)uVar4 < 1) {\r\nLAB_14000134c:\r\n            *puVar15 = 0;\r\n            DAT_140008018 = puVar13;\r\n            _initterm(PTR_DAT_140005550,PTR_DAT_140005560);\r\n            FUN_140001990();\r\n            *(undefined4 *)puVar2 = 2;\r\n            goto LAB_140001084;\r\n          }\r\n          lVar16 = 1;\r\n          while( true ) {\r\n            sVar14 = strlen((char *)puVar3[lVar16 + -1]);\r\n            puVar15 = (undefined8 *)(sVar14 + 1);\r\n            _Dst = malloc((size_t)puVar15);\r\n            puVar13[lVar16 + -1] = _Dst;\r\n            if (_Dst == (void *)0x0) break;\r\n            _Src = (undefined8 *)puVar3[lVar16 + -1];\r\n            memcpy(_Dst,_Src,(size_t)puVar15);\r\n            if (lVar17 == lVar16) {\r\n              puVar15 = puVar13 + lVar17;\r\n              goto LAB_14000134c;\r\n            }\r\n            lVar16 = lVar16 + 1;\r\n            puVar6 = puVar15;\r\n          }\r\n        }\r\n      }\r\n    }\r\n    uVar7 = FUN_140002ad0(8,_Src,puVar6,param_4);\r\n  }\r\n  else {\r\n    DAT_140008004 = 1;\r\nLAB_140001084:\r\n    if (!bVar18) {\r\n      LOCK();\r\n      *(undefined8 *)puVar1 = 0;\r\n      UNLOCK();\r\n    }\r\n    if (*(code **)PTR_PTR_1400054b0 != (code *)0x0) {\r\n      (**(code **)PTR_PTR_1400054b0)(0,2,0);\r\n    }\r\n    puVar6 = (undefined8 *)FUN_140002ac0();\r\n    uVar12 = DAT_140008010;\r\n    uVar7 = (ulonglong)DAT_140008020;\r\n    *puVar6 = DAT_140008010;\r\n    uVar7 = FUN_140002cc0(uVar7,DAT_140008018,uVar12,param_4);\r\n    if (DAT_140008008 == 0) {\r\nLAB_1400013d2:\r\n                    /* WARNING: Subroutine does not return */\r\n      exit((int)uVar7);\r\n    }\r\n    if (DAT_140008004 != 0) {\r\n      return uVar7;\r\n    }\r\n  }\r\n  _cexit();\r\n  return uVar7 & 0xffffffff;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "entry",
+      "address": "140001400",
+      "signature": "undefined __fastcall entry(undefined8 param_1, longlong * param_2, undefined8 param_3, PDWORD param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 29,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "longlong *", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "XMM2_Qa:8"},
+        {"name": "param_4", "type": "typedef PDWORD DWORD *", "storage": "R9:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid entry(undefined8 param_1,longlong *param_2,undefined8 param_3,PDWORD param_4)\r\n\r\n{\r\n  *(undefined4 *)PTR_DAT_1400054e0 = 0;\r\n  FUN_140001010(param_1,param_2,param_3,param_4);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_crt_atexit",
+      "address": "140001420",
+      "signature": "undefined _crt_atexit(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 5,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001910", "address": "140001910"},
+        {"name": "FUN_140001430", "address": "140001430"}],
+      "decompiled_code": "\r\nvoid _crt_atexit(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bc0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _crt_atexit();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001430",
+      "address": "140001430",
+      "signature": "undefined __fastcall FUN_140001430(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 12,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "_crt_atexit", "address": "140001420"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_140001430(void)\r\n\r\n{\r\n  _crt_atexit(FUN_140001440);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001440",
+      "address": "140001440",
+      "signature": "undefined __fastcall FUN_140001440(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 1,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_140001440(void)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001480",
+      "address": "140001480",
+      "signature": "undefined __fastcall FUN_140001480(uint * param_1, ulonglong param_2, byte param_3)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 184,
+      "parameters": [
+        {"name": "param_1", "type": "uint *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "ulonglong", "storage": "RDX:8"},
+        {"name": "param_3", "type": "byte", "storage": "R8B:1"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_140001480(uint *param_1,ulonglong param_2,byte param_3)\r\n\r\n{\r\n  byte *pbVar1;\r\n  uint *puVar2;\r\n  uint *puVar3;\r\n  ulonglong uVar4;\r\n  ulonglong uVar5;\r\n  uint uVar6;\r\n  \r\n  if (param_2 != 0) {\r\n    if (param_2 - 1 < 0xf) {\r\n      uVar4 = 0;\r\n    }\r\n    else {\r\n      uVar4 = param_2 & 0xfffffffffffffff0;\r\n      uVar6 = CONCAT22(CONCAT11(param_3,param_3),CONCAT11(param_3,param_3));\r\n      puVar2 = param_1;\r\n      do {\r\n        puVar3 = puVar2 + 4;\r\n        *puVar2 = *puVar2 ^ uVar6;\r\n        puVar2[1] = puVar2[1] ^ uVar6;\r\n        puVar2[2] = puVar2[2] ^ uVar6;\r\n        puVar2[3] = puVar2[3] ^ uVar6;\r\n        puVar2 = puVar3;\r\n      } while (puVar3 != (uint *)((longlong)param_1 + uVar4));\r\n      if (param_2 == uVar4) {\r\n        return;\r\n      }\r\n    }\r\n    *(byte *)((longlong)param_1 + uVar4) = *(byte *)((longlong)param_1 + uVar4) ^ param_3;\r\n    uVar5 = uVar4 + 1;\r\n    if (uVar5 < param_2) {\r\n      if ((~uVar4 + param_2 & 1) != 0) {\r\n        *(byte *)((longlong)param_1 + uVar5) = *(byte *)((longlong)param_1 + uVar5) ^ param_3;\r\n        uVar5 = uVar4 + 2;\r\n        if (param_2 <= uVar5) {\r\n          return;\r\n        }\r\n      }\r\n      do {\r\n        *(byte *)((longlong)param_1 + uVar5) = *(byte *)((longlong)param_1 + uVar5) ^ param_3;\r\n        pbVar1 = (byte *)((longlong)param_1 + uVar5 + 1);\r\n        *pbVar1 = *pbVar1 ^ param_3;\r\n        uVar5 = uVar5 + 2;\r\n      } while (uVar5 < param_2);\r\n    }\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001540",
+      "address": "140001540",
+      "signature": "undefined __fastcall FUN_140001540(longlong param_1, ulonglong param_2, longlong param_3, ulonglong param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 59,
+      "parameters": [
+        {"name": "param_1", "type": "longlong", "storage": "RCX:8"},
+        {"name": "param_2", "type": "ulonglong", "storage": "RDX:8"},
+        {"name": "param_3", "type": "longlong", "storage": "R8:8"},
+        {"name": "param_4", "type": "ulonglong", "storage": "R9:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_140001540(longlong param_1,ulonglong param_2,longlong param_3,ulonglong param_4)\r\n\r\n{\r\n  ulonglong uVar1;\r\n  \r\n  if (param_2 != 0) {\r\n    uVar1 = 0;\r\n    do {\r\n      *(byte *)(param_1 + uVar1) = *(byte *)(param_1 + uVar1) ^ *(byte *)(param_3 + uVar1 % param_4)\r\n      ;\r\n      uVar1 = uVar1 + 1;\r\n    } while (param_2 != uVar1);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001580",
+      "address": "140001580",
+      "signature": "undefined __fastcall FUN_140001580(byte * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 67,
+      "parameters": [
+        {"name": "param_1", "type": "byte *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nvoid FUN_140001580(byte *param_1)\r\n\r\n{\r\n  byte bVar1;\r\n  \r\n  bVar1 = *param_1;\r\n  do {\r\n    while( true ) {\r\n      if (bVar1 == 0) {\r\n        return;\r\n      }\r\n      if (0xc < (byte)((bVar1 & 0xdf) + 0xbf)) break;\r\n      *param_1 = bVar1 + 0xd;\r\nLAB_1400015a5:\r\n      bVar1 = param_1[1];\r\n      param_1 = param_1 + 1;\r\n    }\r\n    if (0xc < (byte)((bVar1 & 0xdf) + 0xb2)) goto LAB_1400015a5;\r\n    *param_1 = bVar1 - 0xd;\r\n    bVar1 = param_1[1];\r\n    param_1 = param_1 + 1;\r\n  } while( true );\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400015e0",
+      "address": "1400015e0",
+      "signature": "undefined __fastcall FUN_1400015e0(char * param_1, int param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 134,
+      "parameters": [
+        {"name": "param_1", "type": "char *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "int", "storage": "EDX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nvoid FUN_1400015e0(char *param_1,int param_2)\r\n\r\n{\r\n  int iVar1;\r\n  char cVar2;\r\n  \r\n  cVar2 = *param_1;\r\n  do {\r\n    while( true ) {\r\n      if (cVar2 == '\\0') {\r\n        return;\r\n      }\r\n      if (0x19 < (byte)(cVar2 + 0xbfU)) break;\r\n      iVar1 = param_2 + -0x41 + (int)cVar2;\r\n      *param_1 = (char)iVar1 + (char)(iVar1 / 0x1a) * -0x1a + 'A';\r\nLAB_140001627:\r\n      cVar2 = param_1[1];\r\n      param_1 = param_1 + 1;\r\n    }\r\n    if (0x19 < (byte)(cVar2 + 0x9fU)) goto LAB_140001627;\r\n    iVar1 = param_2 + -0x61 + (int)cVar2;\r\n    *param_1 = (char)iVar1 + (char)(iVar1 / 0x1a) * -0x1a + 'a';\r\n    cVar2 = param_1[1];\r\n    param_1 = param_1 + 1;\r\n  } while( true );\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001680",
+      "address": "140001680",
+      "signature": "int __fastcall FUN_140001680(undefined1[16] * param_1, ulonglong param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 220,
+      "parameters": [
+        {"name": "param_1", "type": "undefined1[16] *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "ulonglong", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint FUN_140001680(undefined1 (*param_1) [16],ulonglong param_2)\r\n\r\n{\r\n  byte *pbVar1;\r\n  undefined1 auVar2 [16];\r\n  undefined1 auVar3 [14];\r\n  undefined1 auVar4 [15];\r\n  undefined1 auVar5 [15];\r\n  undefined1 auVar6 [15];\r\n  undefined1 auVar7 [13];\r\n  undefined1 auVar8 [13];\r\n  undefined1 auVar9 [13];\r\n  undefined1 auVar10 [14];\r\n  uint uVar11;\r\n  undefined1 auVar12 [15];\r\n  undefined1 auVar13 [15];\r\n  undefined1 auVar14 [15];\r\n  undefined1 auVar15 [15];\r\n  undefined1 auVar16 [15];\r\n  unkuint9 Var17;\r\n  undefined1 auVar18 [11];\r\n  undefined1 auVar19 [13];\r\n  undefined1 auVar20 [13];\r\n  undefined1 auVar21 [14];\r\n  undefined1 auVar22 [15];\r\n  undefined1 auVar23 [15];\r\n  uint6 uVar24;\r\n  undefined1 (*pauVar25) [16];\r\n  ulonglong uVar26;\r\n  uint uVar27;\r\n  int iVar28;\r\n  int iVar29;\r\n  int iVar30;\r\n  int iVar31;\r\n  \r\n  if (param_2 == 0) {\r\n    return 0;\r\n  }\r\n  if (param_2 - 1 < 0xf) {\r\n    uVar26 = 0;\r\n    iVar28 = 0;\r\n  }\r\n  else {\r\n    iVar28 = 0;\r\n    iVar29 = 0;\r\n    iVar30 = 0;\r\n    iVar31 = 0;\r\n    uVar26 = param_2 & 0xfffffffffffffff0;\r\n    pauVar25 = param_1;\r\n    do {\r\n      auVar2 = *pauVar25;\r\n      pauVar25 = pauVar25 + 1;\r\n      uVar27 = CONCAT13(0,CONCAT12(auVar2[9],(ushort)auVar2[8]));\r\n      auVar4[0xd] = 0;\r\n      auVar4._0_13_ = auVar2._0_13_;\r\n      auVar4[0xe] = auVar2[7];\r\n      auVar5[0xc] = auVar2[6];\r\n      auVar5._0_12_ = auVar2._0_12_;\r\n      auVar5._13_2_ = auVar4._13_2_;\r\n      auVar6[0xb] = 0;\r\n      auVar6._0_11_ = auVar2._0_11_;\r\n      auVar6._12_3_ = auVar5._12_3_;\r\n      uVar11 = auVar6._11_4_;\r\n      auVar12[10] = auVar2[5];\r\n      auVar12._0_10_ = auVar2._0_10_;\r\n      auVar12._11_4_ = uVar11;\r\n      auVar13[9] = 0;\r\n      auVar13._0_9_ = auVar2._0_9_;\r\n      auVar13._10_5_ = auVar12._10_5_;\r\n      auVar14[8] = auVar2[4];\r\n      auVar14._0_8_ = auVar2._0_8_;\r\n      auVar14._9_6_ = auVar13._9_6_;\r\n      auVar16._7_8_ = 0;\r\n      auVar16._0_7_ = auVar14._8_7_;\r\n      Var17 = CONCAT81(SUB158(auVar16 << 0x40,7),auVar2[3]);\r\n      auVar22._9_6_ = 0;\r\n      auVar22._0_9_ = Var17;\r\n      auVar18._1_10_ = SUB1510(auVar22 << 0x30,5);\r\n      auVar18[0] = auVar2[2];\r\n      auVar23._11_4_ = 0;\r\n      auVar23._0_11_ = auVar18;\r\n      auVar19._1_12_ = SUB1512(auVar23 << 0x20,3);\r\n      auVar19[0] = auVar2[1];\r\n      auVar15[1] = 0;\r\n      auVar15[0] = auVar2[0];\r\n      auVar15._2_13_ = auVar19;\r\n      auVar7[0xc] = auVar2[0xb];\r\n      auVar7._0_12_ = ZEXT112(auVar2[0xc]) << 0x40;\r\n      auVar8._10_3_ = auVar7._10_3_;\r\n      auVar8._0_10_ = (unkuint10)auVar2[10] << 0x40;\r\n      auVar20._5_8_ = 0;\r\n      auVar20._0_5_ = auVar8._8_5_;\r\n      auVar9[4] = auVar2[9];\r\n      auVar9._0_4_ = uVar27;\r\n      auVar9[5] = 0;\r\n      auVar9._6_7_ = SUB137(auVar20 << 0x40,6);\r\n      auVar3._10_2_ = 0;\r\n      auVar3._0_10_ = auVar15._0_10_;\r\n      auVar3._12_2_ = (short)Var17;\r\n      uVar24 = CONCAT42(auVar3._10_4_,auVar18._0_2_);\r\n      auVar21._6_8_ = 0;\r\n      auVar21._0_6_ = uVar24;\r\n      auVar10._4_2_ = auVar19._0_2_;\r\n      auVar10._0_4_ = auVar15._0_4_;\r\n      auVar10._6_8_ = SUB148(auVar21 << 0x40,6);\r\n      iVar28 = iVar28 + (uint)auVar2[0xc] + (uVar27 & 0xffff) +\r\n                        (uint)auVar14._8_2_ + (auVar15._0_4_ & 0xffff);\r\n      iVar29 = iVar29 + (uint)auVar2[0xd] + auVar9._4_4_ + (uint)auVar12._10_2_ + auVar10._4_4_;\r\n      iVar30 = iVar30 + (uint)auVar2[0xe] + auVar8._8_4_ + (uVar11 >> 8 & 0xffff) + (int)uVar24;\r\n      iVar31 = iVar31 + (uint)auVar2[0xf] + (uint)(uint3)(auVar7._10_3_ >> 0x10) +\r\n                        (uVar11 >> 0x18) + (auVar3._10_4_ >> 0x10);\r\n    } while ((undefined1 (*) [16])(*param_1 + uVar26) != pauVar25);\r\n    iVar28 = iVar28 + iVar30 + iVar29 + iVar31;\r\n    if (uVar26 == param_2) {\r\n      return iVar28;\r\n    }\r\n  }\r\n  do {\r\n    pbVar1 = *param_1 + uVar26;\r\n    uVar26 = uVar26 + 1;\r\n    iVar28 = iVar28 + (uint)*pbVar1;\r\n  } while (uVar26 < param_2);\r\n  return iVar28;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001770",
+      "address": "140001770",
+      "signature": "ulonglong __fastcall FUN_140001770(undefined1[16] * param_1, ulonglong param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 205,
+      "parameters": [
+        {"name": "param_1", "type": "undefined1[16] *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "ulonglong", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nulonglong FUN_140001770(undefined1 (*param_1) [16],ulonglong param_2)\r\n\r\n{\r\n  undefined1 auVar1 [16];\r\n  byte bVar2;\r\n  undefined1 (*pauVar3) [16];\r\n  undefined7 uVar5;\r\n  ulonglong uVar6;\r\n  ulonglong uVar7;\r\n  undefined1 auVar8 [16];\r\n  ulonglong uVar4;\r\n  \r\n  if (param_2 == 0) {\r\n    return 0;\r\n  }\r\n  if (param_2 - 1 < 0xf) {\r\n    uVar6 = 0;\r\n    uVar4 = 0;\r\n  }\r\n  else {\r\n    auVar8 = (undefined1  [16])0x0;\r\n    uVar6 = param_2 & 0xfffffffffffffff0;\r\n    pauVar3 = param_1;\r\n    do {\r\n      auVar1 = *pauVar3;\r\n      pauVar3 = pauVar3 + 1;\r\n      auVar8 = auVar8 ^ auVar1;\r\n    } while (pauVar3 != (undefined1 (*) [16])(*param_1 + uVar6));\r\n    auVar8 = auVar8 ^ auVar8 >> 0x40;\r\n    auVar8 = auVar8 ^ auVar8 >> 0x20;\r\n    auVar8 = auVar8 ^ auVar8 >> 0x10;\r\n    uVar4 = (ulonglong)(auVar8._0_4_ ^ auVar8._1_4_);\r\n    if (param_2 == uVar6) {\r\n      return uVar4;\r\n    }\r\n  }\r\n  uVar5 = (undefined7)(uVar4 >> 8);\r\n  bVar2 = (byte)uVar4 ^ (*param_1)[uVar6];\r\n  uVar4 = CONCAT71(uVar5,bVar2);\r\n  uVar7 = uVar6 + 1;\r\n  if (uVar7 < param_2) {\r\n    if (((int)param_2 - 1U & 1) != 0) {\r\n      uVar4 = CONCAT71(uVar5,bVar2 ^ (*param_1)[uVar7]);\r\n      uVar7 = uVar6 + 2;\r\n      if (param_2 <= uVar7) {\r\n        return uVar4;\r\n      }\r\n    }\r\n    do {\r\n      uVar4 = CONCAT71((int7)(uVar4 >> 8),(byte)uVar4 ^ (*param_1)[uVar7] ^ (*param_1)[uVar7 + 1]);\r\n      uVar7 = uVar7 + 2;\r\n    } while (uVar7 < param_2);\r\n  }\r\n  return uVar4;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001850",
+      "address": "140001850",
+      "signature": "char __fastcall FUN_140001850(byte param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 26,
+      "parameters": [
+        {"name": "param_1", "type": "byte", "storage": "CL:1"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nchar FUN_140001850(byte param_1)\r\n\r\n{\r\n  if (0x3f < param_1) {\r\n    return '=';\r\n  }\r\n  return \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\"[param_1];\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "1400050a0", "value": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"},
+        {"address": "1400050a0", "value": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}]
+    },
+    {
+      "name": "FUN_140001870",
+      "address": "140001870",
+      "signature": "int __fastcall FUN_140001870(char * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 47,
+      "parameters": [
+        {"name": "param_1", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nint FUN_140001870(char *param_1)\r\n\r\n{\r\n  char cVar1;\r\n  int iVar2;\r\n  \r\n  cVar1 = *param_1;\r\n  if (cVar1 != '\\0') {\r\n    iVar2 = 0x1505;\r\n    do {\r\n      param_1 = param_1 + 1;\r\n      iVar2 = iVar2 * 0x21 + (int)cVar1;\r\n      cVar1 = *param_1;\r\n    } while (cVar1 != '\\0');\r\n    return iVar2;\r\n  }\r\n  return 0x1505;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400018c0",
+      "address": "1400018c0",
+      "signature": "undefined __fastcall FUN_1400018c0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 66,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_1400018c0(void)\r\n\r\n{\r\n  code *pcVar1;\r\n  \r\n  pcVar1 = *(code **)PTR_DAT_140004000;\r\n  while (pcVar1 != (code *)0x0) {\r\n    (*pcVar1)();\r\n    pcVar1 = *(code **)(PTR_DAT_140004000 + 8);\r\n    PTR_DAT_140004000 = PTR_DAT_140004000 + 8;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001910",
+      "address": "140001910",
+      "signature": "undefined __fastcall FUN_140001910(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 111,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "_crt_atexit", "address": "140001420"},
+        {"name": "thunk_FUN_140001430", "address": "140003040"}],
+      "calling_functions": [
+        {"name": "FUN_140001990", "address": "140001990"}],
+      "decompiled_code": "\r\nvoid FUN_140001910(void)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  uint uVar2;\r\n  ulonglong uVar3;\r\n  undefined8 *puVar4;\r\n  \r\n  uVar2 = (uint)*(undefined8 *)PTR_DAT_140005470;\r\n  if (uVar2 == 0xffffffff) {\r\n    uVar3 = 0;\r\n    do {\r\n      uVar2 = (uint)uVar3;\r\n      uVar3 = (ulonglong)(uVar2 + 1);\r\n    } while (*(longlong *)(PTR_DAT_140005470 + uVar3 * 8) != 0);\r\n  }\r\n  if (uVar2 != 0) {\r\n    puVar4 = (undefined8 *)(PTR_DAT_140005470 + (ulonglong)uVar2 * 8);\r\n    puVar1 = (undefined8 *)\r\n             (PTR_DAT_140005470 + ((ulonglong)uVar2 - (ulonglong)(uVar2 - 1)) * 8 + -8);\r\n    do {\r\n      (*(code *)*puVar4)();\r\n      puVar4 = puVar4 + -1;\r\n    } while (puVar4 != puVar1);\r\n  }\r\n  _crt_atexit(FUN_1400018c0);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001990",
+      "address": "140001990",
+      "signature": "undefined __fastcall FUN_140001990(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 26,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "FUN_140001910", "address": "140001910"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"},
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nvoid FUN_140001990(void)\r\n\r\n{\r\n  if (DAT_140008030 != 0) {\r\n    return;\r\n  }\r\n  DAT_140008030 = 1;\r\n  FUN_140001910();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400019b0",
+      "address": "1400019b0",
+      "signature": "undefined8 __fastcall FUN_1400019b0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 3,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nundefined8 FUN_1400019b0(void)\r\n\r\n{\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "tls_callback_1",
+      "address": "1400019c0",
+      "signature": "undefined __fastcall tls_callback_1(undefined8 param_1, uint param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 15,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "uint", "storage": "EDX:4"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "FUN_140002470", "address": "140002470"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid tls_callback_1(undefined8 param_1,uint param_2)\r\n\r\n{\r\n  if ((param_2 != 3) && (param_2 != 0)) {\r\n    return;\r\n  }\r\n  FUN_140002470(param_1,param_2);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "tls_callback_0",
+      "address": "1400019e0",
+      "signature": "undefined __fastcall tls_callback_0(undefined8 param_1, int param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 110,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "int", "storage": "EDX:4"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "FUN_140002470", "address": "140002470"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\n/* WARNING: Removing unreachable block (ram,0x000140001a25) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001a30) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001a38) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001a3a) */\r\n/* WARNING: Removing unreachable block (ram,0x000140001a43) */\r\n\r\nvoid tls_callback_0(undefined8 param_1,int param_2)\r\n\r\n{\r\n  if (*(int *)PTR_DAT_140005450 != 2) {\r\n    *(undefined4 *)PTR_DAT_140005450 = 2;\r\n  }\r\n  if ((param_2 != 2) && (param_2 == 1)) {\r\n    FUN_140002470(param_1,1);\r\n    return;\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001a60",
+      "address": "140001a60",
+      "signature": "undefined8 __fastcall FUN_140001a60(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 3,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nundefined8 FUN_140001a60(void)\r\n\r\n{\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140001a70",
+      "address": "140001a70",
+      "signature": "undefined8 __fastcall FUN_140001a70(undefined4 * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 218,
+      "parameters": [
+        {"name": "param_1", "type": "undefined4 *", "storage": "RCX:8"}],
+      "local_variables": [
+        {"name": "local_28", "type": "undefined1[16]", "storage": "Stack[-0x28]:16"},
+        {"name": "local_38", "type": "undefined1[16]", "storage": "Stack[-0x38]:16"},
+        {"name": "local_48", "type": "undefined1[16]", "storage": "Stack[-0x48]:16"},
+        {"name": "local_58", "type": "undefined8", "storage": "Stack[-0x58]:8"},
+        {"name": "local_60", "type": "undefined8", "storage": "Stack[-0x60]:8"},
+        {"name": "local_68", "type": "undefined8", "storage": "Stack[-0x68]:8"}],
+      "called_functions": [
+        {"name": "__acrt_iob_func", "address": "140002b70"},
+        {"name": "FUN_140002a60", "address": "140002a60"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nundefined8 FUN_140001a70(undefined4 *param_1)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 uVar2;\r\n  char *pcVar3;\r\n  \r\n  switch(*param_1) {\r\n  default:\r\n    pcVar3 = \"Unknown error\";\r\n    break;\r\n  case 1:\r\n    pcVar3 = \"Argument domain error (DOMAIN)\";\r\n    break;\r\n  case 2:\r\n    pcVar3 = \"Argument singularity (SIGN)\";\r\n    break;\r\n  case 3:\r\n    pcVar3 = \"Overflow range error (OVERFLOW)\";\r\n    break;\r\n  case 4:\r\n    pcVar3 = \"The result is too small to be represented (UNDERFLOW)\";\r\n    break;\r\n  case 5:\r\n    pcVar3 = \"Total loss of significance (TLOSS)\";\r\n    break;\r\n  case 6:\r\n    pcVar3 = \"Partial loss of significance (PLOSS)\";\r\n  }\r\n  uVar1 = *(undefined8 *)(param_1 + 2);\r\n  uVar2 = __acrt_iob_func(2);\r\n  FUN_140002a60(uVar2,\"_matherr(): %s in %s(%g, %g)  (retval=%g)\\n\",pcVar3,uVar1);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "14000517f", "value": "Argument singularity (SIGN)"},
+        {"address": "1400051c0", "value": "Partial loss of significance (PLOSS)"},
+        {"address": "140005258", "value": "_matherr(): %s in %s(%g, %g)  (retval=%g)\n"},
+        {"address": "140005160", "value": "Argument domain error (DOMAIN)"},
+        {"address": "1400051c0", "value": "Partial loss of significance (PLOSS)"},
+        {"address": "1400051a0", "value": "Overflow range error (OVERFLOW)"},
+        {"address": "140005210", "value": "The result is too small to be represented (UNDERFLOW)"},
+        {"address": "1400051e8", "value": "Total loss of significance (TLOSS)"},
+        {"address": "140005246", "value": "Unknown error"}]
+    },
+    {
+      "name": "FUN_140001b70",
+      "address": "140001b70",
+      "signature": "undefined __fastcall FUN_140001b70(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 93,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "local_20", "type": "undefined8", "storage": "Stack[-0x20]:8"}],
+      "called_functions": [
+        {"name": "abort", "address": "140002bf8"},
+        {"name": "__acrt_iob_func", "address": "140002b70"},
+        {"name": "FUN_140002a60", "address": "140002a60"},
+        {"name": "FUN_1400029c0", "address": "1400029c0"}],
+      "calling_functions": [
+        {"name": "FUN_140001bd0", "address": "140001bd0"},
+        {"name": "FUN_140001d40", "address": "140001d40"}],
+      "decompiled_code": "\r\nvoid FUN_140001b70(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 local_res10;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  \r\n  local_res10 = param_2;\r\n  local_res18 = param_3;\r\n  local_res20 = param_4;\r\n  uVar1 = __acrt_iob_func(2);\r\n  FUN_140002a60(uVar1,\"Mingw-w64 runtime failure:\\n\",param_3,param_4);\r\n  uVar1 = __acrt_iob_func(2);\r\n  FUN_1400029c0(uVar1,param_1,&local_res10);\r\n                    /* WARNING: Subroutine does not return */\r\n  abort();\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "1400052a0", "value": "Mingw-w64 runtime failure:\n"}]
+    },
+    {
+      "name": "FUN_140001bd0",
+      "address": "140001bd0",
+      "signature": "undefined __fastcall FUN_140001bd0(uint * param_1, undefined8 param_2, undefined8 param_3, PDWORD param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 365,
+      "parameters": [
+        {"name": "param_1", "type": "uint *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "XMM2_Qa:8"},
+        {"name": "param_4", "type": "typedef PDWORD DWORD *", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_24", "type": "undefined4", "storage": "Stack[-0x24]:4"},
+        {"name": "local_30", "type": "undefined8", "storage": "Stack[-0x30]:8"},
+        {"name": "local_48", "type": "undefined8", "storage": "Stack[-0x48]:8"}],
+      "called_functions": [
+        {"name": "VirtualProtect", "address": "EXTERNAL:00000009"},
+        {"name": "VirtualQuery", "address": "EXTERNAL:0000000a"},
+        {"name": "GetLastError", "address": "EXTERNAL:00000003"},
+        {"name": "FUN_1400027f0", "address": "1400027f0"},
+        {"name": "FUN_140001b70", "address": "140001b70"},
+        {"name": "FUN_1400026b0", "address": "1400026b0"}],
+      "calling_functions": [
+        {"name": "FUN_140001d40", "address": "140001d40"}],
+      "decompiled_code": "\r\n/* WARNING: Enum \"SectionFlags\": Some values do not have unique names */\r\n\r\nvoid FUN_140001bd0(uint *param_1,undefined8 param_2,undefined8 param_3,PDWORD param_4)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  LPVOID lpAddress;\r\n  undefined *puVar2;\r\n  undefined *puVar3;\r\n  BOOL BVar4;\r\n  DWORD DVar5;\r\n  ulonglong *puVar6;\r\n  IMAGE_SECTION_HEADER *pIVar7;\r\n  undefined4 *puVar8;\r\n  IMAGE_DOS_HEADER *pIVar9;\r\n  SIZE_T SVar10;\r\n  ulonglong uVar11;\r\n  ulonglong uVar12;\r\n  longlong lVar13;\r\n  DWORD *pDVar14;\r\n  undefined4 uVar15;\r\n  uint uVar16;\r\n  uint *puVar17;\r\n  uint *puVar18;\r\n  int iVar19;\r\n  longlong lVar20;\r\n  uint *in_R8;\r\n  undefined8 *puVar21;\r\n  uint uVar22;\r\n  PDWORD pDVar23;\r\n  undefined8 in_XMM3_Qa;\r\n  undefined8 auStack_150 [5];\r\n  undefined4 auStack_128 [2];\r\n  ulonglong auStack_120 [10];\r\n  longlong alStack_d0 [2];\r\n  undefined1 auStack_c0 [8];\r\n  longlong alStack_b8 [2];\r\n  uint *puStack_a8;\r\n  longlong lStack_a0;\r\n  IMAGE_SECTION_HEADER *pIStack_98;\r\n  _MEMORY_BASIC_INFORMATION local_48;\r\n  \r\n  lVar20 = (longlong)(int)DAT_1400080a4;\r\n  if ((int)DAT_1400080a4 < 1) goto LAB_140001d00;\r\n  param_4 = (PDWORD)0x0;\r\n  puVar6 = (ulonglong *)((longlong)DAT_1400080a8 + 0x18);\r\n  do {\r\n    in_R8 = (uint *)*puVar6;\r\n    if ((in_R8 <= param_1) &&\r\n       (in_R8 = (uint *)((longlong)in_R8 + (ulonglong)*(uint *)(puVar6[1] + 8)), param_1 < in_R8)) {\r\n      return;\r\n    }\r\n    uVar22 = (int)param_4 + 1;\r\n    param_4 = (PDWORD)(ulonglong)uVar22;\r\n    puVar6 = puVar6 + 5;\r\n  } while (uVar22 != DAT_1400080a4);\r\n  while (pIVar7 = FUN_1400026b0((longlong)param_1), pIVar7 != (IMAGE_SECTION_HEADER *)0x0) {\r\n    param_1 = (uint *)(lVar20 * 0x28);\r\n    puVar8 = (undefined4 *)((longlong)DAT_1400080a8 + (longlong)param_1);\r\n    *(IMAGE_SECTION_HEADER **)(puVar8 + 8) = pIVar7;\r\n    *puVar8 = 0;\r\n    pIVar9 = FUN_1400027f0();\r\n    uVar22 = pIVar7->VirtualAddress;\r\n    *(char **)((longlong)DAT_1400080a8 + 0x18 + (longlong)param_1) = pIVar9->e_magic + uVar22;\r\n    SVar10 = VirtualQuery(pIVar9->e_magic + uVar22,&local_48,0x30);\r\n    if (SVar10 == 0) {\r\n      in_R8 = *(uint **)((longlong)DAT_1400080a8 + 0x18 + (longlong)param_1);\r\n      FUN_140001b70(\"  VirtualQuery failed for %d bytes at address %p\",\r\n                    (ulonglong)(pIVar7->Misc).PhysicalAddress,in_R8,param_4);\r\n      break;\r\n    }\r\n    if (((local_48.Protect - 4 & 0xfffffffb) == 0) || ((local_48.Protect - 0x40 & 0xffffffbf) == 0))\r\n    {\r\nLAB_140001c9e:\r\n      DAT_1400080a4 = DAT_1400080a4 + 1;\r\n      return;\r\n    }\r\n    in_R8 = (uint *)0x40;\r\n    if (local_48.Protect == 2) {\r\n      in_R8 = (uint *)0x4;\r\n    }\r\n    param_1 = (uint *)((longlong)param_1 + (longlong)DAT_1400080a8);\r\n    *(PVOID *)(param_1 + 2) = local_48.BaseAddress;\r\n    *(SIZE_T *)(param_1 + 4) = local_48.RegionSize;\r\n    param_4 = param_1;\r\n    BVar4 = VirtualProtect(local_48.BaseAddress,local_48.RegionSize,(DWORD)in_R8,param_1);\r\n    if (BVar4 != 0) goto LAB_140001c9e;\r\n    DVar5 = GetLastError();\r\n    FUN_140001b70(\"  VirtualProtect failed with code 0x%x\",(ulonglong)DVar5,in_R8,param_4);\r\nLAB_140001d00:\r\n    lVar20 = 0;\r\n  }\r\n  puVar17 = param_1;\r\n  FUN_140001b70(\"Address %p has no image-section\",param_1,in_R8,param_4);\r\n  if (DAT_1400080a0 != 0) {\r\n    return;\r\n  }\r\n  DAT_1400080a0 = 1;\r\n  auStack_120[5] = 0x140001d7f;\r\n  puStack_a8 = param_1;\r\n  lStack_a0 = lVar20;\r\n  pIStack_98 = pIVar7;\r\n  FUN_140002730();\r\n  auStack_120[5] = 0x140001d96;\r\n  uVar11 = FUN_140002980();\r\n  puVar3 = PTR_DAT_140005490;\r\n  puVar2 = PTR_IMAGE_DOS_HEADER_140005480;\r\n  lVar20 = -uVar11;\r\n  DAT_1400080a4 = 0;\r\n  DAT_1400080a8 = auStack_c0 + lVar20;\r\n  if ((longlong)PTR_DAT_140005490 - (longlong)PTR_DAT_1400054a0 < 8) {\r\n    DAT_1400080a4 = 0;\r\n    return;\r\n  }\r\n  puVar18 = (uint *)PTR_DAT_1400054a0;\r\n  if ((longlong)PTR_DAT_140005490 - (longlong)PTR_DAT_1400054a0 < 0xc) {\r\nLAB_140001dd3:\r\n    puVar17 = (uint *)(ulonglong)*puVar18;\r\n    if ((*puVar18 != 0) || (pDVar23 = param_4, puVar18[1] != 0)) {\r\nLAB_140001f6d:\r\n      if (PTR_DAT_140005490 <= puVar18) {\r\n        DAT_1400080a4 = 0;\r\n        return;\r\n      }\r\n      do {\r\n        uVar22 = puVar18[1];\r\n        uVar16 = *puVar18;\r\n        puVar18 = puVar18 + 2;\r\n        alStack_b8[0] = CONCAT44(alStack_b8[0]._4_4_,uVar16 + *(int *)(puVar2 + uVar22));\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001faa;\r\n        FUN_140001bd0((uint *)(puVar2 + uVar22),puVar17,param_3,param_4);\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001fbc;\r\n        puVar17 = (uint *)alStack_b8;\r\n        memcpy(puVar2 + uVar22,alStack_b8,4);\r\n      } while (puVar18 < puVar3);\r\n      goto LAB_140001f00;\r\n    }\r\n  }\r\n  else {\r\n    param_4 = (PDWORD)(ulonglong)*(uint *)PTR_DAT_1400054a0;\r\n    if ((*(uint *)PTR_DAT_1400054a0 != 0) || (*(int *)(PTR_DAT_1400054a0 + 4) != 0))\r\n    goto LAB_140001f6d;\r\n    pDVar23 = (PDWORD)0x0;\r\n    in_R8 = (uint *)0x0;\r\n    if (*(int *)(PTR_DAT_1400054a0 + 8) == 0) {\r\n      puVar18 = (uint *)(PTR_DAT_1400054a0 + 0xc);\r\n      goto LAB_140001dd3;\r\n    }\r\n  }\r\n  uVar11 = (ulonglong)puVar18[2];\r\n  if (puVar18[2] != 1) {\r\nLAB_1400020c3:\r\n    uVar15 = 0x40005340;\r\n    *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x1400020cf;\r\n    FUN_140001b70(\"  Unknown pseudo relocation protocol version %d.\\n\",uVar11,in_R8,pDVar23);\r\n    if (DAT_1400080b0 != (code *)0x0) {\r\n      uVar1 = *(undefined8 *)((longlong)alStack_d0 + lVar20 + 8);\r\n      *(undefined4 *)((longlong)auStack_128 + lVar20) = uVar15;\r\n      *(ulonglong *)((longlong)auStack_120 + lVar20) = uVar11;\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 8) = param_3;\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x10) = in_XMM3_Qa;\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x18) = uVar1;\r\n      *(undefined8 *)((longlong)auStack_150 + lVar20) = 0x140002108;\r\n      (*DAT_1400080b0)((longlong)auStack_128 + lVar20);\r\n    }\r\n    return;\r\n  }\r\n  puVar18 = puVar18 + 3;\r\n  if (PTR_DAT_140005490 <= puVar18) {\r\n    DAT_1400080a4 = 0;\r\n    return;\r\n  }\r\n  do {\r\n    uVar22 = puVar18[2];\r\n    puVar21 = (undefined8 *)(puVar2 + *puVar18);\r\n    uVar16 = uVar22 & 0xff;\r\n    uVar11 = (ulonglong)uVar16;\r\n    pDVar23 = (PDWORD)*puVar21;\r\n    in_R8 = (uint *)(puVar2 + puVar18[1]);\r\n    if (uVar16 == 0x20) {\r\n      uVar12 = (ulonglong)*in_R8;\r\n      if ((int)*in_R8 < 0) {\r\n        uVar12 = uVar12 | 0xffffffff00000000;\r\n      }\r\n      lVar13 = (uVar12 - (longlong)puVar21) + (longlong)pDVar23;\r\n      alStack_b8[0] = lVar13;\r\n      if (((uVar22 & 0xc0) == 0) && ((0xffffffff < lVar13 || (lVar13 < -0x80000000))))\r\n      goto LAB_1400020af;\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x14000201b;\r\n      FUN_140001bd0(in_R8,0x20,param_3,pDVar23);\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x14000202c;\r\n      memcpy(in_R8,alStack_b8,4);\r\n    }\r\n    else if (uVar16 < 0x21) {\r\n      if (uVar16 == 8) {\r\n        uVar12 = (ulonglong)(byte)*in_R8;\r\n        if ((char)(byte)*in_R8 < '\\0') {\r\n          uVar12 = uVar12 | 0xffffffffffffff00;\r\n        }\r\n        lVar13 = (uVar12 - (longlong)puVar21) + (longlong)pDVar23;\r\n        alStack_b8[0] = lVar13;\r\n        if (((uVar22 & 0xc0) == 0) && ((0xff < lVar13 || (lVar13 < -0x80)))) goto LAB_1400020af;\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140002071;\r\n        FUN_140001bd0(in_R8,8,param_3,pDVar23);\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140002082;\r\n        memcpy(in_R8,alStack_b8,1);\r\n      }\r\n      else {\r\n        if (uVar16 != 0x10) goto LAB_14000209b;\r\n        uVar12 = (ulonglong)(ushort)*in_R8;\r\n        if ((short)(ushort)*in_R8 < 0) {\r\n          uVar12 = uVar12 | 0xffffffffffff0000;\r\n        }\r\n        lVar13 = (uVar12 - (longlong)puVar21) + (longlong)pDVar23;\r\n        alStack_b8[0] = lVar13;\r\n        if (((uVar22 & 0xc0) == 0) && ((0xffff < lVar13 || (lVar13 < -0x8000)))) goto LAB_1400020af;\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001e66;\r\n        FUN_140001bd0(in_R8,0x10,param_3,pDVar23);\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001e77;\r\n        memcpy(in_R8,alStack_b8,2);\r\n      }\r\n    }\r\n    else {\r\n      if (uVar16 != 0x40) {\r\nLAB_14000209b:\r\n        alStack_b8[0] = 0;\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x1400020af;\r\n        lVar13 = FUN_140001b70(\"  Unknown pseudo relocation bit size %d.\\n\",uVar11,puVar21,pDVar23);\r\nLAB_1400020af:\r\n        *(longlong *)((longlong)alStack_d0 + lVar20) = lVar13;\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x1400020c3;\r\n        FUN_140001b70(\"%d bit pseudo relocation at %p out of range, targeting %p, yielding the value %p.\\n\"\r\n                      ,uVar11,in_R8,pDVar23);\r\n        goto LAB_1400020c3;\r\n      }\r\n      lVar13 = (*(longlong *)in_R8 - (longlong)puVar21) + (longlong)pDVar23;\r\n      alStack_b8[0] = lVar13;\r\n      if (((uVar22 & 0xc0) == 0) && (-1 < lVar13)) goto LAB_1400020af;\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001edf;\r\n      FUN_140001bd0(in_R8,0x40,param_3,pDVar23);\r\n      *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001ef0;\r\n      memcpy(in_R8,alStack_b8,8);\r\n    }\r\n    puVar18 = puVar18 + 3;\r\n  } while (puVar18 < puVar3);\r\nLAB_140001f00:\r\n  if (0 < (int)DAT_1400080a4) {\r\n    lVar13 = 0;\r\n    iVar19 = 0;\r\n    do {\r\n      pDVar14 = (DWORD *)(DAT_1400080a8 + lVar13);\r\n      DVar5 = *pDVar14;\r\n      if (DVar5 != 0) {\r\n        SVar10 = *(SIZE_T *)(pDVar14 + 4);\r\n        lpAddress = *(LPVOID *)(pDVar14 + 2);\r\n        *(undefined8 *)((longlong)auStack_120 + lVar20 + 0x28) = 0x140001f3f;\r\n        VirtualProtect(lpAddress,SVar10,DVar5,(PDWORD)alStack_b8);\r\n      }\r\n      iVar19 = iVar19 + 1;\r\n      lVar13 = lVar13 + 0x28;\r\n    } while (iVar19 < (int)DAT_1400080a4);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140005318", "value": "  VirtualProtect failed with code 0x%x"},
+        {"address": "1400052e0", "value": "  VirtualQuery failed for %d bytes at address %p"},
+        {"address": "1400052c0", "value": "Address %p has no image-section"}]
+    },
+    {
+      "name": "FUN_140001d40",
+      "address": "140001d40",
+      "signature": "undefined __fastcall FUN_140001d40(undefined8 param_1, longlong * param_2, undefined8 param_3, PDWORD param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 887,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "longlong *", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "XMM2_Qa:8"},
+        {"name": "param_4", "type": "typedef PDWORD DWORD *", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_40", "type": "undefined", "storage": "Stack[-0x40]:1"},
+        {"name": "local_48", "type": "undefined", "storage": "Stack[-0x48]:1"},
+        {"name": "local_50", "type": "undefined8", "storage": "Stack[-0x50]:8"}],
+      "called_functions": [
+        {"name": "FUN_140002730", "address": "140002730"},
+        {"name": "FUN_140002980", "address": "140002980"},
+        {"name": "memcpy", "address": "140002c18"},
+        {"name": "VirtualProtect", "address": "EXTERNAL:00000009"},
+        {"name": "FUN_140001bd0", "address": "140001bd0"},
+        {"name": "FUN_140001b70", "address": "140001b70"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid FUN_140001d40(undefined8 param_1,longlong *param_2,undefined8 param_3,PDWORD param_4)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  uint uVar2;\r\n  DWORD flNewProtect;\r\n  SIZE_T dwSize;\r\n  LPVOID lpAddress;\r\n  longlong lVar3;\r\n  undefined *puVar4;\r\n  undefined *puVar5;\r\n  ulonglong uVar6;\r\n  ulonglong uVar7;\r\n  longlong lVar8;\r\n  DWORD *pDVar9;\r\n  undefined4 uVar10;\r\n  uint uVar11;\r\n  uint *puVar12;\r\n  int iVar13;\r\n  uint *in_R8;\r\n  undefined8 *puVar14;\r\n  PDWORD pDVar15;\r\n  undefined8 in_XMM3_Qa;\r\n  undefined8 auStack_e8 [5];\r\n  undefined4 auStack_c0 [2];\r\n  ulonglong auStack_b8 [10];\r\n  longlong alStack_68 [2];\r\n  undefined1 auStack_58 [8];\r\n  longlong local_50 [2];\r\n  \r\n  if (DAT_1400080a0 != 0) {\r\n    return;\r\n  }\r\n  DAT_1400080a0 = 1;\r\n  auStack_b8[5] = 0x140001d7f;\r\n  FUN_140002730();\r\n  auStack_b8[5] = 0x140001d96;\r\n  uVar6 = FUN_140002980();\r\n  puVar5 = PTR_DAT_140005490;\r\n  puVar4 = PTR_IMAGE_DOS_HEADER_140005480;\r\n  lVar3 = -uVar6;\r\n  DAT_1400080a4 = 0;\r\n  DAT_1400080a8 = auStack_58 + lVar3;\r\n  if ((longlong)PTR_DAT_140005490 - (longlong)PTR_DAT_1400054a0 < 8) {\r\n    DAT_1400080a4 = 0;\r\n    return;\r\n  }\r\n  puVar12 = (uint *)PTR_DAT_1400054a0;\r\n  if ((longlong)PTR_DAT_140005490 - (longlong)PTR_DAT_1400054a0 < 0xc) {\r\nLAB_140001dd3:\r\n    param_2 = (longlong *)(ulonglong)*puVar12;\r\n    if ((*puVar12 != 0) || (pDVar15 = param_4, puVar12[1] != 0)) {\r\nLAB_140001f6d:\r\n      if (PTR_DAT_140005490 <= puVar12) {\r\n        DAT_1400080a4 = 0;\r\n        return;\r\n      }\r\n      do {\r\n        uVar2 = puVar12[1];\r\n        uVar11 = *puVar12;\r\n        puVar12 = puVar12 + 2;\r\n        local_50[0] = CONCAT44(local_50[0]._4_4_,uVar11 + *(int *)(puVar4 + uVar2));\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001faa;\r\n        FUN_140001bd0((uint *)(puVar4 + uVar2),param_2,param_3,param_4);\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001fbc;\r\n        param_2 = local_50;\r\n        memcpy(puVar4 + uVar2,local_50,4);\r\n      } while (puVar12 < puVar5);\r\n      goto LAB_140001f00;\r\n    }\r\n  }\r\n  else {\r\n    param_4 = (PDWORD)(ulonglong)*(uint *)PTR_DAT_1400054a0;\r\n    if ((*(uint *)PTR_DAT_1400054a0 != 0) || (*(int *)(PTR_DAT_1400054a0 + 4) != 0))\r\n    goto LAB_140001f6d;\r\n    pDVar15 = (PDWORD)0x0;\r\n    in_R8 = (uint *)0x0;\r\n    if (*(int *)(PTR_DAT_1400054a0 + 8) == 0) {\r\n      puVar12 = (uint *)(PTR_DAT_1400054a0 + 0xc);\r\n      goto LAB_140001dd3;\r\n    }\r\n  }\r\n  uVar6 = (ulonglong)puVar12[2];\r\n  if (puVar12[2] != 1) {\r\nLAB_1400020c3:\r\n    uVar10 = 0x40005340;\r\n    *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x1400020cf;\r\n    FUN_140001b70(\"  Unknown pseudo relocation protocol version %d.\\n\",uVar6,in_R8,pDVar15);\r\n    if (DAT_1400080b0 != (code *)0x0) {\r\n      uVar1 = *(undefined8 *)((longlong)alStack_68 + lVar3 + 8);\r\n      *(undefined4 *)((longlong)auStack_c0 + lVar3) = uVar10;\r\n      *(ulonglong *)((longlong)auStack_b8 + lVar3) = uVar6;\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 8) = param_3;\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x10) = in_XMM3_Qa;\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x18) = uVar1;\r\n      *(undefined8 *)((longlong)auStack_e8 + lVar3) = 0x140002108;\r\n      (*DAT_1400080b0)((longlong)auStack_c0 + lVar3);\r\n    }\r\n    return;\r\n  }\r\n  puVar12 = puVar12 + 3;\r\n  if (PTR_DAT_140005490 <= puVar12) {\r\n    DAT_1400080a4 = 0;\r\n    return;\r\n  }\r\n  do {\r\n    uVar2 = puVar12[2];\r\n    puVar14 = (undefined8 *)(puVar4 + *puVar12);\r\n    uVar11 = uVar2 & 0xff;\r\n    uVar6 = (ulonglong)uVar11;\r\n    pDVar15 = (PDWORD)*puVar14;\r\n    in_R8 = (uint *)(puVar4 + puVar12[1]);\r\n    if (uVar11 == 0x20) {\r\n      uVar7 = (ulonglong)*in_R8;\r\n      if ((int)*in_R8 < 0) {\r\n        uVar7 = uVar7 | 0xffffffff00000000;\r\n      }\r\n      lVar8 = (uVar7 - (longlong)puVar14) + (longlong)pDVar15;\r\n      local_50[0] = lVar8;\r\n      if (((uVar2 & 0xc0) == 0) && ((0xffffffff < lVar8 || (lVar8 < -0x80000000))))\r\n      goto LAB_1400020af;\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x14000201b;\r\n      FUN_140001bd0(in_R8,0x20,param_3,pDVar15);\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x14000202c;\r\n      memcpy(in_R8,local_50,4);\r\n    }\r\n    else if (uVar11 < 0x21) {\r\n      if (uVar11 == 8) {\r\n        uVar7 = (ulonglong)(byte)*in_R8;\r\n        if ((char)(byte)*in_R8 < '\\0') {\r\n          uVar7 = uVar7 | 0xffffffffffffff00;\r\n        }\r\n        lVar8 = (uVar7 - (longlong)puVar14) + (longlong)pDVar15;\r\n        local_50[0] = lVar8;\r\n        if (((uVar2 & 0xc0) == 0) && ((0xff < lVar8 || (lVar8 < -0x80)))) goto LAB_1400020af;\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140002071;\r\n        FUN_140001bd0(in_R8,8,param_3,pDVar15);\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140002082;\r\n        memcpy(in_R8,local_50,1);\r\n      }\r\n      else {\r\n        if (uVar11 != 0x10) goto LAB_14000209b;\r\n        uVar7 = (ulonglong)(ushort)*in_R8;\r\n        if ((short)(ushort)*in_R8 < 0) {\r\n          uVar7 = uVar7 | 0xffffffffffff0000;\r\n        }\r\n        lVar8 = (uVar7 - (longlong)puVar14) + (longlong)pDVar15;\r\n        local_50[0] = lVar8;\r\n        if (((uVar2 & 0xc0) == 0) && ((0xffff < lVar8 || (lVar8 < -0x8000)))) goto LAB_1400020af;\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001e66;\r\n        FUN_140001bd0(in_R8,0x10,param_3,pDVar15);\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001e77;\r\n        memcpy(in_R8,local_50,2);\r\n      }\r\n    }\r\n    else {\r\n      if (uVar11 != 0x40) {\r\nLAB_14000209b:\r\n        local_50[0] = 0;\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x1400020af;\r\n        lVar8 = FUN_140001b70(\"  Unknown pseudo relocation bit size %d.\\n\",uVar6,puVar14,pDVar15);\r\nLAB_1400020af:\r\n        *(longlong *)((longlong)alStack_68 + lVar3) = lVar8;\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x1400020c3;\r\n        FUN_140001b70(\"%d bit pseudo relocation at %p out of range, targeting %p, yielding the value %p.\\n\"\r\n                      ,uVar6,in_R8,pDVar15);\r\n        goto LAB_1400020c3;\r\n      }\r\n      lVar8 = (*(longlong *)in_R8 - (longlong)puVar14) + (longlong)pDVar15;\r\n      local_50[0] = lVar8;\r\n      if (((uVar2 & 0xc0) == 0) && (-1 < lVar8)) goto LAB_1400020af;\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001edf;\r\n      FUN_140001bd0(in_R8,0x40,param_3,pDVar15);\r\n      *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001ef0;\r\n      memcpy(in_R8,local_50,8);\r\n    }\r\n    puVar12 = puVar12 + 3;\r\n  } while (puVar12 < puVar5);\r\nLAB_140001f00:\r\n  if (0 < DAT_1400080a4) {\r\n    lVar8 = 0;\r\n    iVar13 = 0;\r\n    do {\r\n      pDVar9 = (DWORD *)(DAT_1400080a8 + lVar8);\r\n      flNewProtect = *pDVar9;\r\n      if (flNewProtect != 0) {\r\n        dwSize = *(SIZE_T *)(pDVar9 + 4);\r\n        lpAddress = *(LPVOID *)(pDVar9 + 2);\r\n        *(undefined8 *)((longlong)auStack_b8 + lVar3 + 0x28) = 0x140001f3f;\r\n        VirtualProtect(lpAddress,dwSize,flNewProtect,(PDWORD)local_50);\r\n      }\r\n      iVar13 = iVar13 + 1;\r\n      lVar8 = lVar8 + 0x28;\r\n    } while (iVar13 < DAT_1400080a4);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140005378", "value": "  Unknown pseudo relocation bit size %d.\n"},
+        {"address": "1400053a8", "value": "%d bit pseudo relocation at %p out of range, targeting %p, yielding the value %p.\n"},
+        {"address": "140005340", "value": "  Unknown pseudo relocation protocol version %d.\n"}]
+    },
+    {
+      "name": "FUN_1400020d0",
+      "address": "1400020d0",
+      "signature": "undefined __fastcall FUN_1400020d0(undefined4 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4, undefined8 param_5)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 5,
+      "size": 62,
+      "parameters": [
+        {"name": "param_1", "type": "undefined4", "storage": "ECX:4"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "XMM2_Qa:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "XMM3_Qa:8"},
+        {"name": "param_5", "type": "undefined8", "storage": "Stack[0x28]:8"}],
+      "local_variables": [
+        {"name": "local_18", "type": "undefined8", "storage": "Stack[-0x18]:8"},
+        {"name": "local_28", "type": "undefined1[16]", "storage": "Stack[-0x28]:16"},
+        {"name": "local_30", "type": "undefined8", "storage": "Stack[-0x30]:8"},
+        {"name": "local_38", "type": "undefined4", "storage": "Stack[-0x38]:4"}],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid FUN_1400020d0(undefined4 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4,\r\n                  undefined8 param_5)\r\n\r\n{\r\n  undefined4 local_38 [2];\r\n  undefined8 local_30;\r\n  undefined8 local_28;\r\n  undefined8 uStack_20;\r\n  undefined8 local_18;\r\n  \r\n  if (DAT_1400080b0 != (code *)0x0) {\r\n    local_18 = param_5;\r\n    local_38[0] = param_1;\r\n    local_30 = param_2;\r\n    local_28 = param_3;\r\n    uStack_20 = param_4;\r\n    (*DAT_1400080b0)(local_38);\r\n  }\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002110",
+      "address": "140002110",
+      "signature": "undefined __fastcall FUN_140002110(undefined8 param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 12,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "__setusermatherr", "address": "140002c20"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid FUN_140002110(undefined8 param_1)\r\n\r\n{\r\n  DAT_1400080b0 = param_1;\r\n  __setusermatherr();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002120",
+      "address": "140002120",
+      "signature": "undefined8 __fastcall FUN_140002120(undefined8 * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 390,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8 *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "FUN_140002580", "address": "140002580"},
+        {"name": "signal", "address": "140002c08"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nundefined8 FUN_140002120(undefined8 *param_1)\r\n\r\n{\r\n  uint uVar1;\r\n  code *extraout_RAX;\r\n  code *pcVar2;\r\n  undefined8 uVar3;\r\n  code *extraout_RAX_00;\r\n  code *extraout_RAX_01;\r\n  code *extraout_RAX_02;\r\n  \r\n  uVar1 = *(uint *)*param_1;\r\n  if (((uVar1 & 0x20ffffff) == 0x20474343) && ((((uint *)*param_1)[1] & 1) == 0)) {\r\n    return 0xffffffff;\r\n  }\r\n  if (0xc0000096 < uVar1) goto LAB_14000218f;\r\n  if (uVar1 < 0xc000008c) {\r\n    if (uVar1 == 0xc0000005) {\r\n      signal(0xb);\r\n      if (extraout_RAX_02 == (code *)0x1) {\r\n        signal(0xb);\r\n        return 0xffffffff;\r\n      }\r\n      if (extraout_RAX_02 != (code *)0x0) {\r\n        (*extraout_RAX_02)(0xb);\r\n        return 0xffffffff;\r\n      }\r\n      goto LAB_14000218f;\r\n    }\r\n    if (uVar1 < 0xc0000006) {\r\n      if (uVar1 == 0x80000002) {\r\n        return 0xffffffff;\r\n      }\r\n      goto LAB_14000218f;\r\n    }\r\n    if (uVar1 == 0xc0000008) {\r\n      return 0xffffffff;\r\n    }\r\n    if (uVar1 != 0xc000001d) goto LAB_14000218f;\r\nswitchD_140002167_caseD_c0000096:\r\n    signal(4);\r\n    if (extraout_RAX_00 == (code *)0x1) {\r\n      signal(4);\r\n    }\r\n    else {\r\n      if (extraout_RAX_00 == (code *)0x0) goto LAB_14000218f;\r\n      (*extraout_RAX_00)(4);\r\n    }\r\n  }\r\n  else {\r\n    switch(uVar1) {\r\n    case 0xc000008d:\r\n    case 0xc000008e:\r\n    case 0xc000008f:\r\n    case 0xc0000090:\r\n    case 0xc0000091:\r\n    case 0xc0000093:\r\n      signal(8);\r\n      pcVar2 = extraout_RAX;\r\n      if (extraout_RAX == (code *)0x1) {\r\n        signal(8);\r\n        FUN_140002580();\r\n        return 0xffffffff;\r\n      }\r\n      break;\r\n    default:\r\n      goto switchD_140002167_caseD_c0000092;\r\n    case 0xc0000094:\r\n      signal(8);\r\n      pcVar2 = extraout_RAX_01;\r\n      if (extraout_RAX_01 == (code *)0x1) {\r\n        signal(8);\r\n        return 0xffffffff;\r\n      }\r\n      break;\r\n    case 0xc0000096:\r\n      goto switchD_140002167_caseD_c0000096;\r\n    }\r\n    if (pcVar2 == (code *)0x0) {\r\nLAB_14000218f:\r\n      if (DAT_1400080d0 == (code *)0x0) {\r\n        return 0;\r\n      }\r\n                    /* WARNING: Could not recover jumptable at 0x0001400021a3. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n      uVar3 = (*DAT_1400080d0)(param_1);\r\n      return uVar3;\r\n    }\r\n    (*pcVar2)(8);\r\n  }\r\nswitchD_140002167_caseD_c0000092:\r\n  return 0xffffffff;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400022e0",
+      "address": "1400022e0",
+      "signature": "undefined __fastcall FUN_1400022e0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 106,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "GetLastError", "address": "EXTERNAL:00000003"},
+        {"name": "TlsGetValue", "address": "EXTERNAL:00000008"}],
+      "calling_functions": [
+        {"name": "FUN_140002470", "address": "140002470"}],
+      "decompiled_code": "\r\nvoid FUN_1400022e0(void)\r\n\r\n{\r\n  DWORD *pDVar1;\r\n  DWORD DVar2;\r\n  LPVOID pvVar3;\r\n  \r\n  EnterCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n  for (pDVar1 = DAT_1400080e0; pDVar1 != (DWORD *)0x0; pDVar1 = *(DWORD **)(pDVar1 + 4)) {\r\n    pvVar3 = TlsGetValue(*pDVar1);\r\n    DVar2 = GetLastError();\r\n    if ((pvVar3 != (LPVOID)0x0) && (DVar2 == 0)) {\r\n      (**(code **)(pDVar1 + 2))(pvVar3);\r\n    }\r\n  }\r\n                    /* WARNING: Could not recover jumptable at 0x000140002343. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002350",
+      "address": "140002350",
+      "signature": "undefined8 __fastcall FUN_140002350(undefined4 param_1, undefined8 param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 134,
+      "parameters": [
+        {"name": "param_1", "type": "undefined4", "storage": "ECX:4"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"}],
+      "local_variables": [
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "local_res8", "type": "undefined4", "storage": "Stack[0x8]:4"},
+        {"name": "local_10", "type": "undefined8", "storage": "Stack[-0x10]:8"}],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "calloc", "address": "140002c48"},
+        {"name": "LeaveCriticalSection", "address": "EXTERNAL:00000005"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nundefined8 FUN_140002350(undefined4 param_1,undefined8 param_2)\r\n\r\n{\r\n  undefined4 *puVar1;\r\n  \r\n  if (DAT_1400080e8 != 0) {\r\n    puVar1 = calloc(1,0x18);\r\n    if (puVar1 == (undefined4 *)0x0) {\r\n      return 0xffffffff;\r\n    }\r\n    *puVar1 = param_1;\r\n    *(undefined8 *)(puVar1 + 2) = param_2;\r\n    EnterCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n    *(undefined4 **)(puVar1 + 4) = DAT_1400080e0;\r\n    DAT_1400080e0 = puVar1;\r\n    LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400023e0",
+      "address": "1400023e0",
+      "signature": "undefined8 __fastcall FUN_1400023e0(int param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 123,
+      "parameters": [
+        {"name": "param_1", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [
+        {"name": "local_res8", "type": "undefined4", "storage": "Stack[0x8]:4"}],
+      "called_functions": [
+        {"name": "EnterCriticalSection", "address": "EXTERNAL:00000002"},
+        {"name": "free", "address": "140002c50"},
+        {"name": "LeaveCriticalSection", "address": "EXTERNAL:00000005"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\nundefined8 FUN_1400023e0(int param_1)\r\n\r\n{\r\n  int *piVar1;\r\n  int *_Memory;\r\n  int *piVar2;\r\n  \r\n  if (DAT_1400080e8 == 0) {\r\n    return 0;\r\n  }\r\n  EnterCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n  if (DAT_1400080e0 != (int *)0x0) {\r\n    piVar1 = DAT_1400080e0;\r\n    piVar2 = (int *)0x0;\r\n    do {\r\n      _Memory = piVar1;\r\n      piVar1 = *(int **)(_Memory + 4);\r\n      if (*_Memory == param_1) {\r\n        if (piVar2 != (int *)0x0) {\r\n          *(int **)(piVar2 + 4) = piVar1;\r\n          piVar1 = DAT_1400080e0;\r\n        }\r\n        DAT_1400080e0 = piVar1;\r\n        free(_Memory);\r\n        break;\r\n      }\r\n      piVar2 = _Memory;\r\n    } while (piVar1 != (int *)0x0);\r\n  }\r\n  LeaveCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002470",
+      "address": "140002470",
+      "signature": "undefined8 __fastcall FUN_140002470(undefined8 param_1, uint param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 232,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "uint", "storage": "EDX:4"}],
+      "local_variables": [
+        {"name": "local_10", "type": "undefined8", "storage": "Stack[-0x10]:8"}],
+      "called_functions": [
+        {"name": "InitializeCriticalSection", "address": "EXTERNAL:00000004"},
+        {"name": "FUN_1400022e0", "address": "1400022e0"},
+        {"name": "DeleteCriticalSection", "address": "EXTERNAL:00000001"},
+        {"name": "free", "address": "140002c50"},
+        {"name": "FUN_140002580", "address": "140002580"}],
+      "calling_functions": [
+        {"name": "tls_callback_0", "address": "1400019e0"},
+        {"name": "tls_callback_1", "address": "1400019c0"}],
+      "decompiled_code": "\r\nundefined8 FUN_140002470(undefined8 param_1,uint param_2)\r\n\r\n{\r\n  void *pvVar1;\r\n  void *_Memory;\r\n  \r\n  if (param_2 != 2) {\r\n    if (param_2 < 3) {\r\n      if (param_2 == 0) {\r\n        if (DAT_1400080e8 != 0) {\r\n          FUN_1400022e0();\r\n        }\r\n        if (DAT_1400080e8 == 1) {\r\n          DAT_1400080e8 = 1;\r\n          _Memory = DAT_1400080e0;\r\n          while (_Memory != (void *)0x0) {\r\n            pvVar1 = *(void **)((longlong)_Memory + 0x10);\r\n            free(_Memory);\r\n            _Memory = pvVar1;\r\n          }\r\n          DAT_1400080e0 = (void *)0x0;\r\n          DAT_1400080e8 = 0;\r\n          DeleteCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n        }\r\n      }\r\n      else {\r\n        if (DAT_1400080e8 == 0) {\r\n          InitializeCriticalSection((LPCRITICAL_SECTION)&DAT_140008100);\r\n        }\r\n        DAT_1400080e8 = 1;\r\n      }\r\n    }\r\n    else if ((param_2 == 3) && (DAT_1400080e8 != 0)) {\r\n      FUN_1400022e0();\r\n    }\r\n    return 1;\r\n  }\r\n  FUN_140002580();\r\n  return 1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002580",
+      "address": "140002580",
+      "signature": "undefined __fastcall FUN_140002580(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 3,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002120", "address": "140002120"},
+        {"name": "FUN_140001010", "address": "140001010"},
+        {"name": "FUN_140002470", "address": "140002470"}],
+      "decompiled_code": "\r\nvoid FUN_140002580(void)\r\n\r\n{\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002590",
+      "address": "140002590",
+      "signature": "bool __fastcall FUN_140002590(short * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 37,
+      "parameters": [
+        {"name": "param_1", "type": "short *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nbool FUN_140002590(short *param_1)\r\n\r\n{\r\n  if ((*param_1 == 0x5a4d) &&\r\n     (*(int *)((longlong)param_1 + (longlong)*(int *)(param_1 + 0x1e)) == 0x4550)) {\r\n    return (short)((int *)((longlong)param_1 + (longlong)*(int *)(param_1 + 0x1e)))[6] == 0x20b;\r\n  }\r\n  return false;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400025c0",
+      "address": "1400025c0",
+      "signature": "longlong __fastcall FUN_1400025c0(longlong param_1, ulonglong param_2)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 2,
+      "size": 80,
+      "parameters": [
+        {"name": "param_1", "type": "longlong", "storage": "RCX:8"},
+        {"name": "param_2", "type": "ulonglong", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nlonglong FUN_1400025c0(longlong param_1,ulonglong param_2)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  longlong lVar3;\r\n  \r\n  lVar2 = *(int *)(param_1 + 0x3c) + param_1;\r\n  if (*(ushort *)(lVar2 + 6) != 0) {\r\n    lVar3 = lVar2 + 0x18 + (ulonglong)*(ushort *)(lVar2 + 0x14);\r\n    lVar1 = lVar3 + 0x28;\r\n    do {\r\n      if ((*(uint *)(lVar3 + 0xc) <= param_2) &&\r\n         (param_2 < *(uint *)(lVar3 + 0xc) + *(int *)(lVar3 + 8))) {\r\n        return lVar3;\r\n      }\r\n      lVar3 = lVar3 + 0x28;\r\n    } while (lVar3 != lVar1 + (ulonglong)(*(ushort *)(lVar2 + 6) - 1) * 0x28);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002610",
+      "address": "140002610",
+      "signature": "IMAGE_SECTION_HEADER * __fastcall FUN_140002610(char * param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 144,
+      "parameters": [
+        {"name": "param_1", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "strncmp", "address": "140002b68"},
+        {"name": "strlen", "address": "140002b60"}],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Enum \"SectionFlags\": Some values do not have unique names */\r\n\r\nIMAGE_SECTION_HEADER * FUN_140002610(char *param_1)\r\n\r\n{\r\n  int iVar1;\r\n  size_t sVar2;\r\n  IMAGE_SECTION_HEADER *_Str1;\r\n  int *piVar3;\r\n  uint uVar4;\r\n  \r\n  sVar2 = strlen(param_1);\r\n  if ((((sVar2 < 9) && (*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d)) &&\r\n      (piVar3 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                       *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar3 == 0x4550)) &&\r\n     (((short)piVar3[6] == 0x20b && (*(short *)((longlong)piVar3 + 6) != 0)))) {\r\n    uVar4 = 0;\r\n    _Str1 = (IMAGE_SECTION_HEADER *)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    do {\r\n      iVar1 = strncmp(_Str1->Name,param_1,8);\r\n      if (iVar1 == 0) {\r\n        return _Str1;\r\n      }\r\n      uVar4 = uVar4 + 1;\r\n      _Str1 = _Str1 + 1;\r\n    } while (uVar4 < *(ushort *)((longlong)piVar3 + 6));\r\n  }\r\n  return (IMAGE_SECTION_HEADER *)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400026b0",
+      "address": "1400026b0",
+      "signature": "IMAGE_SECTION_HEADER * __fastcall FUN_1400026b0(longlong param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 121,
+      "parameters": [
+        {"name": "param_1", "type": "longlong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001bd0", "address": "140001bd0"}],
+      "decompiled_code": "\r\n/* WARNING: Enum \"SectionFlags\": Some values do not have unique names */\r\n\r\nIMAGE_SECTION_HEADER * FUN_1400026b0(longlong param_1)\r\n\r\n{\r\n  IMAGE_SECTION_HEADER *pIVar1;\r\n  IMAGE_SECTION_HEADER *pIVar2;\r\n  int *piVar3;\r\n  \r\n  pIVar2 = (IMAGE_SECTION_HEADER *)0x0;\r\n  if ((((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n       (piVar3 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar3 == 0x4550)) &&\r\n      ((short)piVar3[6] == 0x20b)) &&\r\n     (pIVar2 = (IMAGE_SECTION_HEADER *)0x0, *(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    pIVar2 = (IMAGE_SECTION_HEADER *)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    pIVar1 = pIVar2 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) + 1;\r\n    while (((ulonglong)(param_1 - (longlong)PTR_IMAGE_DOS_HEADER_140005480) <\r\n            (ulonglong)(uint)pIVar2->VirtualAddress ||\r\n           ((ulonglong)(pIVar2->VirtualAddress + (pIVar2->Misc).PhysicalAddress) <=\r\n            (ulonglong)(param_1 - (longlong)PTR_IMAGE_DOS_HEADER_140005480)))) {\r\n      pIVar2 = pIVar2 + 1;\r\n      if (pIVar2 == pIVar1) {\r\n        return (IMAGE_SECTION_HEADER *)0x0;\r\n      }\r\n    }\r\n  }\r\n  return pIVar2;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002730",
+      "address": "140002730",
+      "signature": "undefined2 __fastcall FUN_140002730(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 49,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001d40", "address": "140001d40"}],
+      "decompiled_code": "\r\nundefined2 FUN_140002730(void)\r\n\r\n{\r\n  int *piVar1;\r\n  \r\n  if (((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n      (piVar1 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                       *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar1 == 0x4550)) &&\r\n     ((short)piVar1[6] == 0x20b)) {\r\n    return *(undefined2 *)((longlong)piVar1 + 6);\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002770",
+      "address": "140002770",
+      "signature": "IMAGE_SECTION_HEADER * __fastcall FUN_140002770(longlong param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 116,
+      "parameters": [
+        {"name": "param_1", "type": "longlong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\n/* WARNING: Enum \"SectionFlags\": Some values do not have unique names */\r\n\r\nIMAGE_SECTION_HEADER * FUN_140002770(longlong param_1)\r\n\r\n{\r\n  IMAGE_SECTION_HEADER *pIVar1;\r\n  IMAGE_SECTION_HEADER *pIVar2;\r\n  int *piVar3;\r\n  \r\n  if ((((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n       (piVar3 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar3 == 0x4550)) &&\r\n      ((short)piVar3[6] == 0x20b)) && (*(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    pIVar2 = (IMAGE_SECTION_HEADER *)((longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18);\r\n    pIVar1 = pIVar2 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) + 1;\r\n    do {\r\n      if ((pIVar2->Characteristics & IMAGE_SCN_MEM_EXECUTE) != 0) {\r\n        if (param_1 == 0) {\r\n          return pIVar2;\r\n        }\r\n        param_1 = param_1 + -1;\r\n      }\r\n      pIVar2 = pIVar2 + 1;\r\n    } while (pIVar1 != pIVar2);\r\n    return (IMAGE_SECTION_HEADER *)0x0;\r\n  }\r\n  return (IMAGE_SECTION_HEADER *)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400027f0",
+      "address": "1400027f0",
+      "signature": "IMAGE_DOS_HEADER * __fastcall FUN_1400027f0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 49,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001bd0", "address": "140001bd0"}],
+      "decompiled_code": "\r\nIMAGE_DOS_HEADER * FUN_1400027f0(void)\r\n\r\n{\r\n  IMAGE_DOS_HEADER *pIVar1;\r\n  \r\n  if ((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n     (*(int *)(PTR_IMAGE_DOS_HEADER_140005480 + *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)) ==\r\n      0x4550)) {\r\n    pIVar1 = (IMAGE_DOS_HEADER *)0x0;\r\n    if ((short)*(int *)((longlong)\r\n                        (PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)) + 0x18) == 0x20b) {\r\n      pIVar1 = (IMAGE_DOS_HEADER *)PTR_IMAGE_DOS_HEADER_140005480;\r\n    }\r\n    return pIVar1;\r\n  }\r\n  return (IMAGE_DOS_HEADER *)0x0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002830",
+      "address": "140002830",
+      "signature": "uint __fastcall FUN_140002830(longlong param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 130,
+      "parameters": [
+        {"name": "param_1", "type": "longlong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nuint FUN_140002830(longlong param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  int *piVar3;\r\n  \r\n  if ((((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n       (piVar3 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar3 == 0x4550)) &&\r\n      ((short)piVar3[6] == 0x20b)) && (*(ushort *)((longlong)piVar3 + 6) != 0)) {\r\n    lVar2 = (longlong)piVar3 + (ulonglong)*(ushort *)(piVar3 + 5) + 0x18;\r\n    lVar1 = lVar2 + 0x28;\r\n    while (((ulonglong)(param_1 - (longlong)PTR_IMAGE_DOS_HEADER_140005480) <\r\n            (ulonglong)*(uint *)(lVar2 + 0xc) ||\r\n           ((ulonglong)(*(uint *)(lVar2 + 0xc) + *(int *)(lVar2 + 8)) <=\r\n            (ulonglong)(param_1 - (longlong)PTR_IMAGE_DOS_HEADER_140005480)))) {\r\n      lVar2 = lVar2 + 0x28;\r\n      if (lVar1 + (ulonglong)(*(ushort *)((longlong)piVar3 + 6) - 1) * 0x28 == lVar2) {\r\n        return 0;\r\n      }\r\n    }\r\n    return ~*(uint *)(lVar2 + 0x24) >> 0x1f;\r\n  }\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400028c0",
+      "address": "1400028c0",
+      "signature": "char * __fastcall FUN_1400028c0(int param_1)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 1,
+      "size": 173,
+      "parameters": [
+        {"name": "param_1", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nchar * FUN_1400028c0(int param_1)\r\n\r\n{\r\n  longlong lVar1;\r\n  ulonglong uVar2;\r\n  undefined *puVar3;\r\n  int *piVar4;\r\n  longlong lVar5;\r\n  \r\n  if ((((*(short *)PTR_IMAGE_DOS_HEADER_140005480 == 0x5a4d) &&\r\n       (piVar4 = (int *)(PTR_IMAGE_DOS_HEADER_140005480 +\r\n                        *(int *)(PTR_IMAGE_DOS_HEADER_140005480 + 0x3c)), *piVar4 == 0x4550)) &&\r\n      ((short)piVar4[6] == 0x20b)) &&\r\n     ((uVar2 = (ulonglong)(uint)piVar4[0x24], piVar4[0x24] != 0 &&\r\n      (*(ushort *)((longlong)piVar4 + 6) != 0)))) {\r\n    lVar5 = (longlong)piVar4 + (ulonglong)*(ushort *)(piVar4 + 5) + 0x18;\r\n    lVar1 = lVar5 + 0x28;\r\n    while ((uVar2 < *(uint *)(lVar5 + 0xc) ||\r\n           (*(uint *)(lVar5 + 0xc) + *(int *)(lVar5 + 8) <= uVar2))) {\r\n      lVar5 = lVar5 + 0x28;\r\n      if (lVar1 + (ulonglong)(*(ushort *)((longlong)piVar4 + 6) - 1) * 0x28 == lVar5) {\r\n        return (char *)0x0;\r\n      }\r\n    }\r\n    for (puVar3 = PTR_IMAGE_DOS_HEADER_140005480 + uVar2;\r\n        (*(int *)(puVar3 + 4) != 0 || (*(int *)(puVar3 + 0xc) != 0)); puVar3 = puVar3 + 0x14) {\r\n      if (param_1 < 1) {\r\n        return PTR_IMAGE_DOS_HEADER_140005480 + *(uint *)(puVar3 + 0xc);\r\n      }\r\n      param_1 = param_1 + -1;\r\n    }\r\n    return (char *)0x0;\r\n  }\r\n  return (char *)0x0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140009698", "value": "KERNEL32.dll"},
+        {"address": "1400096ac", "value": "api-ms-win-crt-environment-l1-1-0.dll"}]
+    },
+    {
+      "name": "FUN_140002980",
+      "address": "140002980",
+      "signature": "ulonglong __fastcall FUN_140002980(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 50,
+      "parameters": [],
+      "local_variables": [
+        {"name": "local_res8", "type": "undefined", "storage": "Stack[0x8]:1"},
+        {"name": "local_ff8", "type": "undefined8", "storage": "Stack[-0xff8]:8"}],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001d40", "address": "140001d40"}],
+      "decompiled_code": "\r\nulonglong FUN_140002980(void)\r\n\r\n{\r\n  ulonglong in_RAX;\r\n  ulonglong uVar1;\r\n  undefined8 *puVar2;\r\n  undefined8 local_res8 [4];\r\n  \r\n  puVar2 = local_res8;\r\n  uVar1 = in_RAX;\r\n  if (0xfff < in_RAX) {\r\n    do {\r\n      puVar2 = puVar2 + -0x200;\r\n      *puVar2 = *puVar2;\r\n      uVar1 = uVar1 - 0x1000;\r\n    } while (0x1000 < uVar1);\r\n  }\r\n  *(undefined8 *)((longlong)puVar2 - uVar1) = *(undefined8 *)((longlong)puVar2 - uVar1);\r\n  return in_RAX;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_1400029c0",
+      "address": "1400029c0",
+      "signature": "undefined __fastcall FUN_1400029c0(undefined8 param_1, undefined8 param_2, undefined8 param_3)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 3,
+      "size": 51,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"}],
+      "local_variables": [
+        {"name": "local_28", "type": "undefined8", "storage": "Stack[-0x28]:8"}],
+      "called_functions": [
+        {"name": "FUN_140002ab0", "address": "140002ab0"},
+        {"name": "__stdio_common_vfprintf", "address": "140002b88"}],
+      "calling_functions": [
+        {"name": "FUN_140001b70", "address": "140001b70"}],
+      "decompiled_code": "\r\nvoid FUN_1400029c0(undefined8 param_1,undefined8 param_2,undefined8 param_3)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  \r\n  puVar1 = (undefined8 *)FUN_140002ab0();\r\n  __stdio_common_vfprintf(*puVar1,param_1,param_2,0,param_3);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002a00",
+      "address": "140002a00",
+      "signature": "undefined __fastcall FUN_140002a00(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 83,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "local_res10", "type": "undefined8", "storage": "Stack[0x10]:8"},
+        {"name": "local_20", "type": "undefined8", "storage": "Stack[-0x20]:8"},
+        {"name": "local_38", "type": "undefined8", "storage": "Stack[-0x38]:8"}],
+      "called_functions": [
+        {"name": "FUN_140002ab0", "address": "140002ab0"},
+        {"name": "__stdio_common_vfprintf", "address": "140002b88"},
+        {"name": "__acrt_iob_func", "address": "140002b70"}],
+      "calling_functions": [
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nvoid FUN_140002a00(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  undefined8 *puVar2;\r\n  undefined8 local_res10;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  \r\n  local_res10 = param_2;\r\n  local_res18 = param_3;\r\n  local_res20 = param_4;\r\n  uVar1 = __acrt_iob_func(1);\r\n  puVar2 = (undefined8 *)FUN_140002ab0();\r\n  __stdio_common_vfprintf(*puVar2,uVar1,param_1,0,&local_res10);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002a60",
+      "address": "140002a60",
+      "signature": "undefined __fastcall FUN_140002a60(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 68,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_res20", "type": "undefined8", "storage": "Stack[0x20]:8"},
+        {"name": "local_res18", "type": "undefined8", "storage": "Stack[0x18]:8"},
+        {"name": "local_20", "type": "undefined8", "storage": "Stack[-0x20]:8"},
+        {"name": "local_38", "type": "undefined8", "storage": "Stack[-0x38]:8"}],
+      "called_functions": [
+        {"name": "FUN_140002ab0", "address": "140002ab0"},
+        {"name": "__stdio_common_vfprintf", "address": "140002b88"}],
+      "calling_functions": [
+        {"name": "FUN_140001a70", "address": "140001a70"},
+        {"name": "FUN_140001b70", "address": "140001b70"},
+        {"name": "FUN_140002ad0", "address": "140002ad0"}],
+      "decompiled_code": "\r\nvoid FUN_140002a60(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  undefined8 *puVar1;\r\n  undefined8 local_res18;\r\n  undefined8 local_res20;\r\n  \r\n  local_res18 = param_3;\r\n  local_res20 = param_4;\r\n  puVar1 = (undefined8 *)FUN_140002ab0();\r\n  __stdio_common_vfprintf(*puVar1,param_1,param_2,0,&local_res18);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002ab0",
+      "address": "140002ab0",
+      "signature": "undefined * __fastcall FUN_140002ab0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 8,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002a00", "address": "140002a00"},
+        {"name": "FUN_140002a60", "address": "140002a60"},
+        {"name": "FUN_1400029c0", "address": "1400029c0"}],
+      "decompiled_code": "\r\nundefined * FUN_140002ab0(void)\r\n\r\n{\r\n  return &DAT_140004050;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002ac0",
+      "address": "140002ac0",
+      "signature": "undefined * __fastcall FUN_140002ac0(void)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 11,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nundefined * FUN_140002ac0(void)\r\n\r\n{\r\n  return *(undefined **)PTR_PTR_1400054d0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002ad0",
+      "address": "140002ad0",
+      "signature": "undefined __fastcall FUN_140002ad0(uint param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 45,
+      "parameters": [
+        {"name": "param_1", "type": "uint", "storage": "ECX:4"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "R9:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "_exit", "address": "140002bc8"},
+        {"name": "__acrt_iob_func", "address": "140002b70"},
+        {"name": "FUN_140002a60", "address": "140002a60"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid FUN_140002ad0(uint param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  undefined8 uVar1;\r\n  \r\n  uVar1 = __acrt_iob_func(2);\r\n  FUN_140002a60(uVar1,\"runtime error %d\\n\",(ulonglong)param_1,param_4);\r\n                    /* WARNING: Subroutine does not return */\r\n  _exit(0xff);\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140005430", "value": "runtime error %d\n"}]
+    },
+    {
+      "name": "FUN_140002b00",
+      "address": "140002b00",
+      "signature": "undefined8 __fastcall FUN_140002b00(undefined4 * param_1, undefined8 * param_2, undefined8 * param_3, int param_4, undefined4 * param_5)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 5,
+      "size": 95,
+      "parameters": [
+        {"name": "param_1", "type": "undefined4 *", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8 *", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8 *", "storage": "R8:8"},
+        {"name": "param_4", "type": "int", "storage": "R9D:4"},
+        {"name": "param_5", "type": "undefined4 *", "storage": "Stack[0x28]:8"}],
+      "local_variables": [],
+      "called_functions": [
+        {"name": "_initialize_narrow_environment", "address": "140002bd0"},
+        {"name": "_configure_narrow_argv", "address": "140002bb8"},
+        {"name": "_set_new_mode", "address": "140002c40"},
+        {"name": "__p___argc", "address": "140002ba0"},
+        {"name": "__p___argv", "address": "140002ba8"},
+        {"name": "__p__environ", "address": "140002c60"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nundefined8\r\nFUN_140002b00(undefined4 *param_1,undefined8 *param_2,undefined8 *param_3,int param_4,\r\n             undefined4 *param_5)\r\n\r\n{\r\n  undefined4 *puVar1;\r\n  undefined8 *puVar2;\r\n  \r\n  _initialize_narrow_environment();\r\n  _configure_narrow_argv(2 - (uint)(param_4 == 0));\r\n  puVar1 = (undefined4 *)__p___argc();\r\n  *param_1 = *puVar1;\r\n  puVar2 = (undefined8 *)__p___argv();\r\n  *param_2 = *puVar2;\r\n  puVar2 = (undefined8 *)__p__environ();\r\n  *param_3 = *puVar2;\r\n  _set_new_mode(*param_5);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "strlen",
+      "address": "140002b60",
+      "signature": "size_t __cdecl strlen(char * _Str)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Str", "type": "char *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"},
+        {"name": "FUN_140002610", "address": "140002610"},
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nsize_t __cdecl strlen(char *_Str)\r\n\r\n{\r\n  size_t sVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002b60. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  sVar1 = strlen(_Str);\r\n  return sVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "strncmp",
+      "address": "140002b68",
+      "signature": "int __cdecl strncmp(char * _Str1, char * _Str2, size_t _MaxCount)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 3,
+      "size": 6,
+      "parameters": [
+        {"name": "_Str1", "type": "char *", "storage": "RCX:8"},
+        {"name": "_Str2", "type": "char *", "storage": "RDX:8"},
+        {"name": "_MaxCount", "type": "typedef size_t ulonglong", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002610", "address": "140002610"}],
+      "decompiled_code": "\r\nint __cdecl strncmp(char *_Str1,char *_Str2,size_t _MaxCount)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002b68. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = strncmp(_Str1,_Str2,_MaxCount);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__acrt_iob_func",
+      "address": "140002b70",
+      "signature": "undefined __acrt_iob_func(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002a00", "address": "140002a00"},
+        {"name": "FUN_140001a70", "address": "140001a70"},
+        {"name": "FUN_140001b70", "address": "140001b70"},
+        {"name": "FUN_140002ad0", "address": "140002ad0"}],
+      "decompiled_code": "\r\nvoid __acrt_iob_func(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b70. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __acrt_iob_func();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__commode",
+      "address": "140002b78",
+      "signature": "undefined __p__commode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __p__commode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b78. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__commode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__fmode",
+      "address": "140002b80",
+      "signature": "undefined __p__fmode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __p__fmode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b80. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__fmode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__stdio_common_vfprintf",
+      "address": "140002b88",
+      "signature": "undefined __stdio_common_vfprintf(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002a00", "address": "140002a00"},
+        {"name": "FUN_140002a60", "address": "140002a60"},
+        {"name": "FUN_1400029c0", "address": "1400029c0"}],
+      "decompiled_code": "\r\nvoid __stdio_common_vfprintf(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002b88. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __stdio_common_vfprintf();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "putchar",
+      "address": "140002b90",
+      "signature": "int __cdecl putchar(int _Ch)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Ch", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002cc0", "address": "140002cc0"}],
+      "decompiled_code": "\r\nint __cdecl putchar(int _Ch)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002b90. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = putchar(_Ch);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p___argc",
+      "address": "140002ba0",
+      "signature": "undefined __p___argc(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid __p___argc(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002ba0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p___argc();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p___argv",
+      "address": "140002ba8",
+      "signature": "undefined __p___argv(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid __p___argv(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002ba8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p___argv();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_cexit",
+      "address": "140002bb0",
+      "signature": "void __cdecl _cexit(void)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __cdecl _cexit(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bb0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _cexit();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_configure_narrow_argv",
+      "address": "140002bb8",
+      "signature": "undefined _configure_narrow_argv(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid _configure_narrow_argv(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bb8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _configure_narrow_argv();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_crt_atexit",
+      "address": "140002bc0",
+      "signature": "undefined _crt_atexit(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [],
+      "decompiled_code": "\r\nvoid _crt_atexit(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bc0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _crt_atexit();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_exit",
+      "address": "140002bc8",
+      "signature": "noreturn void __cdecl _exit(int _Code)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Code", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002ad0", "address": "140002ad0"}],
+      "decompiled_code": "\r\nvoid __cdecl _exit(int _Code)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bc8. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _exit(_Code);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initialize_narrow_environment",
+      "address": "140002bd0",
+      "signature": "undefined _initialize_narrow_environment(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid _initialize_narrow_environment(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bd0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initialize_narrow_environment();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_set_app_type",
+      "address": "140002bd8",
+      "signature": "undefined _set_app_type(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _set_app_type(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bd8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _set_app_type();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initterm",
+      "address": "140002be0",
+      "signature": "undefined _initterm(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _initterm(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002be0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initterm();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_initterm_e",
+      "address": "140002be8",
+      "signature": "undefined _initterm_e(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid _initterm_e(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002be8. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _initterm_e();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_set_invalid_parameter_handler",
+      "address": "140002bf0",
+      "signature": "_invalid_parameter_handler __cdecl _set_invalid_parameter_handler(_invalid_parameter_handler _Handler)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Handler", "type": "typedef _invalid_parameter_handler _invalid_parameter_handler *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\n_invalid_parameter_handler __cdecl\r\n_set_invalid_parameter_handler(_invalid_parameter_handler _Handler)\r\n\r\n{\r\n  _invalid_parameter_handler p_Var1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002bf0. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  p_Var1 = _set_invalid_parameter_handler(_Handler);\r\n  return p_Var1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "abort",
+      "address": "140002bf8",
+      "signature": "noreturn void __cdecl abort(void)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001b70", "address": "140001b70"}],
+      "decompiled_code": "\r\nvoid __cdecl abort(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002bf8. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  abort();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "exit",
+      "address": "140002c00",
+      "signature": "noreturn void __cdecl exit(int _Code)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Code", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid __cdecl exit(int _Code)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c00. Too many branches */\r\n                    /* WARNING: Subroutine does not return */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  exit(_Code);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "signal",
+      "address": "140002c08",
+      "signature": "void signal(int param_1)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "param_1", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002120", "address": "140002120"}],
+      "decompiled_code": "\r\n/* WARNING: Unknown calling convention -- yet parameter storage is locked */\r\n\r\nvoid signal(int param_1)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c08. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  signal(param_1);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "memcpy",
+      "address": "140002c18",
+      "signature": "void * __cdecl memcpy(void * _Dst, void * _Src, size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 3,
+      "size": 6,
+      "parameters": [
+        {"name": "_Dst", "type": "void *", "storage": "RCX:8"},
+        {"name": "_Src", "type": "void *", "storage": "RDX:8"},
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "R8:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"},
+        {"name": "FUN_140001d40", "address": "140001d40"}],
+      "decompiled_code": "\r\nvoid * __cdecl memcpy(void *_Dst,void *_Src,size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002c18. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = memcpy(_Dst,_Src,_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__setusermatherr",
+      "address": "140002c20",
+      "signature": "undefined __setusermatherr(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002110", "address": "140002110"}],
+      "decompiled_code": "\r\nvoid __setusermatherr(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c20. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __setusermatherr();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_configthreadlocale",
+      "address": "140002c30",
+      "signature": "int __cdecl _configthreadlocale(int _Flag)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Flag", "type": "int", "storage": "ECX:4"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nint __cdecl _configthreadlocale(int _Flag)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002c30. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  iVar1 = _configthreadlocale(_Flag);\r\n  return iVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "_set_new_mode",
+      "address": "140002c40",
+      "signature": "undefined _set_new_mode(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid _set_new_mode(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c40. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  _set_new_mode();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "calloc",
+      "address": "140002c48",
+      "signature": "void * __cdecl calloc(size_t _Count, size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 2,
+      "size": 6,
+      "parameters": [
+        {"name": "_Count", "type": "typedef size_t ulonglong", "storage": "RCX:8"},
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "RDX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002350", "address": "140002350"}],
+      "decompiled_code": "\r\nvoid * __cdecl calloc(size_t _Count,size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002c48. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = calloc(_Count,_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "free",
+      "address": "140002c50",
+      "signature": "void __cdecl free(void * _Memory)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Memory", "type": "void *", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_1400023e0", "address": "1400023e0"},
+        {"name": "FUN_140002470", "address": "140002470"}],
+      "decompiled_code": "\r\nvoid __cdecl free(void *_Memory)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c50. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  free(_Memory);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "malloc",
+      "address": "140002c58",
+      "signature": "void * __cdecl malloc(size_t _Size)",
+      "is_thunk": true,
+      "calling_convention": "__cdecl",
+      "parameter_count": 1,
+      "size": 6,
+      "parameters": [
+        {"name": "_Size", "type": "typedef size_t ulonglong", "storage": "RCX:8"}],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nvoid * __cdecl malloc(size_t _Size)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n                    /* WARNING: Could not recover jumptable at 0x000140002c58. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  pvVar1 = malloc(_Size);\r\n  return pvVar1;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "__p__environ",
+      "address": "140002c60",
+      "signature": "undefined __p__environ(void)",
+      "is_thunk": true,
+      "calling_convention": "unknown",
+      "parameter_count": 0,
+      "size": 6,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140002b00", "address": "140002b00"}],
+      "decompiled_code": "\r\nvoid __p__environ(void)\r\n\r\n{\r\n                    /* WARNING: Could not recover jumptable at 0x000140002c60. Too many branches */\r\n                    /* WARNING: Treating indirect jump as call */\r\n  __p__environ();\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    },
+    {
+      "name": "FUN_140002cc0",
+      "address": "140002cc0",
+      "signature": "undefined8 __fastcall FUN_140002cc0(undefined8 param_1, undefined8 param_2, undefined8 param_3, undefined8 param_4)",
+      "is_thunk": false,
+      "calling_convention": "__fastcall",
+      "parameter_count": 4,
+      "size": 891,
+      "parameters": [
+        {"name": "param_1", "type": "undefined8", "storage": "RCX:8"},
+        {"name": "param_2", "type": "undefined8", "storage": "RDX:8"},
+        {"name": "param_3", "type": "undefined8", "storage": "R8:8"},
+        {"name": "param_4", "type": "undefined8", "storage": "R9:8"}],
+      "local_variables": [
+        {"name": "local_20", "type": "undefined8", "storage": "Stack[-0x20]:8"},
+        {"name": "local_28", "type": "undefined8", "storage": "Stack[-0x28]:8"},
+        {"name": "local_30", "type": "undefined8", "storage": "Stack[-0x30]:8"}],
+      "called_functions": [
+        {"name": "FUN_140002a00", "address": "140002a00"},
+        {"name": "FUN_140001990", "address": "140001990"},
+        {"name": "strlen", "address": "140002b60"},
+        {"name": "putchar", "address": "140002b90"},
+        {"name": "FUN_1400015e0", "address": "1400015e0"},
+        {"name": "FUN_140001580", "address": "140001580"}],
+      "calling_functions": [
+        {"name": "FUN_140001010", "address": "140001010"}],
+      "decompiled_code": "\r\nundefined8\r\nFUN_140002cc0(undefined8 param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4)\r\n\r\n{\r\n  undefined1 auVar1 [15];\r\n  undefined1 auVar2 [14];\r\n  undefined1 auVar3 [14];\r\n  ulonglong uVar4;\r\n  undefined1 auVar5 [15];\r\n  undefined1 auVar6 [15];\r\n  undefined1 auVar7 [15];\r\n  undefined1 auVar8 [15];\r\n  undefined1 auVar9 [15];\r\n  undefined1 auVar10 [15];\r\n  undefined1 auVar11 [14];\r\n  undefined1 auVar12 [15];\r\n  undefined1 auVar13 [15];\r\n  undefined1 auVar14 [15];\r\n  undefined1 auVar15 [15];\r\n  undefined1 auVar16 [15];\r\n  undefined1 auVar17 [13];\r\n  undefined1 auVar18 [13];\r\n  undefined1 auVar19 [13];\r\n  undefined1 auVar20 [15];\r\n  undefined1 auVar21 [15];\r\n  undefined1 auVar22 [15];\r\n  undefined1 auVar23 [15];\r\n  undefined1 auVar24 [15];\r\n  undefined1 auVar25 [15];\r\n  undefined1 auVar26 [15];\r\n  undefined1 auVar27 [15];\r\n  undefined1 auVar28 [15];\r\n  unkuint9 Var29;\r\n  undefined1 auVar30 [11];\r\n  undefined1 auVar31 [13];\r\n  undefined1 auVar32 [14];\r\n  undefined1 auVar33 [15];\r\n  undefined1 auVar34 [15];\r\n  undefined1 auVar35 [15];\r\n  byte *pbVar36;\r\n  byte *pbVar37;\r\n  size_t sVar38;\r\n  ulonglong uVar39;\r\n  size_t sVar40;\r\n  byte bVar41;\r\n  byte *pbVar42;\r\n  ulonglong uVar43;\r\n  undefined1 uVar45;\r\n  undefined1 uVar46;\r\n  undefined1 uVar47;\r\n  undefined1 uVar48;\r\n  unkuint10 Var44;\r\n  undefined2 uVar49;\r\n  undefined8 local_28;\r\n  undefined8 local_20;\r\n  \r\n  FUN_140001990();\r\n  local_20 = 0x21656761737365;\r\n  local_28 = 0x4d20746572636553;\r\n  pbVar42 = (byte *)&local_28;\r\n  FUN_140002a00(\"Original: %s\\n\",&local_28,param_3,param_4);\r\n  pbVar36 = (byte *)strlen((char *)&local_28);\r\n  if (pbVar36 != (byte *)0x0) {\r\n    if (pbVar36 + -1 < (byte *)0x7) {\r\n      pbVar42 = (byte *)0x0;\r\n    }\r\n    else {\r\n      local_28 = local_28 ^ s_BBBBBBBB_1400050e8._0_8_;\r\n      if (pbVar36 == (byte *)0x8) goto LAB_140002d60;\r\n      pbVar42 = (byte *)0x8;\r\n    }\r\n    pbVar37 = (byte *)((longlong)&local_28 + (longlong)pbVar42);\r\n    do {\r\n      pbVar42 = pbVar42 + 1;\r\n      *pbVar37 = *pbVar37 ^ 0x42;\r\n      pbVar37 = pbVar37 + 1;\r\n    } while (pbVar42 < pbVar36);\r\n  }\r\nLAB_140002d60:\r\n  FUN_140002a00(\"XOR encrypted (hex): \",pbVar42,param_3,param_4);\r\n  pbVar42 = (byte *)&local_28;\r\n  for (uVar43 = 0; sVar38 = strlen((char *)&local_28), uVar43 < sVar38; uVar43 = uVar43 + 1) {\r\n    bVar41 = *pbVar42;\r\n    pbVar42 = pbVar42 + 1;\r\n    FUN_140002a00(\"%02X \",(ulonglong)bVar41,param_3,param_4);\r\n  }\r\n  putchar(10);\r\n  sVar38 = strlen((char *)&local_28);\r\n  if (sVar38 != 0) {\r\n    if (sVar38 - 1 < 7) {\r\n      uVar43 = 0;\r\n    }\r\n    else {\r\n      local_28 = local_28 ^ s_BBBBBBBB_1400050e8._0_8_;\r\n      if (sVar38 == 8) goto LAB_140002e00;\r\n      uVar43 = 8;\r\n    }\r\n    pbVar42 = (byte *)((longlong)&local_28 + uVar43);\r\n    do {\r\n      uVar43 = uVar43 + 1;\r\n      *pbVar42 = *pbVar42 ^ 0x42;\r\n      pbVar42 = pbVar42 + 1;\r\n    } while (uVar43 < sVar38);\r\n  }\r\nLAB_140002e00:\r\n  FUN_140002a00(\"XOR decrypted: %s\\n\",&local_28,param_3,param_4);\r\n  FUN_140001580((byte *)&local_28);\r\n  FUN_140002a00(\"ROT13: %s\\n\",&local_28,param_3,param_4);\r\n  FUN_140001580((byte *)&local_28);\r\n  FUN_140002a00(\"ROT13 back: %s\\n\",&local_28,param_3,param_4);\r\n  FUN_1400015e0((char *)&local_28,3);\r\n  FUN_140002a00(\"Caesar +3: %s\\n\",&local_28,param_3,param_4);\r\n  sVar38 = strlen((char *)&local_28);\r\n  if (sVar38 == 0) {\r\n    uVar43 = 0;\r\n  }\r\n  else {\r\n    if (sVar38 - 1 < 7) {\r\n      uVar43 = 0;\r\n      uVar39 = 0;\r\n    }\r\n    else {\r\n      uVar48 = (undefined1)(local_28 >> 0x38);\r\n      auVar5._8_6_ = 0;\r\n      auVar5._0_8_ = local_28;\r\n      auVar5[0xe] = uVar48;\r\n      uVar47 = (undefined1)(local_28 >> 0x30);\r\n      auVar7._8_4_ = 0;\r\n      auVar7._0_8_ = local_28;\r\n      auVar7[0xc] = uVar47;\r\n      auVar7._13_2_ = auVar5._13_2_;\r\n      auVar9._8_4_ = 0;\r\n      auVar9._0_8_ = local_28;\r\n      auVar9._12_3_ = auVar7._12_3_;\r\n      uVar46 = (undefined1)(local_28 >> 0x28);\r\n      auVar12._8_2_ = 0;\r\n      auVar12._0_8_ = local_28;\r\n      auVar12[10] = uVar46;\r\n      auVar12._11_4_ = auVar9._11_4_;\r\n      auVar14._8_2_ = 0;\r\n      auVar14._0_8_ = local_28;\r\n      auVar14._10_5_ = auVar12._10_5_;\r\n      uVar45 = (undefined1)(local_28 >> 0x20);\r\n      auVar16[8] = uVar45;\r\n      auVar16._0_8_ = local_28;\r\n      auVar16._9_6_ = auVar14._9_6_;\r\n      auVar23._7_8_ = 0;\r\n      auVar23._0_7_ = auVar16._8_7_;\r\n      auVar24._8_7_ = 0;\r\n      auVar24._0_8_ = SUB158(auVar23 << 0x40,7);\r\n      auVar25._9_6_ = 0;\r\n      auVar25._0_9_ = SUB159(auVar24 << 0x38,6);\r\n      auVar26._10_5_ = 0;\r\n      auVar26._0_10_ = SUB1510(auVar25 << 0x30,5);\r\n      auVar27._11_4_ = 0;\r\n      auVar27._0_11_ = SUB1511(auVar26 << 0x28,4);\r\n      auVar35._12_3_ = 0;\r\n      auVar35._0_12_ = SUB1512(auVar27 << 0x20,3);\r\n      auVar22[1] = 0;\r\n      auVar22[0] = (byte)local_28;\r\n      auVar22._2_13_ = SUB1513(auVar35 << 0x18,2);\r\n      auVar1._8_6_ = 0;\r\n      auVar1._0_8_ = local_28;\r\n      auVar1[0xe] = uVar48;\r\n      auVar6._8_4_ = 0;\r\n      auVar6._0_8_ = local_28;\r\n      auVar6[0xc] = uVar47;\r\n      auVar6._13_2_ = auVar1._13_2_;\r\n      auVar8._8_4_ = 0;\r\n      auVar8._0_8_ = local_28;\r\n      auVar8._12_3_ = auVar6._12_3_;\r\n      auVar10._8_2_ = 0;\r\n      auVar10._0_8_ = local_28;\r\n      auVar10[10] = uVar46;\r\n      auVar10._11_4_ = auVar8._11_4_;\r\n      auVar13._8_2_ = 0;\r\n      auVar13._0_8_ = local_28;\r\n      auVar13._10_5_ = auVar10._10_5_;\r\n      auVar15[8] = uVar45;\r\n      auVar15._0_8_ = local_28;\r\n      auVar15._9_6_ = auVar13._9_6_;\r\n      auVar28._7_8_ = 0;\r\n      auVar28._0_7_ = auVar15._8_7_;\r\n      Var29 = CONCAT81(SUB158(auVar28 << 0x40,7),(char)(local_28 >> 0x18));\r\n      auVar33._9_6_ = 0;\r\n      auVar33._0_9_ = Var29;\r\n      auVar30._1_10_ = SUB1510(auVar33 << 0x30,5);\r\n      auVar30[0] = (char)(local_28 >> 0x10);\r\n      auVar34._11_4_ = 0;\r\n      auVar34._0_11_ = auVar30;\r\n      auVar20[2] = (char)(local_28 >> 8);\r\n      auVar20._0_2_ = (ushort)local_28;\r\n      auVar20._3_12_ = SUB1512(auVar34 << 0x20,3);\r\n      auVar21._2_13_ = auVar20._2_13_;\r\n      auVar21._0_2_ = (ushort)local_28 & 0xff;\r\n      Var44 = (unkuint10)auVar22._0_4_ << 0x40;\r\n      auVar17._10_2_ = 0;\r\n      auVar17._0_10_ = Var44;\r\n      auVar17[0xc] = uVar48;\r\n      auVar18._10_2_ = 0;\r\n      auVar18._0_10_ = Var44;\r\n      auVar18[0xc] = uVar48;\r\n      auVar31._2_3_ = auVar18._10_3_;\r\n      auVar31._0_2_ = auVar7._12_2_;\r\n      auVar31._5_8_ = 0;\r\n      auVar19._4_2_ = auVar12._10_2_;\r\n      auVar19._0_4_ = auVar16._8_4_;\r\n      auVar19._6_7_ = SUB137(auVar31 << 0x40,6);\r\n      uVar49 = (undefined2)Var29;\r\n      auVar2._10_2_ = 0;\r\n      auVar2._0_10_ = auVar21._0_10_;\r\n      auVar2._12_2_ = uVar49;\r\n      auVar3._10_2_ = 0;\r\n      auVar3._0_10_ = auVar21._0_10_;\r\n      auVar3._12_2_ = uVar49;\r\n      auVar32._2_4_ = auVar3._10_4_;\r\n      auVar32._0_2_ = auVar30._0_2_;\r\n      auVar32._6_8_ = 0;\r\n      auVar11._4_2_ = auVar20._2_2_;\r\n      auVar11._0_4_ = auVar21._0_4_;\r\n      auVar11._6_8_ = SUB148(auVar32 << 0x40,6);\r\n      uVar43 = (ulonglong)\r\n               ((int)CONCAT32(auVar17._10_3_,auVar7._12_2_) + (auVar16._8_4_ & 0xffff) +\r\n                (int)CONCAT42(auVar2._10_4_,auVar30._0_2_) + (auVar21._0_4_ & 0xffff) +\r\n               (uint)(uint3)(auVar17._10_3_ >> 0x10) + auVar19._4_4_ +\r\n               (auVar2._10_4_ >> 0x10) + auVar11._4_4_);\r\n      if (sVar38 == 8) goto LAB_140002eff;\r\n      uVar39 = 8;\r\n    }\r\n    do {\r\n      pbVar42 = (byte *)((longlong)&local_28 + uVar39);\r\n      uVar39 = uVar39 + 1;\r\n      uVar43 = (ulonglong)((int)uVar43 + (uint)*pbVar42);\r\n    } while (uVar39 < sVar38);\r\n  }\r\nLAB_140002eff:\r\n  FUN_140002a00(\"Checksum: %u\\n\",uVar43,sVar38,param_4);\r\n  sVar40 = strlen((char *)&local_28);\r\n  if (sVar40 == 0) {\r\n    bVar41 = 0;\r\n  }\r\n  else {\r\n    if (sVar40 - 1 < 7) {\r\n      bVar41 = 0;\r\n      uVar43 = 0;\r\n    }\r\n    else {\r\n      uVar43 = local_28 ^ local_28 >> 0x20;\r\n      uVar43 = uVar43 >> 0x10 ^ uVar43;\r\n      bVar41 = (byte)uVar43 ^ (byte)(uVar43 >> 8);\r\n      if (sVar40 == 8) goto LAB_140002fb0;\r\n      uVar43 = 8;\r\n    }\r\n    bVar41 = bVar41 ^ *(byte *)((longlong)&local_28 + uVar43);\r\n    uVar39 = uVar43 + 1;\r\n    sVar38 = ~uVar43 + sVar40;\r\n    if (uVar39 < sVar40) {\r\n      uVar4 = sVar38 & 1;\r\n      sVar38 = (size_t)((uint)sVar38 & 1);\r\n      if (uVar4 != 0) {\r\n        bVar41 = bVar41 ^ *(byte *)((longlong)&local_28 + uVar39);\r\n        uVar39 = uVar43 + 2;\r\n        if (sVar40 <= uVar39) goto LAB_140002fb0;\r\n      }\r\n      do {\r\n        bVar41 = bVar41 ^ *(byte *)((longlong)&local_28 + uVar39) ^\r\n                 *(byte *)((longlong)&local_28 + uVar39 + 1);\r\n        uVar39 = uVar39 + 2;\r\n      } while (uVar39 < sVar40);\r\n    }\r\n  }\r\nLAB_140002fb0:\r\n  FUN_140002a00(\"XOR Checksum: %02X\\n\",(ulonglong)bVar41,sVar38,param_4);\r\n  if ((byte)local_28 == 0) {\r\n    uVar43 = 0x1505;\r\n  }\r\n  else {\r\n    uVar43 = 0x1505;\r\n    pbVar42 = (byte *)((longlong)&local_28 + 1);\r\n    bVar41 = (byte)local_28;\r\n    do {\r\n      sVar38 = (size_t)(uint)((int)uVar43 * 0x20);\r\n      uVar43 = (ulonglong)(uint)((int)uVar43 * 0x21 + (int)(char)bVar41);\r\n      bVar41 = *pbVar42;\r\n      pbVar42 = pbVar42 + 1;\r\n    } while (bVar41 != 0);\r\n  }\r\n  FUN_140002a00(\"Hash: %lu\\n\",uVar43,sVar38,param_4);\r\n  return 0;\r\n}\r\n\r\n",
+      "strings": [
+        {"address": "140005000", "value": "Original: %s\n"},
+        {"address": "1400050e8", "value": "BBBBBBBB"},
+        {"address": "14000500e", "value": "XOR encrypted (hex): "},
+        {"address": "140005024", "value": "%02X "},
+        {"address": "1400050e8", "value": "BBBBBBBB"},
+        {"address": "14000502a", "value": "XOR decrypted: %s\n"},
+        {"address": "14000503d", "value": "ROT13: %s\n"},
+        {"address": "140005048", "value": "ROT13 back: %s\n"},
+        {"address": "140005058", "value": "Caesar +3: %s\n"},
+        {"address": "140005067", "value": "Checksum: %u\n"},
+        {"address": "140005075", "value": "XOR Checksum: %02X\n"},
+        {"address": "140005089", "value": "Hash: %lu\n"}]
+    },
+    {
+      "name": "thunk_FUN_140001430",
+      "address": "140003040",
+      "signature": "undefined __fastcall thunk_FUN_140001430(void)",
+      "is_thunk": true,
+      "calling_convention": "__fastcall",
+      "parameter_count": 0,
+      "size": 5,
+      "parameters": [],
+      "local_variables": [],
+      "called_functions": [],
+      "calling_functions": [
+        {"name": "FUN_140001910", "address": "140001910"}],
+      "decompiled_code": "\r\nvoid thunk_FUN_140001430(void)\r\n\r\n{\r\n  _crt_atexit(FUN_140001440);\r\n  return;\r\n}\r\n\r\n",
+      "strings": []
+    }
+  ]
+}
